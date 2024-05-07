@@ -1,3 +1,9 @@
-﻿using ColonySimulator.Backend;
+﻿namespace ColonySimulator.Backend;
 
-BaseClassesTest.Main();
+public class Program
+{
+    public static void Main(String[] args)
+    {
+        Console.WriteLine("Witamy w kolonii!");
+    }
+}

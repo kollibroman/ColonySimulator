@@ -4,5 +4,5 @@ public abstract class Threat
 {
     public int Id { get; set; }
     public int ThreatLevel { get; set; }
-    public String Name { get; set; }
+    public required string Name { get; init; }
 }

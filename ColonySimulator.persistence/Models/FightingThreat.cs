@@ -3,5 +3,4 @@
 public class FightingThreat : Threat
 {
     public double FightningSkill { get; set; }
-    
 }
