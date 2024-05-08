@@ -1,4 +1,5 @@
 ﻿using ColonySimulator.Backend.Services;
+using ColonySimulator.persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,14 +11,17 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
-        IHostBuilder builder = Host.CreateDefaultBuilder(args);
+        var builder = Host.CreateDefaultBuilder(args);
         builder.ConfigureAppConfiguration(x =>
         {
             x.AddJsonFile("./appsettings.json", optional: true, reloadOnChange: true);
         })
-        .ConfigureServices(services =>
+        .ConfigureServices((config, services) =>
         {
             services.AddHostedService<StartupService>();
+
+            var connectionString = config.Configuration.GetConnectionString("BasicDb");
+            services.AddSqlite<ColonySimulatorContext>(connectionString);
         })
         .ConfigureLogging(x =>
         {
@@ -28,6 +32,7 @@ public class Program
             configuration.ReadFrom.Configuration(builderContext.Configuration));
 
         var host = builder.Build();
+        
         await host.RunAsync();
     }
 }
