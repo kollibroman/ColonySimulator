@@ -1,4 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿namespace ColonySimulator.Backend;
 
-Console.WriteLine("Bye Bye world!");
+public class Program
+{
+    public static void Main(String[] args)
+    {
+        Console.WriteLine("Witamy w kolonii!");
+    }
+}
