@@ -1,0 +1,6 @@
+@startuml
+class FightingThreat {
+    + FightningSkill : double <<get>> <<set>>
+}
+Threat <|-- FightingThreat
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+!include ./FightingThreat.puml
+!include ./Man.puml
+!include ./Threat.puml
+!include ./NaturalThreat.puml
+!include ./Person.puml
+!include ./PlagueThreat.puml
+!include ./Woman.puml
+@enduml

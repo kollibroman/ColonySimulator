@@ -1,0 +1,6 @@
+@startuml
+class PlagueThreat {
+    + MedicalSkill : double <<get>> <<set>>
+}
+Threat <|-- PlagueThreat
+@enduml

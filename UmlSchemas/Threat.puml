@@ -1,0 +1,7 @@
+@startuml
+abstract class Threat {
+    + Id : int <<get>> <<set>>
+    + ThreatLevel : int <<get>> <<set>>
+    + <<required>> Name : string <<get>> <<init>>
+}
+@enduml
