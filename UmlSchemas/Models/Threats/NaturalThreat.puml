@@ -1,0 +1,7 @@
+@startuml
+class NaturalThreat {
+    + RequiredFarmingLevel : int <<get>> <<set>>
+    + RequiredCropsCount : int <<get>> <<set>>
+}
+Threat <|-- NaturalThreat
+@enduml

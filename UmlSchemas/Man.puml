@@ -1,6 +1,0 @@
-@startuml
-class Man {
-    + Strength : double <<get>> <<set>>
-}
-Person <|-- Man
-@enduml

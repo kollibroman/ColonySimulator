@@ -1,6 +1,0 @@
-@startuml
-class NaturalThreat {
-    + NaturalSkill : double <<get>> <<set>>
-}
-Threat <|-- NaturalThreat
-@enduml

@@ -1,0 +1,6 @@
+@startuml
+class Medic {
+    + MedicLevel : int <<get>> <<set>>
+}
+Proffesion <|-- Medic
+@enduml

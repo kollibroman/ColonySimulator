@@ -1,0 +1,6 @@
+@startuml
+class Medicine {
+    + MedicineCount : int <<get>> <<set>>
+}
+Resource <|-- Medicine
+@enduml

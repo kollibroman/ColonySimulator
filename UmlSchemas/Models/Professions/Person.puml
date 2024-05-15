@@ -2,6 +2,9 @@
 abstract class Person {
     + Id : int <<get>> <<set>>
     + Vitality : double <<get>> <<set>>
+    + Strength : double <<get>> <<set>>
+    + Agility : double <<get>> <<set>>
     + ResourceConsumption : double <<get>> <<set>>
 }
+Person --> "Gender" Gender
 @enduml

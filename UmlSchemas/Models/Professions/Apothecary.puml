@@ -1,0 +1,6 @@
+@startuml
+class Apothecary {
+    + ApothecaryLevel : int <<get>> <<set>>
+}
+Proffesion <|-- Apothecary
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+abstract class Resource {
+    + Id : int <<get>> <<set>>
+    + <<required>> Name : string <<get>> <<set>>
+}
+@enduml

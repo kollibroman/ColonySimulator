@@ -1,0 +1,6 @@
+@startuml
+class Trader {
+    + TradingLevel : int <<get>> <<set>>
+}
+Proffesion <|-- Trader
+@enduml
