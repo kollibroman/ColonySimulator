@@ -1,4 +1,4 @@
-﻿namespace ColonySimulator.persistence.Models.ModelsThreats;
+﻿namespace ColonySimulator.Backend.Persistence.Models.Threats;
 
 public class PlagueThreat : Threat
 {

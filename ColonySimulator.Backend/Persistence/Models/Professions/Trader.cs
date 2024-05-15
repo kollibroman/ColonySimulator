@@ -1,4 +1,4 @@
-﻿namespace ColonySimulator.persistence.Models.ModelsProfessions;
+﻿namespace ColonySimulator.Backend.Persistence.Models.Professions;
 
 public class Trader : Proffesion
 {

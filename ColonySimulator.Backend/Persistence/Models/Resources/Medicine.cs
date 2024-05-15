@@ -1,4 +1,4 @@
-﻿namespace ColonySimulator.persistence.Models.ModelsResources;
+﻿namespace ColonySimulator.Backend.Persistence.Models.Resources;
 
 public class Medicine : Resource
 {

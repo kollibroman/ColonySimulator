@@ -1,6 +1,6 @@
-﻿namespace ColonySimulator.persistence.Models.ModelsThreats;
+﻿namespace ColonySimulator.Backend.Persistence.Models.Threats;
 
-public class FightningThreat : Threat
+public class FightingThreat : Threat
 {   
     public int RequiredSmithingLevel { get; set; }
     public int RequiredWeaponryCount { get; set; }
