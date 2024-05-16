@@ -1,7 +1,0 @@
-@startuml
-abstract class Person {
-    + Id : int <<get>> <<set>>
-    + Vitality : double <<get>> <<set>>
-    + ResourceConsumption : double <<get>> <<set>>
-}
-@enduml

@@ -1,9 +1,20 @@
 @startuml
-!include ./FightingThreat.puml
-!include ./Man.puml
-!include ./Threat.puml
-!include ./NaturalThreat.puml
-!include ./Person.puml
-!include ./PlagueThreat.puml
-!include ./Woman.puml
+!include ./Enums/Gender.puml
+!include ./Models/Resources/Wood.puml
+!include ./Models/Resources/Resource.puml
+!include ./Models/Resources/Crops.puml
+!include ./Models/Resources/Weaponry.puml
+!include ./Models/Resources/Medicine.puml
+!include ./Models/Professions/Trader.puml
+!include ./Models/Professions/Farmer.puml
+!include ./Models/Professions/Proffesion.puml
+!include ./Models/Professions/Timber.puml
+!include ./Models/Professions/BlackSmith.puml
+!include ./Models/Professions/Medic.puml
+!include ./Models/Professions/Apothecary.puml
+!include ./Models/Professions/Person.puml
+!include ./Models/Threats/FightingThreat.puml
+!include ./Models/Threats/Threat.puml
+!include ./Models/Threats/NaturalThreat.puml
+!include ./Models/Threats/PlagueThreat.puml
 @enduml

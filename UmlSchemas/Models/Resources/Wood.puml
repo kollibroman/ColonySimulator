@@ -1,0 +1,6 @@
+@startuml
+class Wood {
+    + WoodCount : int <<get>> <<set>>
+}
+Resource <|-- Wood
+@enduml

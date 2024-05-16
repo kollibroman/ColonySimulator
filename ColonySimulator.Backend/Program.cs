@@ -1,5 +1,5 @@
 ﻿using ColonySimulator.Backend.Services;
-using ColonySimulator.persistence;
+using ColonySimulator.Backend.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,7 +19,6 @@ public class Program
         .ConfigureServices((config, services) =>
         {
             services.AddHostedService<StartupService>();
-
             var connectionString = config.Configuration.GetConnectionString("BasicDb");
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })

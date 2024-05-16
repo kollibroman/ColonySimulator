@@ -1,6 +1,0 @@
-@startuml
-class Woman {
-    + Agility : double <<get>> <<set>>
-}
-Person <|-- Woman
-@enduml

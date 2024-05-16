@@ -1,0 +1,21 @@
+@startuml
+class ColonySimulatorContext {
+    + ColonySimulatorContext(options:DbContextOptions<ColonySimulatorContext>)
+}
+class "DbSet`1"<T> {
+}
+DbContext <|-- ColonySimulatorContext
+ColonySimulatorContext --> "Apothecaries<Apothecary>" "DbSet`1"
+ColonySimulatorContext --> "BlackSmiths<BlackSmith>" "DbSet`1"
+ColonySimulatorContext --> "Farmers<Farmer>" "DbSet`1"
+ColonySimulatorContext --> "Medics<Medic>" "DbSet`1"
+ColonySimulatorContext --> "Timbers<Timber>" "DbSet`1"
+ColonySimulatorContext --> "Traders<Trader>" "DbSet`1"
+ColonySimulatorContext --> "Crops<Crops>" "DbSet`1"
+ColonySimulatorContext --> "Medicines<Medicine>" "DbSet`1"
+ColonySimulatorContext --> "Weaponry<Weaponry>" "DbSet`1"
+ColonySimulatorContext --> "Wood<Wood>" "DbSet`1"
+ColonySimulatorContext --> "FightingThreats<FightingThreat>" "DbSet`1"
+ColonySimulatorContext --> "NaturalThreats<NaturalThreat>" "DbSet`1"
+ColonySimulatorContext --> "PlagueThreats<PlagueThreat>" "DbSet`1"
+@enduml
