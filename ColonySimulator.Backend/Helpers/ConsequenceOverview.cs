@@ -12,12 +12,12 @@ public class ConsequenceOverview<T, TR>
     {
         Parameters = parameters;
         PopulationCount = PopCounter.PopulationCout;
-        DeadPeople = PopCounter.DeadPeople;
+        PopulationLost = PopCounter.PeopleLost;
         ProfessionsOverview = professionsOverview;
     }
 
     public T Parameters { get; set; }
     public int PopulationCount { get; set; }
-    public int DeadPeople { get; set; }
+    public int PopulationLost { get; set; }
     public TR ProfessionsOverview { get; set; }
 }
