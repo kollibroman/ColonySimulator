@@ -3,9 +3,8 @@ using ColonySimulator.Backend.Persistence.Models.Threats;
 
 namespace ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 
-public interface IApothecaryHandler
+public interface IApothecaryHandler :IPersonActivity
 {
     public Task CreateMedicine(Herbs herbs);
     public Task CollectingHerbs(Herbs herbs);
-    public Task ThreatExperience(Threat threat);
 }

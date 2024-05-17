@@ -2,7 +2,7 @@
 
 namespace ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 
-public interface ITraderHandler
+public interface ITraderHandler : IPersonActivity
 {
     public Task Trade(Wood wood, Medicine medicine, Herbs herbs, Weaponry weaponry);
 }

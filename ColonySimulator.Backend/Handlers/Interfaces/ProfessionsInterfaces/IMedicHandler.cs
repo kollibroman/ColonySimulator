@@ -2,7 +2,7 @@
 
 namespace ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 
-public interface IMedicHandler
+public interface IMedicHandler : IPersonActivity
 {
     public Task Heal(Medicine medicine);
 }

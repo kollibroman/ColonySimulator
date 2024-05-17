@@ -16,7 +16,7 @@ public class ApothecaryHandler : IApothecaryHandler
         throw new NotImplementedException();
     }
 
-    public Task ThreatExperience(Threat threat)
+    public Task ExperienceThreat(Threat threat)
     {
         throw new NotImplementedException();
     }

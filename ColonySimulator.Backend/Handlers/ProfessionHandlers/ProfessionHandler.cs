@@ -14,7 +14,6 @@ public class ProfessionHandler : IProfessionHandler
     private readonly ITimberHandler _timberHandler;
     private readonly ITraderHandler _traderHandler;
 
-    private Crops _crops;
 
     public Task DoWork(Proffesion proffesion)
     {
@@ -27,7 +26,7 @@ public class ProfessionHandler : IProfessionHandler
     }
 
     public ProfessionHandler(IFarmerHandler farmerHandler, IApothecaryHandler apothecaryHandler, IBlackSmithHandler blackSmithHandler,
-                                IMedicHandler medicHandler, ITimberHandler timberHandler, ITraderHandler traderHandler, Crops crops)
+                                IMedicHandler medicHandler, ITimberHandler timberHandler, ITraderHandler traderHandler)
     {
         _farmerHandler = farmerHandler;
         _apothecaryHandler = apothecaryHandler;
@@ -35,13 +34,11 @@ public class ProfessionHandler : IProfessionHandler
         _medicHandler = medicHandler;
         _timberHandler = timberHandler;
         _traderHandler = traderHandler;
-
-        _crops = crops;
     }
 
     public async Task HandleFarm()
     {
-        _farmerHandler.Farm(_crops);
+        throw new NotImplementedException();
     }
 
     public async Task HandleApothecary()
