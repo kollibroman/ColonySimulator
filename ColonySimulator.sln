@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColonySimulator.Backend", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColonySimulator.tests", "ColonySimulator.tests\ColonySimulator.tests.csproj", "{9E3EB534-07DE-421B-880E-AA18348597F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColonySimulator.GUI", "ColonySimulator.GUI\ColonySimulator.GUI.csproj", "{65378101-B749-47F3-ABBD-91B67CEA8EE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{9E3EB534-07DE-421B-880E-AA18348597F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E3EB534-07DE-421B-880E-AA18348597F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E3EB534-07DE-421B-880E-AA18348597F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65378101-B749-47F3-ABBD-91B67CEA8EE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65378101-B749-47F3-ABBD-91B67CEA8EE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65378101-B749-47F3-ABBD-91B67CEA8EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65378101-B749-47F3-ABBD-91B67CEA8EE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
