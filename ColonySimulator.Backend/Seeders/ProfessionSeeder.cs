@@ -1,20 +1,24 @@
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Enums;
 using ColonySimulator.Backend.Persistence.Models.Professions;
+using Serilog;
 
 namespace ColonySimulator.Backend.Seeders;
 
 public class ProfessionSeeder
 {
     private readonly ColonySimulatorContext _dbContext;
+    private readonly ILogger _logger;
 
-    public ProfessionSeeder(ColonySimulatorContext dbContext)
+    public ProfessionSeeder(ColonySimulatorContext dbContext, ILogger logger)
     {
         _dbContext = dbContext;
+        _logger = logger;
     }
 
     public async Task SeedApothecary(int apothecaryCount, CancellationToken ct)
     {
+        _logger.Information("Seeding apothecaries...");
         var rand = new Random();
         var entityList = new List<Apothecary>();
         
@@ -41,12 +45,13 @@ public class ProfessionSeeder
     }
     
     
-    public async Task SeedBlacksmith(int BlacksmithCount, CancellationToken ct)
+    public async Task SeedBlacksmith(int blacksmithCount, CancellationToken ct)
     {
+        _logger.Information("Seeding blacksmiths...");
         var rand = new Random();
         var entityList = new List<BlackSmith>();
         
-        for (int i = 0; i <= BlacksmithCount ; i++)
+        for (int i = 0; i <= blacksmithCount ; i++)
         {
             var entity = new BlackSmith
             {
@@ -70,6 +75,7 @@ public class ProfessionSeeder
     
     public async Task SeedFarmer(int farmerCount, CancellationToken ct)
     {
+        _logger.Information("Seeding farmers...");
         var rand = new Random();
         var entityList = new List<Farmer>();
         
@@ -97,6 +103,7 @@ public class ProfessionSeeder
     
     public async Task SeedMedic(int medicCount, CancellationToken ct)
     {
+        _logger.Information("Seeding medics...");
         var rand = new Random();
         var entityList = new List<Medic>();
         
@@ -124,6 +131,7 @@ public class ProfessionSeeder
     
     public async Task SeedTimbers(int timbersCount, CancellationToken ct)
     {
+        _logger.Information("Seeding timbers...");
         var rand = new Random();
         var entityList = new List<Timber>();
         
@@ -151,6 +159,7 @@ public class ProfessionSeeder
 
     public async Task SeedTraders(int traderCount, CancellationToken ct)
     {
+        _logger.Information("Seeding traders...");
         var rand = new Random();
         var entityList = new List<Trader>();
         
