@@ -26,7 +26,7 @@ public class Program
             services.AddScoped<ProfessionSeeder>();
             services.AddScoped<ResourceSeeder>();
             services.AddScoped<ThreatSeeder>();
-
+            
             services.AddSingleton<Year>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);

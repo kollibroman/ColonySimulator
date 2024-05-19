@@ -21,6 +21,7 @@ public class ColonySimulatorContext : DbContext
     public DbSet<Medicine> Medicines => Set<Medicine>();
     public DbSet<Weaponry> Weaponry => Set<Weaponry>();
     public DbSet<Wood> Wood => Set<Wood>();
+    public DbSet<Herbs> Herbs => Set<Herbs>();
     public DbSet<FightingThreat> FightingThreats => Set<FightingThreat>();
     public DbSet<NaturalThreat> NaturalThreats => Set<NaturalThreat>();
     public DbSet<PlagueThreat> PlagueThreats => Set<PlagueThreat>();

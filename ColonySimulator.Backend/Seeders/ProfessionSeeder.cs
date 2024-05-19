@@ -1,3 +1,4 @@
+using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Enums;
 using ColonySimulator.Backend.Persistence.Models.Professions;
@@ -10,7 +11,7 @@ public class ProfessionSeeder
     private readonly ColonySimulatorContext _dbContext;
     private readonly ILogger _logger;
 
-    public ProfessionSeeder(ColonySimulatorContext dbContext, ILogger logger)
+    public ProfessionSeeder(ColonySimulatorContext dbContext, ILogger logger) 
     {
         _dbContext = dbContext;
         _logger = logger;
@@ -40,6 +41,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
+        PopCounter.PopulationCout += apothecaryCount;
         await _dbContext.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -69,6 +71,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
+        PopCounter.PopulationCout += blacksmithCount;
         await _dbContext.BlackSmiths.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -97,6 +100,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
+        PopCounter.PopulationCout += farmerCount;
         await _dbContext.Farmers.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -125,6 +129,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
+        PopCounter.PopulationCout += medicCount;
         await _dbContext.Medics.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -153,6 +158,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
+        PopCounter.PopulationCout += timbersCount;
         await _dbContext.Timbers.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -181,6 +187,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
+        PopCounter.PopulationCout += traderCount;
         await _dbContext.Traders.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
