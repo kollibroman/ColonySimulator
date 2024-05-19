@@ -1,4 +1,5 @@
-﻿using ColonySimulator.Backend.Services;
+﻿using ColonySimulator.Backend.Helpers;
+using ColonySimulator.Backend.Services;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Seeders;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,8 @@ public class Program
             services.AddScoped<ProfessionSeeder>();
             services.AddScoped<ResourceSeeder>();
             services.AddScoped<ThreatSeeder>();
+
+            services.AddSingleton<Year>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })
