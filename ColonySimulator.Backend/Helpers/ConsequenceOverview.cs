@@ -8,11 +8,11 @@ public class ConsequenceOverview<T, TR>
     {
     }
 
-    public ConsequenceOverview(T parameters, TR professionsOverview)
+    public ConsequenceOverview(T parameters, TR professionsOverview, int populationCount, int peopleLost)
     {
         Parameters = parameters;
-        PopulationCount = PopCounter.PopulationCout;
-        PopulationLost = PopCounter.PeopleLost;
+        PopulationCount = populationCount;
+        PopulationLost = peopleLost;
         ProfessionsOverview = professionsOverview;
     }
 

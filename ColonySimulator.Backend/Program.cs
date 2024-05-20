@@ -28,6 +28,7 @@ public class Program
             services.AddScoped<ThreatSeeder>();
             
             services.AddSingleton<Year>();
+            services.AddSingleton<PopCounter>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })

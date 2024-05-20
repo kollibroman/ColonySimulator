@@ -10,11 +10,13 @@ public class ProfessionSeeder
 {
     private readonly ColonySimulatorContext _dbContext;
     private readonly ILogger _logger;
+    private readonly PopCounter _counter;
 
-    public ProfessionSeeder(ColonySimulatorContext dbContext, ILogger logger) 
+    public ProfessionSeeder(ColonySimulatorContext dbContext, ILogger logger, PopCounter counter) 
     {
         _dbContext = dbContext;
         _logger = logger;
+        _counter = counter;
     }
 
     public async Task SeedApothecary(int apothecaryCount, CancellationToken ct)
@@ -41,7 +43,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
-        PopCounter.PopulationCout += apothecaryCount;
+        _counter.PopulationCount += apothecaryCount;
         await _dbContext.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -71,7 +73,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
-        PopCounter.PopulationCout += blacksmithCount;
+        _counter.PopulationCount += blacksmithCount;
         await _dbContext.BlackSmiths.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -100,7 +102,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
-        PopCounter.PopulationCout += farmerCount;
+        _counter.PopulationCount += farmerCount;
         await _dbContext.Farmers.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -129,7 +131,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
-        PopCounter.PopulationCout += medicCount;
+        _counter.PopulationCount += medicCount;
         await _dbContext.Medics.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -158,7 +160,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
-        PopCounter.PopulationCout += timbersCount;
+        _counter.PopulationCount += timbersCount;
         await _dbContext.Timbers.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
@@ -187,7 +189,7 @@ public class ProfessionSeeder
             entityList.Add(entity);
         }
 
-        PopCounter.PopulationCout += traderCount;
+        _counter.PopulationCount += traderCount;
         await _dbContext.Traders.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
