@@ -1,0 +1,9 @@
+@startuml
+interface IApothecaryHandler {
+    + CreateMedicine(herbs:Herbs) : Task
+    + CollectingHerbs(herbs:Herbs) : Task
+}
+IPersonActivity <|-- IApothecaryHandler
+Herbs <.. IApothecaryHandler
+
+@enduml

@@ -28,6 +28,7 @@ public class ResourceSeeder
     {
         var herb = new Herbs
         {
+            Name = "peppermint",
             HerbsCount = herbsCount
         };
         

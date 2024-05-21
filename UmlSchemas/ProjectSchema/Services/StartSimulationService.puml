@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class StartSimulationService {
+    + StartSimulation(professionHandler:IProfessionHandler, resourceHandler:IResourceHandler, threatHandler:IThreatHandler)
+    + <<Task>> RunAsync()
+}
+
+IProfessionHandler *-- StartSimulationService
+IResourceHandler *-- StartSimulationService
+IThreatHandler *-- StartSimulationService
+@enduml

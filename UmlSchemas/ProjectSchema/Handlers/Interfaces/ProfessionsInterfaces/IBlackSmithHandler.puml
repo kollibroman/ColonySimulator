@@ -1,0 +1,8 @@
+@startuml
+interface IBlackSmithHandler {
+    + CreateWeapon(weapon:Weaponry, wood:Wood) : Task
+}
+IPersonActivity <|-- IBlackSmithHandler
+Weaponry <.. IBlackSmithHandler
+Wood <.. IBlackSmithHandler
+@enduml

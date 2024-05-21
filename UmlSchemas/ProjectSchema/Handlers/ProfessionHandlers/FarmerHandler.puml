@@ -1,0 +1,7 @@
+@startuml
+class FarmerHandler {
+    + Farm(crops:Crops) : Task
+    + ExperienceThreat(threat:Threat) : Task
+}
+IFarmerHandler <|-- FarmerHandler
+@enduml

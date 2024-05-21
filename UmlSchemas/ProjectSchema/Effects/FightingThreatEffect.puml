@@ -1,0 +1,5 @@
+@startuml
+class FightingThreatEffect {
+}
+Effect <|-- FightingThreatEffect
+@enduml

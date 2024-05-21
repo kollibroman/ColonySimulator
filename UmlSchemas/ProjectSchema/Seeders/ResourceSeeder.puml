@@ -1,0 +1,12 @@
+@startuml
+class ResourceSeeder {
+    + ResourceSeeder(dbContext:ColonySimulatorContext)
+    + <<async>> SeedCrops(cropsCount:int, ct:CancellationToken) : Task
+    + <<async>> SeedHerbs(herbsCount:int, ct:CancellationToken) : Task
+    + <<async>> SeedMedicine(medicineCount:int, ct:CancellationToken) : Task
+    + <<async>> SeedWeaponry(weaponryCount:int, ct:CancellationToken) : Task
+    + <<async>> SeedWood(woodCount:int, ct:CancellationToken) : Task
+}
+
+ColonySimulatorContext *-- ResourceSeeder
+@enduml

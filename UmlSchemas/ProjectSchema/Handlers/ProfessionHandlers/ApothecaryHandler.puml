@@ -1,0 +1,8 @@
+@startuml
+class ApothecaryHandler {
+    + CreateMedicine(herbs:Herbs) : Task
+    + CollectingHerbs(herbs:Herbs) : Task
+    + ExperienceThreat(threat:Threat) : Task
+}
+IApothecaryHandler <|-- ApothecaryHandler
+@enduml

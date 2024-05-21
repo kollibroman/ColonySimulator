@@ -1,0 +1,5 @@
+@startuml
+class PlagueEffect {
+}
+Effect <|-- PlagueEffect
+@enduml

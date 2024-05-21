@@ -1,0 +1,10 @@
+@startuml
+class "ConsequenceOverview`2"<T,TR> {
+    + ConsequenceOverview()
+    + ConsequenceOverview(parameters:T, professionsOverview:TR, populationCount:int, peopleLost:int)
+    + Parameters : T <<get>> <<set>>
+    + PopulationCount : int <<get>> <<set>>
+    + PopulationLost : int <<get>> <<set>>
+    + ProfessionsOverview : TR <<get>> <<set>>
+}
+@enduml

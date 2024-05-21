@@ -1,0 +1,7 @@
+@startuml
+interface IResourceHandler {
+    + ConsumeResources(person:Person) : Task
+}
+
+Person <.. IResourceHandler
+@enduml

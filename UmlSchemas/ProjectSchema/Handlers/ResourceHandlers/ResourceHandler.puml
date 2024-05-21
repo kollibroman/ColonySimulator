@@ -1,0 +1,6 @@
+@startuml
+class ResourceHandler {
+    + ConsumeResources(person:Person) : Task
+}
+IResourceHandler <|-- ResourceHandler
+@enduml

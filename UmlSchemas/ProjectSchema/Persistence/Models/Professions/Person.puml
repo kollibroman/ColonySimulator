@@ -1,0 +1,11 @@
+@startuml
+abstract class Person {
+    + Id : int <<get>> <<set>>
+    + Vitality : int <<get>> <<set>>
+    + Strength : int <<get>> <<set>>
+    + Agility : int <<get>> <<set>>
+    + ResourceConsumption : double <<get>> <<set>>
+    + IsSick : bool <<get>> <<set>>
+}
+Person --> "Gender" Gender
+@enduml

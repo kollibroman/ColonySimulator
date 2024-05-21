@@ -1,0 +1,6 @@
+@startuml
+class BlackSmith {
+    + BlackSmithLevel : int <<get>> <<set>>
+}
+Proffesion <|-- BlackSmith
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+!include ./Program.puml
+!include ./Helpers/Year.puml
+!include ./Helpers/PopCounter.puml
+!include ./Seeders/ThreatSeeder.puml
+!include ./Seeders/ResourceSeeder.puml
+!include ./Seeders/ProfessionSeeder.puml
+!include ./Handlers/Threathandler.puml
+!include ./Persistence/ColonySimulatorContext.puml
+!include ./Services/StartupService.puml
+!include ./Services/StartSimulationService.puml
+!include ./Effects/PlagueEffect.puml
+!include ./Effects/FightingThreatEffect.puml
+!include ./Effects/NaturalEffect.puml
+!include ./Effects/Effect.puml
+!include ./Handlers/ProfessionHandlers/TraderHandler.puml
+!include ./Handlers/ProfessionHandlers/ProfessionHandler.puml
+!include ./Handlers/ProfessionHandlers/FarmerHandler.puml
+!include ./Handlers/ProfessionHandlers/BlackSmithHandler.puml
+!include ./Handlers/ProfessionHandlers/TimberHandler.puml
+!include ./Handlers/ProfessionHandlers/MedicHandler.puml
+!include ./Handlers/ProfessionHandlers/ApothecaryHandler.puml
+!include ./Handlers/Interfaces/IPersonActivity.puml
+!include ./Handlers/Interfaces/IThreatHandler.puml
+!include ./Handlers/Interfaces/IResourceHandler.puml
+!include ./Handlers/ResourceHandlers/ResourceHandler.puml
+!include ./Persistence/Enums/Gender.puml
+!include ./Handlers/Interfaces/ProfessionsInterfaces/IBlackSmithHandler.puml
+!include ./Handlers/Interfaces/ProfessionsInterfaces/IProfessionHandler.puml
+!include ./Handlers/Interfaces/ProfessionsInterfaces/IFarmerHandler.puml
+!include ./Handlers/Interfaces/ProfessionsInterfaces/IMedicHandler.puml
+!include ./Handlers/Interfaces/ProfessionsInterfaces/ITraderHandler.puml
+!include ./Handlers/Interfaces/ProfessionsInterfaces/IApothecaryHandler.puml
+!include ./Handlers/Interfaces/ProfessionsInterfaces/ITimberHandler.puml
+!include ./Persistence/Models/Resources/Wood.puml
+!include ./Persistence/Models/Resources/Resource.puml
+!include ./Persistence/Models/Resources/Crops.puml
+!include ./Persistence/Models/Resources/Weaponry.puml
+!include ./Persistence/Models/Resources/Herbs.puml
+!include ./Persistence/Models/Resources/Medicine.puml
+!include ./Persistence/Models/Professions/Trader.puml
+!include ./Persistence/Models/Professions/Farmer.puml
+!include ./Persistence/Models/Professions/Proffesion.puml
+!include ./Persistence/Models/Professions/Timber.puml
+!include ./Persistence/Models/Professions/BlackSmith.puml
+!include ./Persistence/Models/Professions/Medic.puml
+!include ./Persistence/Models/Professions/Apothecary.puml
+!include ./Persistence/Models/Professions/Person.puml
+!include ./Persistence/Models/Threats/FightingThreat.puml
+!include ./Persistence/Models/Threats/Threat.puml
+!include ./Persistence/Models/Threats/NaturalThreat.puml
+!include ./Persistence/Models/Threats/PlagueThreat.puml
+
+Program --> StartupService
+@enduml

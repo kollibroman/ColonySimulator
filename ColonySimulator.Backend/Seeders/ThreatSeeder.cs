@@ -42,7 +42,10 @@ public class ThreatSeeder
 
     public async Task SeedNatural(CancellationToken ct)
     {
-        
+        var rnd = new Random();
+        var nameArr = new string[] { "Storm", "SnowStorm", "Snow", "Rain", "Flood", "Drought", "Hunger" };
+
+        var naturalList = new List<NaturalThreat>();
     }
 
     public async Task SeedFighting(CancellationToken ct)

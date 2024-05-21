@@ -1,0 +1,14 @@
+@startuml
+class ProfessionSeeder {
+    + ProfessionSeeder(dbContext:ColonySimulatorContext, logger:ILogger, counter:PopCounter)
+    + <<async>> SeedApothecary(apothecaryCount:int, ct:CancellationToken) : Task
+    + <<async>> SeedBlacksmith(blacksmithCount:int, ct:CancellationToken) : Task
+    + <<async>> SeedFarmer(farmerCount:int, ct:CancellationToken) : Task
+    + <<async>> SeedMedic(medicCount:int, ct:CancellationToken) : Task
+    + <<async>> SeedTimbers(timbersCount:int, ct:CancellationToken) : Task
+    + <<async>> SeedTraders(traderCount:int, ct:CancellationToken) : Task
+}
+
+ColonySimulatorContext *-- ProfessionSeeder
+PopCounter *-- ProfessionSeeder
+@enduml
