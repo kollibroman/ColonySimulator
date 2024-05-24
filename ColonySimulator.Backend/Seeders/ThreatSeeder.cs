@@ -46,10 +46,48 @@ public class ThreatSeeder
         var nameArr = new string[] { "Storm", "SnowStorm", "Snow", "Rain", "Flood", "Drought", "Hunger" };
 
         var naturalList = new List<NaturalThreat>();
+
+        for (int i = 0; i <= 15; i++)
+        {
+            var threatLevel = rnd.Next(1, 5);
+            var naturalThreat = new NaturalThreat
+            {
+                Name = nameArr[rnd.Next(0,6)],
+                RequiredCropsCount = rnd.Next(_counter.PopulationCount,(_counter.PopulationCount/4)*threatLevel),
+                ThreatLevel = threatLevel,
+                RequiredFarmingLevel = rnd.Next(1,5)
+            };
+            
+            naturalList.Add(naturalThreat);
+        }
+
+        await _dbContext.AddRangeAsync(naturalList, ct);
+        await _dbContext.SaveChangesAsync(ct);
     }
 
     public async Task SeedFighting(CancellationToken ct)
     {
-        
+        var rnd = new Random();
+        var nameArr = new string[] { "Bandits", "Riot", "Wolves", "Outcasts", "Army", "Demons" };
+
+        var fightingList = new List<FightingThreat>();
+
+        for (int i = 0; i <= 10; i++)
+        {
+            var threatLevel = rnd.Next(1, 5);
+            var threat = new FightingThreat
+            {
+                Name = nameArr[rnd.Next(0, 5)],
+                RequiredSmithingLevel = rnd.Next(1, 5),
+                RequiredWeaponryCount =
+                    rnd.Next(_counter.PopulationCount / 2, (_counter.PopulationCount / 10) * threatLevel),
+                ThreatLevel = threatLevel
+            };
+            
+            fightingList.Add(threat);
+        }
+
+        await _dbContext.AddRangeAsync(fightingList, ct);
+        await _dbContext.SaveChangesAsync(ct);
     }
 }

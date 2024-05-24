@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+object ExampleTrader {
+    Id = 2
+    Vitality = 5
+    Strength = 1
+    ResourceConsumpion = 0.2
+    Agility = 3
+    RequiredStrengthLevel = 1
+    RequiredAgilityLevel = 2
+    TradingLevel = 4
+}
+
+object ExampleThreat {
+    Id =1
+    ThreatLevel=3
+    Name = "Asmodeus"
+    RequiredSmithingLevel=
+    RequiredWeaponryCount=50
+}
+
+@enduml

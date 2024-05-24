@@ -1,4 +1,6 @@
-﻿using ColonySimulator.Backend.Helpers;
+﻿using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
+using ColonySimulator.Backend.Handlers.ProfessionHandlers;
+using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Services;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Seeders;
@@ -26,6 +28,7 @@ public class Program
             services.AddScoped<ProfessionSeeder>();
             services.AddScoped<ResourceSeeder>();
             services.AddScoped<ThreatSeeder>();
+            services.AddScoped<IApothecaryHandler, ApothecaryHandler>();
             
             services.AddSingleton<Year>();
             services.AddSingleton<PopCounter>();

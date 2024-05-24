@@ -7,5 +7,5 @@ abstract class Person {
     + ResourceConsumption : double <<get>> <<set>>
     + IsSick : bool <<get>> <<set>>
 }
-Person --> "Gender" Gender
+Person *-- "Gender" Gender
 @enduml
