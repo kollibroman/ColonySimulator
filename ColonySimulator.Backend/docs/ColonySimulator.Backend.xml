@@ -52,5 +52,12 @@
             </summary>
             <param name="ct"></param>
         </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ProfessionSeeder.SeedApothecary(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seeds apothecary object
+            </summary>
+            <param name="apothecaryCount"></param>
+            <param name="ct"></param>
+        </member>
     </members>
 </doc>
