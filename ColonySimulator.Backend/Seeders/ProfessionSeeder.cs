@@ -18,7 +18,13 @@ public class ProfessionSeeder
         _logger = logger;
         _counter = counter;
     }
-
+    
+    /// <summary>
+    /// Seeds apothecary object
+    /// </summary>
+    /// <param name="apothecaryCount"></param>
+    /// <param name="ct"></param>
+    
     public async Task SeedApothecary(int apothecaryCount, CancellationToken ct)
     {
         _logger.Information("Seeding apothecaries...");

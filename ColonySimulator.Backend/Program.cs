@@ -28,6 +28,7 @@ public class Program
             services.AddScoped<ProfessionSeeder>();
             services.AddScoped<ResourceSeeder>();
             services.AddScoped<ThreatSeeder>();
+            services.AddScoped<DataSeeder>();
             services.AddScoped<IApothecaryHandler, ApothecaryHandler>();
             
             services.AddSingleton<Year>();

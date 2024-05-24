@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ColonySimulator.Backend</name>
+    </assembly>
+    <members>
+        <member name="T:ColonySimulator.Backend.Migrations.init">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ColonySimulator.Backend.Migrations.AddIsSick">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddIsSick.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddIsSick.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddIsSick.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ColonySimulator.Backend.Migrations.CosmeticChanges">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.GetSeedingDataAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets seeding data
+            </summary>
+            <param name="ct"></param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.SeedData(System.Threading.CancellationToken)">
+            <summary>
+            Seeds data
+            </summary>
+            <param name="ct"></param>
+        </member>
+    </members>
+</doc>

@@ -53,7 +53,7 @@ public class ThreatSeeder
             var naturalThreat = new NaturalThreat
             {
                 Name = nameArr[rnd.Next(0,6)],
-                RequiredCropsCount = rnd.Next(_counter.PopulationCount,(_counter.PopulationCount/4)*threatLevel),
+                RequiredCropsCount = rnd.Next(_counter.PopulationCount/4,(_counter.PopulationCount/4)*threatLevel),
                 ThreatLevel = threatLevel,
                 RequiredFarmingLevel = rnd.Next(1,5)
             };
@@ -80,7 +80,7 @@ public class ThreatSeeder
                 Name = nameArr[rnd.Next(0, 5)],
                 RequiredSmithingLevel = rnd.Next(1, 5),
                 RequiredWeaponryCount =
-                    rnd.Next(_counter.PopulationCount / 2, (_counter.PopulationCount / 10) * threatLevel),
+                    rnd.Next(_counter.PopulationCount / 10, (_counter.PopulationCount / 10) * threatLevel),
                 ThreatLevel = threatLevel
             };
             
