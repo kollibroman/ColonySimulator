@@ -33,6 +33,7 @@ public class Program
             
             services.AddSingleton<Year>();
             services.AddSingleton<PopCounter>();
+            services.AddSingleton<DataDisplayService>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })

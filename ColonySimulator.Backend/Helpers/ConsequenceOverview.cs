@@ -7,6 +7,14 @@ public class ConsequenceOverview<T, TR>
     public ConsequenceOverview()
     {
     }
+    
+    public ConsequenceOverview(T parameters, TR professionsOverview)
+    {
+        Parameters = parameters;
+        ProfessionsOverview = professionsOverview;
+        PopulationCount = 0;
+        PopulationLost = 0;
+    }
 
     public ConsequenceOverview(T parameters, TR professionsOverview, int populationCount, int peopleLost)
     {
@@ -16,8 +24,8 @@ public class ConsequenceOverview<T, TR>
         ProfessionsOverview = professionsOverview;
     }
 
-    public T Parameters { get; set; }
+    public T Parameters { get; set; } = default!;
     public int PopulationCount { get; set; }
     public int PopulationLost { get; set; }
-    public TR ProfessionsOverview { get; set; }
+    public TR ProfessionsOverview { get; set; } = default!;
 }
