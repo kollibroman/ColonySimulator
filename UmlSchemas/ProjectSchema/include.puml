@@ -1,4 +1,6 @@
 @startuml
+left to right direction
+
 !include ./Program.puml
 !include ./Helpers/Year.puml
 !include ./Helpers/PopCounter.puml
