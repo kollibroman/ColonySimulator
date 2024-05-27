@@ -1,7 +1,7 @@
 @startuml
 abstract class Threat {
-    + Id : int <<get>> <<set>>
-    + ThreatLevel : int <<get>> <<set>>
-    + <<required>> Name : string <<get>> <<set>>
+    + Id : int <<get>> <<set>> = 4
+    + ThreatLevel : int <<get>> <<set>> = 4
+    + <<required>> Name : string <<get>> <<set>> = "resource"
 }
 @enduml

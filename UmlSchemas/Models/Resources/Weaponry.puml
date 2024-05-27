@@ -1,6 +1,6 @@
 @startuml
 class Weaponry {
-    + WeaponryCount : int <<get>> <<set>>
+    + WeaponryCount : int <<get>> <<set>> = 42
 }
 Resource <|-- Weaponry
 @enduml

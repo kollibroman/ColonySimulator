@@ -1,7 +1,7 @@
 @startuml
 class Proffesion {
-    + RequiredStrength : double <<get>> <<set>>
-    + RequiredAgility : double <<get>> <<set>>
+    + RequiredStrength : double <<get>> <<set>> = 2
+    + RequiredAgility : double <<get>> <<set>> = 3
 }
 Person <|-- Proffesion
 @enduml

@@ -1,7 +1,7 @@
 @startuml
 class PlagueThreat {
-    + RequiredMedicalLevel : int <<get>> <<set>>
-    + RequiredMedicineCount : int <<get>> <<set>>
+    + RequiredMedicalLevel : int <<get>> <<set>> = 5
+    + RequiredMedicineCount : int <<get>> <<set>> = 3
 }
 Threat <|-- PlagueThreat
 @enduml

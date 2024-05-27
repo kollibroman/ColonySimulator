@@ -1,6 +1,6 @@
 @startuml
 class Farmer {
-    + FarmingLevel : int <<get>> <<set>>
+    + FarmingLevel : int <<get>> <<set>> = 4
 }
 Proffesion <|-- Farmer
 @enduml

@@ -1,6 +1,6 @@
 @startuml
 class Medic {
-    + MedicLevel : int <<get>> <<set>>
+    + MedicLevel : int <<get>> <<set>> = 3
 }
 Proffesion <|-- Medic
 @enduml
