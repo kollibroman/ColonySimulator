@@ -1,0 +1,5 @@
+@startuml
+abstract class Effect {
+    + <<required>> Name : string <<get>> <<init>>
+}
+@enduml

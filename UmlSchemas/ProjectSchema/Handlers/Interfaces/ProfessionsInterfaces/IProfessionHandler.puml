@@ -1,0 +1,9 @@
+@startuml
+interface IProfessionHandler {
+    + DoWork(proffesion:Proffesion) : Task
+    + ExperienceThreat(effect:Effect) : Task
+}
+
+Proffesion <.. IProfessionHandler
+Effect <.. IProfessionHandler
+@enduml

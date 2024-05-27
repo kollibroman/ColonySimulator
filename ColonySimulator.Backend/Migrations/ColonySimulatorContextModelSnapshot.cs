@@ -22,13 +22,16 @@ namespace ColonySimulator.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Agility")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Agility")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ApothecaryLevel")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Gender")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsSick")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("RequiredAgility")
@@ -40,11 +43,11 @@ namespace ColonySimulator.Backend.Migrations
                     b.Property<double>("ResourceConsumption")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("Strength")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Strength")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<double>("Vitality")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Vitality")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -57,13 +60,16 @@ namespace ColonySimulator.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Agility")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Agility")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("BlackSmithLevel")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Gender")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsSick")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("RequiredAgility")
@@ -75,11 +81,11 @@ namespace ColonySimulator.Backend.Migrations
                     b.Property<double>("ResourceConsumption")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("Strength")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Strength")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<double>("Vitality")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Vitality")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -92,13 +98,16 @@ namespace ColonySimulator.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Agility")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Agility")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("FarmingLevel")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Gender")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsSick")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("RequiredAgility")
@@ -110,11 +119,11 @@ namespace ColonySimulator.Backend.Migrations
                     b.Property<double>("ResourceConsumption")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("Strength")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Strength")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<double>("Vitality")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Vitality")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -127,10 +136,13 @@ namespace ColonySimulator.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Agility")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Agility")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Gender")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsSick")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("MedicLevel")
@@ -145,11 +157,11 @@ namespace ColonySimulator.Backend.Migrations
                     b.Property<double>("ResourceConsumption")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("Strength")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Strength")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<double>("Vitality")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Vitality")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -162,10 +174,13 @@ namespace ColonySimulator.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Agility")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Agility")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Gender")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsSick")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("RequiredAgility")
@@ -177,14 +192,14 @@ namespace ColonySimulator.Backend.Migrations
                     b.Property<double>("ResourceConsumption")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("Strength")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Strength")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TimberLevel")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Vitality")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Vitality")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -197,10 +212,13 @@ namespace ColonySimulator.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Agility")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Agility")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Gender")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsSick")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("RequiredAgility")
@@ -212,14 +230,14 @@ namespace ColonySimulator.Backend.Migrations
                     b.Property<double>("ResourceConsumption")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("Strength")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Strength")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TradingLevel")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Vitality")
-                        .HasColumnType("REAL");
+                    b.Property<int>("Vitality")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -242,6 +260,24 @@ namespace ColonySimulator.Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Crops");
+                });
+
+            modelBuilder.Entity("ColonySimulator.Backend.Persistence.Models.Resources.Herbs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("HerbsCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Herbs");
                 });
 
             modelBuilder.Entity("ColonySimulator.Backend.Persistence.Models.Resources.Medicine", b =>

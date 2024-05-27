@@ -1,7 +1,17 @@
 namespace ColonySimulator.Backend.Helpers;
 
+/// <summary>
+/// Population counter class
+/// </summary>
 public class PopCounter
 {
-    public static int PopulationCout { get; set; } = 0;
-    public static int PeopleLost { get; set; } = 0;
+    /// <summary>
+    /// Actual number of people 
+    /// </summary>
+    public int PopulationCount { get; set; } = 0;
+    
+    /// <summary>
+    /// People lost during simulation
+    /// </summary>
+    public int PeopleLost { get; set; } = 0;
 }

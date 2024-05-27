@@ -1,0 +1,5 @@
+@startuml
+class Program {
+    + {static} <<async>> Main(args:string[]) : Task
+}
+@enduml

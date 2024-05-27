@@ -1,0 +1,50 @@
+@startuml
+class ColonySimulatorContext {
+    Apothecaries: DbSet<Apothecary>
+    Blacksmiths: DbSet<Blacksmith>
+    Farmers: DbSet<Farmer>
+    Medics: DbSet<Medic>
+    Timbers: DbSet<Timber>
+    Traders: DbSet<Trader>
+    Crops: DbSet<Crops>
+    Medicines: DbSet<Medicine>
+    Weaponry: DbSet<Weaponry
+    Wood: DbSet<Wood>
+    Herbs: DbSet<Herbs>
+    FightingThreats: DbSet<FightingThreat>
+    NaturalThreats: DbSet<NaturalThreat>
+    PlagueThreats: DbSet<PlagueThreat>
+    + ColonySimulatorContext(options:DbContextOptions<ColonySimulatorContext>)
+}
+
+class Apothecary {
+    + ApothecaryLevel : int <<get>> <<set>>
+}
+
+class BlackSmith {
+    + BlackSmithLevel : int <<get>> <<set>>
+}
+
+class Farmer {
+    + FarmingLevel : int <<get>> <<set>>
+}
+
+class Medic {
+    + MedicLevel : int <<get>> <<set>>
+}
+
+class Timber {
+    + TimberLevel : int <<get>> <<set>>
+}
+
+class Trader {
+    + TradingLevel : int <<get>> <<set>>
+}
+
+ColonySimulatorContext --> "Apothecaries" Apothecary
+ColonySimulatorContext --> "BlackSmiths" BlackSmith
+ColonySimulatorContext --> "Farmers" Farmer
+ColonySimulatorContext --> "Medics" Medic
+ColonySimulatorContext --> "Timbers" Timber
+ColonySimulatorContext --> "Traders" Trader
+@enduml

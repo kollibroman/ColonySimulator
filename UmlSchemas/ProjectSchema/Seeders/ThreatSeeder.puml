@@ -1,0 +1,11 @@
+@startuml
+class ThreatSeeder {
+    + ThreatSeeder(dbContext:ColonySimulatorContext, counter:PopCounter)
+    + <<async>> SeedPlagues(ct:CancellationToken) : Task
+    + <<async>> SeedNatural(ct:CancellationToken) : Task
+    + <<async>> SeedFighting(ct:CancellationToken) : Task
+}
+
+PopCounter *-- ThreatSeeder
+ColonySimulatorContext *-- ThreatSeeder
+@enduml

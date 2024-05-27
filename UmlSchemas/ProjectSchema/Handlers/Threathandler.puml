@@ -1,0 +1,7 @@
+@startuml
+class Threathandler {
+    + CalculateAffection(proffesion:Proffesion) : Task
+    + GenerateEffects(threat:Threat) : Task<Effect>
+}
+IThreatHandler <|-- Threathandler
+@enduml

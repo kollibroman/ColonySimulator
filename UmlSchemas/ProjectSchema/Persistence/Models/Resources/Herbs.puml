@@ -1,0 +1,7 @@
+@startuml
+class Herbs {
+    + HerbsCount : int <<get>> <<set>>
+}
+
+Resource <|-- Herbs
+@enduml

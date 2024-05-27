@@ -1,0 +1,6 @@
+@startuml
+class PopCounter {
+    + PopulationCount : int <<get>> <<set>> = 0
+    + PeopleLost : int <<get>> <<set>> = 0
+}
+@enduml

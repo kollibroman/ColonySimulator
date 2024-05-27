@@ -1,0 +1,10 @@
+@startuml
+interface ITraderHandler {
+    + Trade(wood:Wood, medicine:Medicine, herbs:Herbs, weaponry:Weaponry) : Task
+}
+IPersonActivity <|-- ITraderHandler
+Wood <.. ITraderHandler
+Medicine <.. ITraderHandler
+Herbs <.. ITraderHandler
+Weaponry <.. ITraderHandler
+@enduml

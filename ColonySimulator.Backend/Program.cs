@@ -1,5 +1,9 @@
-﻿using ColonySimulator.Backend.Services;
+﻿using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
+using ColonySimulator.Backend.Handlers.ProfessionHandlers;
+using ColonySimulator.Backend.Helpers;
+using ColonySimulator.Backend.Services;
 using ColonySimulator.Backend.Persistence;
+using ColonySimulator.Backend.Seeders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +24,17 @@ public class Program
         {
             services.AddHostedService<StartupService>();
             var connectionString = config.Configuration.GetConnectionString("BasicDb");
+
+            services.AddScoped<ProfessionSeeder>();
+            services.AddScoped<ResourceSeeder>();
+            services.AddScoped<ThreatSeeder>();
+            services.AddScoped<DataSeeder>();
+            services.AddScoped<IApothecaryHandler, ApothecaryHandler>();
+            
+            services.AddSingleton<Year>();
+            services.AddSingleton<PopCounter>();
+            services.AddSingleton<DataDisplayService>();
+            
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })
         .ConfigureLogging(x =>

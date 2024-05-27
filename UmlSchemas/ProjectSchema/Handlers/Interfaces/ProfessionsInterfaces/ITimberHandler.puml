@@ -1,0 +1,7 @@
+@startuml
+interface ITimberHandler {
+    + CreateWood(wood:Wood) : Task
+}
+IPersonActivity <|-- ITimberHandler
+Wood <.. ITimberHandler
+@enduml

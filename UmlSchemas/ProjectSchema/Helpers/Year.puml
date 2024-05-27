@@ -1,0 +1,5 @@
+@startuml
+class Year {
+    + YearOfSim : int <<get>> <<set>> = 0
+}
+@enduml

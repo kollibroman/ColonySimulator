@@ -1,0 +1,23 @@
+@startuml
+class ProfessionHandler {
+    + DoWork(proffesion:Proffesion) : Task
+    + ExperienceThreat(effect:Effect) : Task
+    + ProfessionHandler(farmerHandler:IFarmerHandler, apothecaryHandler:IApothecaryHandler, blackSmithHandler:IBlackSmithHandler, medicHandler:IMedicHandler, timberHandler:ITimberHandler, traderHandler:ITraderHandler)
+    + <<async>> HandleFarm() : Task
+    + <<async>> HandleApothecary() : Task
+    + <<async>> HandleBlackSmith() : Task
+    + <<async>> HandleMedic() : Task
+    + <<async>> HandleTimber() : Task
+    + <<async>> HandleTrader() : Task
+}
+IProfessionHandler <|-- ProfessionHandler
+
+IFarmerHandler *-- ProfessionHandler
+IApothecaryHandler *-- ProfessionHandler
+ITraderHandler *-- ProfessionHandler
+IBlackSmithHandler *-- ProfessionHandler
+IMedicHandler *-- ProfessionHandler
+ITimberHandler *-- ProfessionHandler
+Proffesion <.. ProfessionHandler
+Effect <.. ProfessionHandler
+@enduml

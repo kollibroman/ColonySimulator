@@ -1,0 +1,12 @@
+@startuml
+class ProfessionsOverview {
+}
+class "ICollection`1"<T> {
+}
+ProfessionsOverview o-> "Apothecaries<Apothecary>" "ICollection`1"
+ProfessionsOverview o-> "BlackSmiths<BlackSmith>" "ICollection`1"
+ProfessionsOverview o-> "Farmers<Farmer>" "ICollection`1"
+ProfessionsOverview o-> "Medics<Medic>" "ICollection`1"
+ProfessionsOverview o-> "Timbers<Timber>" "ICollection`1"
+ProfessionsOverview o-> "Traders<Trader>" "ICollection`1"
+@enduml

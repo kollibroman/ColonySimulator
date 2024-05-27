@@ -1,0 +1,6 @@
+@startuml
+class Crops {
+    + CropsCount : int <<get>> <<set>>
+}
+Resource <|-- Crops
+@enduml

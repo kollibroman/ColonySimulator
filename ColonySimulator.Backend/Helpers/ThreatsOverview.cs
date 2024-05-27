@@ -2,8 +2,18 @@ using ColonySimulator.Backend.Persistence.Models.Threats;
 
 namespace ColonySimulator.Backend.Helpers;
 
-public class ThreatsOverview
+/// <summary>
+/// Overview class for threats
+/// </summary>
+public class ThreatsOverview //ADD OTHER OBJECT, THIS IS FOR PURE SHOWCASE AT TUESDAY
 {
-    public ICollection<Threat> ThreatsDefeated { get; set; } = default!;
-    public ICollection<Threat> ThreatsYieldedTo { get; set; } = default!;
+    /// <summary>
+    /// Defeated threats list
+    /// </summary>
+    public ICollection<PlagueThreat> ThreatsDefeated { get; set; } = default!;
+    
+    /// <summary>
+    /// Not defeated threat list 
+    /// </summary>
+    public ICollection<PlagueThreat> ThreatsYieldedTo { get; set; } = default!;
 }
