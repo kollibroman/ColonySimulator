@@ -4,6 +4,129 @@
         <name>ColonySimulator.Backend</name>
     </assembly>
     <members>
+        <member name="T:ColonySimulator.Backend.Helpers.ConsequenceOverview`2">
+            <summary>
+            generic class to map data overview 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TR"></typeparam>
+        </member>
+        <member name="M:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.#ctor">
+            <summary>
+            empty constructor
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.#ctor(`0,`1)">
+            <summary>
+            Constructor with generic parameters
+            </summary>
+            <param name="parameters">threat overview</param>
+            <param name="professionsOverview">Professions overview class</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.#ctor(`0,`1,System.Int32,System.Int32)">
+            <summary>
+            Main constructor with all needed parameters to show
+            </summary>
+            <param name="parameters">Threat overview class</param>
+            <param name="professionsOverview">Professions overview class</param>
+            <param name="populationCount">Actual population count</param>
+            <param name="peopleLost">Number of people lost</param>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.Parameters">
+            <summary>
+            Generic parameter to pass
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.PopulationCount">
+            <summary>
+            Population number
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.PopulationLost">
+            <summary>
+            Number of people lost
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.ProfessionsOverview">
+            <summary>
+            second generic parameter to pass
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Helpers.PopCounter">
+            <summary>
+            Population counter class
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.PopCounter.PopulationCount">
+            <summary>
+            Actual number of people 
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.PopCounter.PeopleLost">
+            <summary>
+            People lost during simulation
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Helpers.ProfessionsOverview">
+            <summary>
+            Overview class for professions
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ProfessionsOverview.Apothecaries">
+            <summary>
+            Apothecaries list
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ProfessionsOverview.BlackSmiths">
+            <summary>
+            BlackSmith list
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ProfessionsOverview.Farmers">
+            <summary>
+            Farmers list
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ProfessionsOverview.Medics">
+            <summary>
+            Medics list
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ProfessionsOverview.Timbers">
+            <summary>
+            Timbers list
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ProfessionsOverview.Traders">
+            <summary>
+            Traders list
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Helpers.ThreatsOverview">
+            <summary>
+            Overview class for threats
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ThreatsOverview.ThreatsDefeated">
+            <summary>
+            Defeated threats list
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ThreatsOverview.ThreatsYieldedTo">
+            <summary>
+            Not defeated threat list 
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Helpers.Year">
+            <summary>
+            Year counter class
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.Year.YearOfSim">
+            <summary>
+            Current year of simulation
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Migrations.init">
             <inheritdoc />
         </member>
@@ -40,24 +163,97 @@
         <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:ColonySimulator.Backend.Seeders.DataSeeder">
+            <summary>
+            Data seeder class, with combined other seeders
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.#ctor(ColonySimulator.Backend.Seeders.ProfessionSeeder,ColonySimulator.Backend.Seeders.ResourceSeeder,ColonySimulator.Backend.Seeders.ThreatSeeder,Serilog.ILogger)">
+            <summary>
+            Constructor for it
+            </summary>
+            <param name="professionSeeder">Profession seeder class</param>
+            <param name="resourceSeeder">Resource seeder class</param>
+            <param name="threatSeeder">Threat seeder class</param>
+            <param name="logger">logger class to log data</param>
+        </member>
         <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.GetSeedingDataAsync(System.Threading.CancellationToken)">
             <summary>
             Gets seeding data
             </summary>
-            <param name="ct"></param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.SeedData(System.Threading.CancellationToken)">
             <summary>
             Seeds data
             </summary>
-            <param name="ct"></param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Seeders.ProfessionSeeder">
+            <summary>
+            Data seeder for profession objects
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ProfessionSeeder.#ctor(ColonySimulator.Backend.Persistence.ColonySimulatorContext,Serilog.ILogger,ColonySimulator.Backend.Helpers.PopCounter)">
+            <summary>
+            Constructor for it with DI parameters
+            </summary>
+            <param name="dbContext">Db context class</param>
+            <param name="logger">Logger to log data</param>
+            <param name="counter">Population counter class</param>
         </member>
         <member name="M:ColonySimulator.Backend.Seeders.ProfessionSeeder.SeedApothecary(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Seeds apothecary object
             </summary>
-            <param name="apothecaryCount"></param>
-            <param name="ct"></param>
+            <param name="apothecaryCount">Number of Apothecaries</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ProfessionSeeder.SeedBlacksmith(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seed blacksmiths
+            </summary>
+            <param name="blacksmithCount">number of blacksmiths to seed</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ProfessionSeeder.SeedFarmer(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Farmer seeder
+            </summary>
+            <param name="farmerCount">number of farmers to seed</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ProfessionSeeder.SeedMedic(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seed medics
+            </summary>
+            <param name="medicCount">Number of medics</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ProfessionSeeder.SeedTimbers(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seed timbers
+            </summary>
+            <param name="timbersCount">Number of seeders to seed</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ProfessionSeeder.SeedTraders(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seed traders
+            </summary>
+            <param name="traderCount">Number of traders to seed</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Services.DataDisplayService">
+            <summary>
+            Class to display data and serialize it
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.DataDisplayService.#ctor(ColonySimulator.Backend.Helpers.PopCounter)">
+            <summary>
+            constructor for it with DI parameters
+            </summary>
+            <param name="counter">Population counter class</param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.DataDisplayService.SerializeAndDisplayData``2(``0,``1)">
             <summary>
@@ -66,6 +262,18 @@
             <typeparam name="T"></typeparam>
             <typeparam name="TR"></typeparam>
             <returns>Serialized string based on passed content</returns>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.StartupService.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            application startup method
+            </summary>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.StartupService.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+            application shutdown
+            </summary>
+            <param name="cancellationToken"></param>
         </member>
     </members>
 </doc>

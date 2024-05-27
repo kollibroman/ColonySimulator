@@ -10,6 +10,10 @@ using ILogger = Serilog.ILogger;
 
 namespace ColonySimulator.Backend.Services;
 
+/// <summary>
+/// Startup class
+/// </summary>
+
 public class StartupService : IHostedService
 {
     private readonly ILogger _logger;
@@ -25,7 +29,10 @@ public class StartupService : IHostedService
         _serviceScope = serviceScope;
         _displayService = displayService;
     }
-    
+    /// <summary>
+    /// application startup method
+    /// </summary>
+    /// <param name="cancellationToken"></param>
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         //_year.YearOfSim++;
@@ -34,7 +41,7 @@ public class StartupService : IHostedService
         var dataSeeder = scope.ServiceProvider.GetService<DataSeeder>();
         var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
 
-        await dbContext.Database.EnsureCreatedAsync(cancellationToken);
+        await dbContext!.Database.EnsureCreatedAsync(cancellationToken);
         
         await dataSeeder!.GetSeedingDataAsync(cancellationToken);
         await dataSeeder.SeedData(cancellationToken);
@@ -48,7 +55,8 @@ public class StartupService : IHostedService
             Medics = await dbContext.Medics.ToListAsync(cancellationToken),
             Farmers = await dbContext.Farmers.ToListAsync(cancellationToken),
         };
-
+        
+        //change to some reliable values later
         var threatOverview = new ThreatsOverview
         {
             ThreatsDefeated = await dbContext.PlagueThreats.Where(x => x.Id % 2 == 0).ToListAsync(cancellationToken),
@@ -57,7 +65,11 @@ public class StartupService : IHostedService
         
         Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview));
     }
-
+    
+    /// <summary>
+    /// application shutdown
+    /// </summary>
+    /// <param name="cancellationToken"></param>
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         using var scope = _serviceScope.CreateScope();

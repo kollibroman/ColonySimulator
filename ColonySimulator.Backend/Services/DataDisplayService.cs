@@ -4,11 +4,17 @@ using ColonySimulator.Backend.Persistence.Models.Professions;
 using Newtonsoft.Json;
 
 namespace ColonySimulator.Backend.Services;
-
+/// <summary>
+/// Class to display data and serialize it
+/// </summary>
 public class DataDisplayService
 {
     private readonly PopCounter _counter;
 
+    /// <summary>
+    /// constructor for it with DI parameters
+    /// </summary>
+    /// <param name="counter">Population counter class</param>
     public DataDisplayService(PopCounter counter)
     {
         _counter = counter;

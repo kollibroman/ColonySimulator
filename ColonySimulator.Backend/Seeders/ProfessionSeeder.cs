@@ -5,13 +5,21 @@ using ColonySimulator.Backend.Persistence.Models.Professions;
 using Serilog;
 
 namespace ColonySimulator.Backend.Seeders;
-
+/// <summary>
+/// Data seeder for profession objects
+/// </summary>
 public class ProfessionSeeder
 {
     private readonly ColonySimulatorContext _dbContext;
     private readonly ILogger _logger;
     private readonly PopCounter _counter;
-
+    
+    /// <summary>
+    /// Constructor for it with DI parameters
+    /// </summary>
+    /// <param name="dbContext">Db context class</param>
+    /// <param name="logger">Logger to log data</param>
+    /// <param name="counter">Population counter class</param>
     public ProfessionSeeder(ColonySimulatorContext dbContext, ILogger logger, PopCounter counter) 
     {
         _dbContext = dbContext;
@@ -22,8 +30,8 @@ public class ProfessionSeeder
     /// <summary>
     /// Seeds apothecary object
     /// </summary>
-    /// <param name="apothecaryCount"></param>
-    /// <param name="ct"></param>
+    /// <param name="apothecaryCount">Number of Apothecaries</param>
+    /// <param name="ct">Cancellation token</param>
     
     public async Task SeedApothecary(int apothecaryCount, CancellationToken ct)
     {
@@ -54,6 +62,11 @@ public class ProfessionSeeder
         await _dbContext.SaveChangesAsync(ct);
     }
     
+    /// <summary>
+    /// Seed blacksmiths
+    /// </summary>
+    /// <param name="blacksmithCount">number of blacksmiths to seed</param>
+    /// <param name="ct">Cancellation token</param>
     
     public async Task SeedBlacksmith(int blacksmithCount, CancellationToken ct)
     {
@@ -84,6 +97,12 @@ public class ProfessionSeeder
         await _dbContext.SaveChangesAsync(ct);
     }
     
+    /// <summary>
+    /// Farmer seeder
+    /// </summary>
+    /// <param name="farmerCount">number of farmers to seed</param>
+    /// <param name="ct">Cancellation token</param>
+    
     public async Task SeedFarmer(int farmerCount, CancellationToken ct)
     {
         _logger.Information("Seeding farmers...");
@@ -112,6 +131,12 @@ public class ProfessionSeeder
         await _dbContext.Farmers.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
+    
+    /// <summary>
+    /// Seed medics
+    /// </summary>
+    /// <param name="medicCount">Number of medics</param>
+    /// <param name="ct">Cancellation token</param>
     
     public async Task SeedMedic(int medicCount, CancellationToken ct)
     {
@@ -142,6 +167,12 @@ public class ProfessionSeeder
         await _dbContext.SaveChangesAsync(ct);
     }
     
+    /// <summary>
+    /// Seed timbers
+    /// </summary>
+    /// <param name="timbersCount">Number of seeders to seed</param>
+    /// <param name="ct">Cancellation token</param>
+    
     public async Task SeedTimbers(int timbersCount, CancellationToken ct)
     {
         _logger.Information("Seeding timbers...");
@@ -170,7 +201,13 @@ public class ProfessionSeeder
         await _dbContext.Timbers.AddRangeAsync(entityList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
-
+    
+    /// <summary>
+    /// Seed traders
+    /// </summary>
+    /// <param name="traderCount">Number of traders to seed</param>
+    /// <param name="ct">Cancellation token</param>
+    
     public async Task SeedTraders(int traderCount, CancellationToken ct)
     {
         _logger.Information("Seeding traders...");

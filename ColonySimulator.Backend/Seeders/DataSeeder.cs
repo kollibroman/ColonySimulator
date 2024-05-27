@@ -2,6 +2,10 @@ using Serilog;
 
 namespace ColonySimulator.Backend.Seeders;
 
+/// <summary>
+/// Data seeder class, with combined other seeders
+/// </summary>
+
 public class DataSeeder
 {
     private readonly ProfessionSeeder _professionSeeder;
@@ -24,6 +28,13 @@ public class DataSeeder
     private int _weaponryCount;
     private int _woodCount;
     
+    /// <summary>
+    /// Constructor for it
+    /// </summary>
+    /// <param name="professionSeeder">Profession seeder class</param>
+    /// <param name="resourceSeeder">Resource seeder class</param>
+    /// <param name="threatSeeder">Threat seeder class</param>
+    /// <param name="logger">logger class to log data</param>
     public DataSeeder(ProfessionSeeder professionSeeder, ResourceSeeder resourceSeeder, ThreatSeeder threatSeeder, ILogger logger)
     {
         _professionSeeder = professionSeeder;
@@ -35,7 +46,7 @@ public class DataSeeder
     /// <summary>
     /// Gets seeding data
     /// </summary>
-    /// <param name="ct"></param>
+    /// <param name="ct">Cancellation token</param>
     
     public async Task GetSeedingDataAsync(CancellationToken ct)
     {
@@ -77,7 +88,7 @@ public class DataSeeder
     /// <summary>
     /// Seeds data
     /// </summary>
-    /// <param name="ct"></param>
+    /// <param name="ct">Cancellation token</param>
     
     public async Task SeedData(CancellationToken ct)
     {
