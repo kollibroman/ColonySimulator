@@ -17,17 +17,17 @@ namespace ColonySimulator.Backend.Services;
 public class StartupService : IHostedService
 {
     private readonly ILogger _logger;
-    private readonly Year _year;
     private readonly IServiceScopeFactory _serviceScope;
     private readonly DataDisplayService _displayService;
+    private readonly StartSimulationService _simulationService;
 
-    public StartupService(Year year, ILogger logger, IServiceScopeFactory serviceScope,
-        DataDisplayService displayService)
+    public StartupService(ILogger logger, IServiceScopeFactory serviceScope,
+        DataDisplayService displayService, StartSimulationService simulationService)
     {
-        _year = year;
         _logger = logger;
         _serviceScope = serviceScope;
         _displayService = displayService;
+        _simulationService = simulationService;
     }
     /// <summary>
     /// application startup method
@@ -64,6 +64,8 @@ public class StartupService : IHostedService
         };
         
         Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview));
+
+        await _simulationService.RunAsync(cancellationToken);
     }
     
     /// <summary>
