@@ -4,6 +4,23 @@
         <name>ColonySimulator.Backend</name>
     </assembly>
     <members>
+        <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler">
+            <summary>
+            Profession handler, it resolves and modifies data related to simuation
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler.#ctor(ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IFarmerHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IApothecaryHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IBlackSmithHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IMedicHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITimberHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITraderHandler,ColonySimulator.Backend.Persistence.ColonySimulatorContext)">
+            <summary>
+            Constructor with DI parameters 
+            </summary>
+            <param name="farmerHandler">farmer handler</param>
+            <param name="apothecaryHandler">apothecary handler</param>
+            <param name="blackSmithHandler">blacksmith handler</param>
+            <param name="medicHandler">medic handler</param>
+            <param name="timberHandler">timber handler</param>
+            <param name="traderHandler">trader handler</param>
+            <param name="dbContext">Db context class with db objects</param>
+        </member>
         <member name="T:ColonySimulator.Backend.Helpers.ConsequenceOverview`2">
             <summary>
             generic class to map data overview 
@@ -23,7 +40,7 @@
             <param name="parameters">threat overview</param>
             <param name="professionsOverview">Professions overview class</param>
         </member>
-        <member name="M:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.#ctor(`0,`1,System.Int32,System.Int32)">
+        <member name="M:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.#ctor(`0,`1,System.Int32,System.Int32,ColonySimulator.Backend.Helpers.ResourceOverview)">
             <summary>
             Main constructor with all needed parameters to show
             </summary>
@@ -255,13 +272,38 @@
             </summary>
             <param name="counter">Population counter class</param>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.DataDisplayService.SerializeAndDisplayData``2(``0,``1)">
+        <member name="M:ColonySimulator.Backend.Services.DataDisplayService.SerializeAndDisplayData``2(``0,``1,ColonySimulator.Backend.Helpers.ResourceOverview)">
             <summary>
             Serialize and display objects in a pleasant way
             </summary>
             <typeparam name="T"></typeparam>
             <typeparam name="TR"></typeparam>
             <returns>Serialized string based on passed content</returns>
+        </member>
+        <member name="T:ColonySimulator.Backend.Services.StartSimulationService">
+            <summary>
+            Class to fire up simulation
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Helpers.PopCounter,ColonySimulator.Backend.Helpers.Year,ColonySimulator.Backend.Services.DataDisplayService)">
+            <summary>
+            Constructor for this service
+            </summary>
+            <param name="serviceScopeFactory">Service scope factory</param>
+            <param name="counter">Population counter class</param>
+            <param name="year">current year in simulation</param>
+            <param name="displayService">Data display service</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.RunAsync(System.Threading.CancellationToken)">
+            <summary>
+            Start simulation based on specified parameters and don't stop till everyone is dead
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Services.StartupService">
+            <summary>
+            Startup class
+            </summary>
         </member>
         <member name="M:ColonySimulator.Backend.Services.StartupService.StartAsync(System.Threading.CancellationToken)">
             <summary>

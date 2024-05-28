@@ -8,7 +8,8 @@ public class FarmerHandler : IFarmerHandler
 {
     public Task Farm(Crops crops)
     {
-        throw new NotImplementedException();
+        crops.CropsCount++;
+        return Task.CompletedTask;
     }
     public Task ExperienceThreat(Threat threat)
     {
