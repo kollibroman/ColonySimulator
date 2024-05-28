@@ -4,6 +4,23 @@
         <name>ColonySimulator.Backend</name>
     </assembly>
     <members>
+        <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler">
+            <summary>
+            Profession handler, it resolves and modifies data related to simuation
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler.#ctor(ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IFarmerHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IApothecaryHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IBlackSmithHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IMedicHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITimberHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITraderHandler,ColonySimulator.Backend.Persistence.ColonySimulatorContext)">
+            <summary>
+            Constructor with DI parameters 
+            </summary>
+            <param name="farmerHandler">farmer handler</param>
+            <param name="apothecaryHandler">apothecary handler</param>
+            <param name="blackSmithHandler">blacksmith handler</param>
+            <param name="medicHandler">medic handler</param>
+            <param name="timberHandler">timber handler</param>
+            <param name="traderHandler">trader handler</param>
+            <param name="dbContext">Db context class with db objects</param>
+        </member>
         <member name="T:ColonySimulator.Backend.Helpers.ConsequenceOverview`2">
             <summary>
             generic class to map data overview 
@@ -102,6 +119,33 @@
             Traders list
             </summary>
         </member>
+        <member name="T:ColonySimulator.Backend.Helpers.Tests.TestDataHelper">
+            <summary>
+            Class with sample data to match in tests
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Helpers.Tests.TestDataHelper.TestSeederData">
+            <summary>
+            Method to test sample data from db
+            </summary>
+            <returns>List of professions</returns>
+        </member>
+        <member name="T:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder">
+            <summary>
+            Seeder to seed test data
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder.#ctor(ColonySimulator.Backend.Persistence.ColonySimulatorContext)">
+            <summary>
+            Constructor for test data seeder
+            </summary>
+            <param name="dbContext">Db context</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder.SeedTestData">
+            <summary>
+            Method to seed test data in db
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Helpers.ThreatsOverview">
             <summary>
             Overview class for threats
@@ -162,6 +206,29 @@
         </member>
         <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+        </member>
+        <member name="T:ColonySimulator.Backend.Migrations.AddProfessionsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddProfessionsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddProfessionsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddProfessionsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.ColonySimulatorContext">
+            <summary>
+            Db context to operate with database linked to application
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Persistence.ColonySimulatorContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ColonySimulator.Backend.Persistence.ColonySimulatorContext})">
+            <summary>
+            Constructor with options
+            </summary>
+            <param name="options">dbContext options</param>
         </member>
         <member name="T:ColonySimulator.Backend.Seeders.DataSeeder">
             <summary>
@@ -262,6 +329,31 @@
             <typeparam name="T"></typeparam>
             <typeparam name="TR"></typeparam>
             <returns>Serialized string based on passed content</returns>
+        </member>
+        <member name="T:ColonySimulator.Backend.Services.StartSimulationService">
+            <summary>
+            Class to fire up simulation
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Helpers.PopCounter,ColonySimulator.Backend.Helpers.Year,ColonySimulator.Backend.Services.DataDisplayService)">
+            <summary>
+            Constructor for this service
+            </summary>
+            <param name="serviceScopeFactory">Service scope factory</param>
+            <param name="counter">Population counter class</param>
+            <param name="year">current year in simulation</param>
+            <param name="displayService">Data display service</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.RunAsync(System.Threading.CancellationToken)">
+            <summary>
+            Start simulation based on specified parameters and don't stop till everyone is dead
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Services.StartupService">
+            <summary>
+            Startup class
+            </summary>
         </member>
         <member name="M:ColonySimulator.Backend.Services.StartupService.StartAsync(System.Threading.CancellationToken)">
             <summary>

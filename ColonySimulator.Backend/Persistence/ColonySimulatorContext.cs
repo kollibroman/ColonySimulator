@@ -5,8 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ColonySimulator.Backend.Persistence;
 
+
+/// <summary>
+/// Db context to operate with database linked to application
+/// </summary>
 public class ColonySimulatorContext : DbContext
 {
+    /// <summary>
+    /// Constructor with options
+    /// </summary>
+    /// <param name="options">dbContext options</param>
     public ColonySimulatorContext(DbContextOptions<ColonySimulatorContext> options) : base(options)
     {
     }
@@ -25,6 +33,9 @@ public class ColonySimulatorContext : DbContext
     public DbSet<FightingThreat> FightingThreats => Set<FightingThreat>();
     public DbSet<NaturalThreat> NaturalThreats => Set<NaturalThreat>();
     public DbSet<PlagueThreat> PlagueThreats => Set<PlagueThreat>();
+
+    //for testing purposes only, don't seed with other data than test 
+    public DbSet<Proffesion> Proffesions => Set<Proffesion>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
