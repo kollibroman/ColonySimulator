@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+
+Object Threat {
+    Id = 4
+    ThreatLevel = 3
+    Name = "Ligma"
+}
+
+Object PlagueThreat {
+    RequiredMedicalLevel = 4
+    RequiredMedicineCount = 3
+}
+
+Object Resource {
+    Id = 2
+    Name = "Oak"
+}
+
+Object Wood {
+    WoodCount
+}
+
+Object Person {
+    Id = 1
+    Vitality = 2
+    Strength = 2.0
+    Agility = 4.0
+    ResourceConsumption = 2.0
+}
+
+Object Proffesion {
+    RequiredStrength = 2
+    RequiredAgility = 3
+}
+
+Object Gender {
+    Man
+    Woman
+}
+
+Object Farmer {
+    FarmingLevel = 4
+}
+
+Threat --  "contains" PlagueThreat
+Resource -- "contains" Wood
+Person -- "contains" Proffesion
+Person -- "contains" Gender
+Proffesion -- "contains" Farmer
+@enduml

@@ -96,7 +96,7 @@ public class StartSimulationService
                     Console.WriteLine("Weapons: " + resourceOverview.WeaponryCount);
                     Console.WriteLine("Medicine: " + resourceOverview.MedicinesCount);
                     Console.WriteLine("PopulationCount: " + _counter.PopulationCount);
-                    Console.WriteLine("Threats count: " + threatOverview.ThreatsDefeated.Count);
+                    Console.WriteLine("Threats count: " + threatOverview.ThreatsDefeated.Count + "\n");
                     if (_year.YearOfSim == 10)
                     {
                         break;
