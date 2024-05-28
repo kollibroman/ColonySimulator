@@ -1,10 +1,10 @@
 @startuml
 abstract class Person {
-    + Id : int <<get>> <<set>>
-    + Vitality : double <<get>> <<set>>
-    + Strength : double <<get>> <<set>>
-    + Agility : double <<get>> <<set>>
-    + ResourceConsumption : double <<get>> <<set>>
+    + Id : int <<get>> <<set>> = 1
+    + Vitality : double <<get>> <<set>> = 5
+    + Strength : double <<get>> <<set>> = 2.0
+    + Agility : double <<get>> <<set>> = 4.0
+    + ResourceConsumption : double <<get>> <<set>> = 2.0
 }
 Person --> "Gender" Gender
 @enduml

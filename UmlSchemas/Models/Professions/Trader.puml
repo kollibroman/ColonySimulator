@@ -1,6 +1,6 @@
 @startuml
 class Trader {
-    + TradingLevel : int <<get>> <<set>>
+    + TradingLevel : int <<get>> <<set>> = 5
 }
 Proffesion <|-- Trader
 @enduml

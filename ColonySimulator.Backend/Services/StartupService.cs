@@ -17,17 +17,17 @@ namespace ColonySimulator.Backend.Services;
 public class StartupService : IHostedService
 {
     private readonly ILogger _logger;
-    private readonly Year _year;
     private readonly IServiceScopeFactory _serviceScope;
     private readonly DataDisplayService _displayService;
+    private readonly StartSimulationService _simulationService;
 
-    public StartupService(Year year, ILogger logger, IServiceScopeFactory serviceScope,
-        DataDisplayService displayService)
+    public StartupService(ILogger logger, IServiceScopeFactory serviceScope,
+        DataDisplayService displayService, StartSimulationService simulationService)
     {
-        _year = year;
         _logger = logger;
         _serviceScope = serviceScope;
         _displayService = displayService;
+        _simulationService = simulationService;
     }
     /// <summary>
     /// application startup method
@@ -63,7 +63,18 @@ public class StartupService : IHostedService
             ThreatsYieldedTo = await dbContext.PlagueThreats.Where(x => x.Id % 2 != 0).ToListAsync(cancellationToken),
         };
         
-        Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview));
+        var resourceOverview = new ResourceOverview
+        {
+            CropsCount = dbContext.Crops.SingleOrDefault(x => x.Id == 1).CropsCount,
+            HerbsCount = dbContext.Herbs.SingleOrDefault(x => x.Id == 1).HerbsCount,
+            WeaponryCount = dbContext.Weaponry.SingleOrDefault(x => x.Id == 1).WeaponryCount,
+            MedicinesCount = dbContext.Medicines.SingleOrDefault(x => x.Id == 1).MedicineCount,
+            WoodCount = dbContext.Wood.SingleOrDefault(x => x.Id == 1).WoodCount
+        };
+        
+        //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
+        
+        await _simulationService.RunAsync(cancellationToken);
     }
     
     /// <summary>

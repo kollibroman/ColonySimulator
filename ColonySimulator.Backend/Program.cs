@@ -1,5 +1,8 @@
-﻿using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
+﻿using ColonySimulator.Backend.Handlers;
+using ColonySimulator.Backend.Handlers.Interfaces;
+using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Handlers.ProfessionHandlers;
+using ColonySimulator.Backend.Handlers.ResourceHandlers;
 using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Services;
 using ColonySimulator.Backend.Persistence;
@@ -29,11 +32,23 @@ public class Program
             services.AddScoped<ResourceSeeder>();
             services.AddScoped<ThreatSeeder>();
             services.AddScoped<DataSeeder>();
+            
             services.AddScoped<IApothecaryHandler, ApothecaryHandler>();
+            services.AddScoped<IBlackSmithHandler, BlackSmithHandler>();
+            services.AddScoped<IFarmerHandler, FarmerHandler>();
+            services.AddScoped<IMedicHandler, MedicHandler>();
+            services.AddScoped<ITimberHandler, TimberHandler>();
+            services.AddScoped<ITraderHandler, TraderHandler>();
+            services.AddScoped<IResourceHandler, ResourceHandler>();
+            services.AddScoped<IThreatHandler, Threathandler>();
+
+            services.AddScoped<IProfessionHandler, ProfessionHandler>();
             
             services.AddSingleton<Year>();
             services.AddSingleton<PopCounter>();
             services.AddSingleton<DataDisplayService>();
+            services.AddSingleton<StartupService>();
+            services.AddSingleton<StartSimulationService>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })

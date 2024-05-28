@@ -1,7 +1,7 @@
 @startuml
 class FightingThreat {
-    + RequiredSmithingLevel : int <<get>> <<set>>
-    + RequiredWeaponryCount : int <<get>> <<set>>
+    + RequiredSmithingLevel : int <<get>> <<set>> = 4
+    + RequiredWeaponryCount : int <<get>> <<set>> = 2
 }
 Threat <|-- FightingThreat
 @enduml

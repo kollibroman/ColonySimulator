@@ -7,6 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 
+/// <summary>
+/// Profession handler, it resolves and modifies data related to simuation
+/// </summary>
+
 public class ProfessionHandler : IProfessionHandler
 {
     
@@ -18,6 +22,17 @@ public class ProfessionHandler : IProfessionHandler
     private readonly ITraderHandler _traderHandler;
     private ColonySimulatorContext _dbContext;
 
+    /// <summary>
+    /// Constructor with DI parameters 
+    /// </summary>
+    /// <param name="farmerHandler">farmer handler</param>
+    /// <param name="apothecaryHandler">apothecary handler</param>
+    /// <param name="blackSmithHandler">blacksmith handler</param>
+    /// <param name="medicHandler">medic handler</param>
+    /// <param name="timberHandler">timber handler</param>
+    /// <param name="traderHandler">trader handler</param>
+    /// <param name="dbContext">Db context class with db objects</param>
+    
     public ProfessionHandler(IFarmerHandler farmerHandler, IApothecaryHandler apothecaryHandler, IBlackSmithHandler blackSmithHandler,
                                 IMedicHandler medicHandler, ITimberHandler timberHandler, ITraderHandler traderHandler, ColonySimulatorContext dbContext)
     {

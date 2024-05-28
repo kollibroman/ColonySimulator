@@ -1,4 +1,6 @@
 @startuml
+left to right direction
+
 !include ./Enums/Gender.puml
 !include ./Models/Resources/Wood.puml
 !include ./Models/Resources/Resource.puml

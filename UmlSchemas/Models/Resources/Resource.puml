@@ -1,6 +1,6 @@
 @startuml
 abstract class Resource {
-    + Id : int <<get>> <<set>>
-    + <<required>> Name : string <<get>> <<set>>
+    + Id : int <<get>> <<set>> = 2
+    + <<required>> Name : string <<get>> <<set>> = "Oak"
 }
 @enduml

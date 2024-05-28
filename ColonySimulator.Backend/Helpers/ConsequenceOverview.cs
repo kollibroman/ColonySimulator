@@ -38,12 +38,13 @@ public class ConsequenceOverview<T, TR>
     /// <param name="professionsOverview">Professions overview class</param>
     /// <param name="populationCount">Actual population count</param>
     /// <param name="peopleLost">Number of people lost</param>
-    public ConsequenceOverview(T parameters, TR professionsOverview, int populationCount, int peopleLost)
+    public ConsequenceOverview(T parameters, TR professionsOverview, int populationCount, int peopleLost, ResourceOverview resourceOverview)
     {
         Parameters = parameters;
         PopulationCount = populationCount;
         PopulationLost = peopleLost;
         ProfessionsOverview = professionsOverview;
+        ResourceOverview = resourceOverview;
     }
     
     /// <summary>
@@ -65,4 +66,6 @@ public class ConsequenceOverview<T, TR>
     /// second generic parameter to pass
     /// </summary>
     public TR ProfessionsOverview { get; set; } = default!;
+
+    public ResourceOverview ResourceOverview { get; set; }
 }

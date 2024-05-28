@@ -1,6 +1,6 @@
 @startuml
 class Timber {
-    + TimberLevel : int <<get>> <<set>>
+    + TimberLevel : int <<get>> <<set>> = 3
 }
 Proffesion <|-- Timber
 @enduml
