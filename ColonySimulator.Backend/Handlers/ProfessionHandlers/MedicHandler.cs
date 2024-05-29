@@ -9,7 +9,7 @@ public class MedicHandler : IMedicHandler
 {
     public Task Heal(Medicine medicine, Person person, int medLevel)
     {
-        if(medicine.MedicineCount - 1 < 0){}
+        if(medicine.MedicineCount - 5/medLevel < 0){}
         else
         {
             person.IsSick = false;

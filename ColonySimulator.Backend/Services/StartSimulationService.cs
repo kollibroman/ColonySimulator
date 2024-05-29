@@ -113,7 +113,10 @@ public class StartSimulationService
                     Console.WriteLine("Threats count: " + threatOverview.ThreatsDefeated.Count);
                     Console.WriteLine("\n");
 
-                    if (_year.YearOfSim == 10) break;
+                    if (_year.YearOfSim == 10)
+                    {
+                        break;
+                    }
                     
                     
                 if (_counter.PopulationCount == 0)
