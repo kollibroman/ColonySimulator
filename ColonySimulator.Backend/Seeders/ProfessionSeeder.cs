@@ -2,6 +2,7 @@ using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Enums;
 using ColonySimulator.Backend.Persistence.Models.Professions;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace ColonySimulator.Backend.Seeders;
@@ -210,30 +211,26 @@ public class ProfessionSeeder
     
     public async Task SeedTraders(int traderCount, CancellationToken ct)
     {
+        //Changed the seeder to create only one trader
         _logger.Information("Seeding traders...");
         var rand = new Random();
-        var entityList = new List<Trader>();
         
-        for (int i = 0; i <= traderCount ; i++)
+        var entity = new Trader
         {
-            var entity = new Trader
-            {
-                Agility = 5,
-                TradingLevel = rand.Next(1, 5),
-                Gender = (Gender)rand.Next(0, 1),
-                RequiredAgility = 5,
-                RequiredStrength = 1,
-                Strength = 1,
-                Vitality = rand.Next(1, 10),
-                ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
-            };
-            
-            entityList.Add(entity);
-        }
+            Agility = 5,
+            TradingLevel = rand.Next(1, 5),
+            Gender = (Gender)rand.Next(0, 1),
+            RequiredAgility = 5,
+            RequiredStrength = 1,
+            Strength = 1,
+            Vitality = rand.Next(1, 10),
+            ResourceConsumption = rand.Next(1, 10),
+            IsSick = false
+        };
+        
 
-        _counter.PopulationCount += traderCount;
-        await _dbContext.Traders.AddRangeAsync(entityList, ct);
+        _counter.PopulationCount += 1;
+        await _dbContext.Traders.AddAsync(entity , ct);
         await _dbContext.SaveChangesAsync(ct);
     }
 }
