@@ -8,7 +8,6 @@ public class ApothecaryHandler : IApothecaryHandler
 {
     public Task CreateMedicine(Herbs herbs, Medicine medicine, int apoLevel)
     {
-        //Making sure herbs don't go under 0
         if (herbs.HerbsCount - 6 <= 0){}
         else
         {
