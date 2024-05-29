@@ -4,5 +4,5 @@ namespace ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 
 public interface ITimberHandler : IPersonActivity
 {
-    public Task CreateWood(Wood wood);
+    public Task CreateWood(Wood wood, int timLevel);
 }
