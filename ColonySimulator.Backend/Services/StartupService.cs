@@ -35,8 +35,6 @@ public class StartupService : IHostedService
     /// <param name="cancellationToken"></param>
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        //_year.YearOfSim++;
-
         using var scope = _serviceScope.CreateScope();
         var dataSeeder = scope.ServiceProvider.GetService<DataSeeder>();
         var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
@@ -86,7 +84,7 @@ public class StartupService : IHostedService
         using var scope = _serviceScope.CreateScope();
         var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
 
-        //await dbContext!.Database.EnsureDeletedAsync(cancellationToken);
+        await dbContext!.Database.EnsureDeletedAsync(cancellationToken);
         Console.WriteLine("Bye world");
     }
 }

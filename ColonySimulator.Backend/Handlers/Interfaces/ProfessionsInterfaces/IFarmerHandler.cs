@@ -4,5 +4,5 @@ namespace ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 
 public interface IFarmerHandler : IPersonActivity
 {
-    public Task Farm(Crops crops);
+    public Task Farm(Crops crops, Herbs herbs, int farmLevel);
 }

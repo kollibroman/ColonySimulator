@@ -7,5 +7,8 @@ public interface IProfessionHandler
 {
     Task HandleFarm();
     Task HandleApothecary();
-    
+    Task HandleTimber();
+    Task HandleBlackSmith();
+    Task HandleTrader();
+    Task HandleMedic();
 }

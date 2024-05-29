@@ -6,14 +6,22 @@ namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 
 public class ApothecaryHandler : IApothecaryHandler
 {
-    public Task CreateMedicine(Herbs herbs)
+    public Task CreateMedicine(Herbs herbs, Medicine medicine, int apoLevel)
     {
-        throw new NotImplementedException();
+        if (herbs.HerbsCount - 6 <= 0){}
+        else
+        {
+            medicine.MedicineCount += 1 * apoLevel;
+            herbs.HerbsCount -= 6;
+        }
+        
+        return Task.CompletedTask;
     }
 
-    public Task CollectingHerbs(Herbs herbs)
+    public Task CollectingHerbs(Herbs herbs, int apoLevel)
     {
-        throw new NotImplementedException();
+        herbs.HerbsCount += 2 * apoLevel;
+        return Task.CompletedTask;
     }
 
     public Task ExperienceThreat(Threat threat)

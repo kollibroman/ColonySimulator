@@ -6,9 +6,10 @@ namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 
 public class TimberHandler : ITimberHandler
 {
-    public Task CreateWood(Wood wood)
+    public Task CreateWood(Wood wood, int timLevel)
     {
-        throw new NotImplementedException();
+        wood.WoodCount += 2 * timLevel;
+        return Task.CompletedTask;
     }
     
     public Task ExperienceThreat(Threat threat)
