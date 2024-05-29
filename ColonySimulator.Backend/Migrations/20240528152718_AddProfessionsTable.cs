@@ -147,7 +147,7 @@ namespace ColonySimulator.Backend.Migrations
                     IsSick = table.Column<bool>(type: "INTEGER", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     Strength = table.Column<int>(type: "INTEGER", nullable: false),
                     Vitality = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -168,7 +168,7 @@ namespace ColonySimulator.Backend.Migrations
                     IsSick = table.Column<bool>(type: "INTEGER", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     Strength = table.Column<int>(type: "INTEGER", nullable: false),
                     Vitality = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -189,7 +189,7 @@ namespace ColonySimulator.Backend.Migrations
                     IsSick = table.Column<bool>(type: "INTEGER", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     Strength = table.Column<int>(type: "INTEGER", nullable: false),
                     Vitality = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -210,7 +210,7 @@ namespace ColonySimulator.Backend.Migrations
                     MedicLevel = table.Column<int>(type: "INTEGER", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     Strength = table.Column<int>(type: "INTEGER", nullable: false),
                     Vitality = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -230,7 +230,7 @@ namespace ColonySimulator.Backend.Migrations
                     IsSick = table.Column<bool>(type: "INTEGER", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     Strength = table.Column<int>(type: "INTEGER", nullable: false),
                     TimberLevel = table.Column<int>(type: "INTEGER", nullable: false),
                     Vitality = table.Column<int>(type: "INTEGER", nullable: false)
