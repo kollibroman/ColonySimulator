@@ -27,6 +27,45 @@ public class TraderHandler : ITraderHandler
 
         Console.WriteLine("You can trade: \n" + resources[indexMax] + " --> " + resources[indexMin] + "" + "\n" 
             + resourcesCount.Max() + " --> " + resourcesCount.Min());
+
+        int willingToTrade, amountSold;
+
+        try
+        {
+            Console.WriteLine("If you are willing to trade (type: 1), if not (type: 0): ");
+            willingToTrade = int.Parse(Console.ReadLine()!);
+            if (willingToTrade == 1)
+            {
+                Console.WriteLine("How much you want to trade: ");
+                amountSold = int.Parse(Console.ReadLine()!);
+                if (amountSold > resourcesCount.Max() || amountSold < 0)
+                {
+                    //Needs adding some sort of loop to get user input again 
+                    Console.WriteLine("Can't trade this amount of resource");
+                }
+                else
+                {
+                    //Works kinda need to be reworked to be seen in the display data
+                    Console.WriteLine("Max before: " + resourcesCount[indexMax]);
+                    resourcesCount[indexMax] -= amountSold;
+                    Console.WriteLine("Max after: " + resourcesCount[indexMax]);
+                    Console.WriteLine("Min before: " + resourcesCount[indexMin]);
+                    resourcesCount[indexMin] += amountSold;
+                    Console.WriteLine("Min after: " + resourcesCount[indexMin]);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Transaction rejected");
+                return Task.CompletedTask;
+            }
+        }
+        //Need to add logger I think
+        catch (ArgumentNullException ex)
+        {
+            
+        }
+        
         
         return Task.CompletedTask;
     }

@@ -28,12 +28,13 @@ public class ResourceHandler : IResourceHandler
         var herbs = await _dbContext.Herbs.SingleOrDefaultAsync(x => x.Id == 1);
         var wood = await _dbContext.Wood.SingleOrDefaultAsync(x => x.Id == 1);
 
-        for (int i = 0; i < popCount; i++)
+        foreach (var person in peopleList)
         {
-            if(crop.CropsCount - 1 < 0){}
+            //Need to add dying people from starvation later
+            if(crop.CropsCount - person.ResourceConsumption < 0){}
             else
             {
-                crop.CropsCount--;
+                crop.CropsCount -= person.ResourceConsumption;
             }
         }
     }

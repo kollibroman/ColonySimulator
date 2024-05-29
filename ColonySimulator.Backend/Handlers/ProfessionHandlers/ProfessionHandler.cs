@@ -44,6 +44,8 @@ public class ProfessionHandler : IProfessionHandler
         _traderHandler = traderHandler;
         _dbContext = dbContext;
     }
+    
+    //All Handlers have to be balanced for later good working of program
 
     public async Task HandleFarm()
     {
@@ -128,19 +130,13 @@ public class ProfessionHandler : IProfessionHandler
     
     public async Task HandleTrader()
     {
-        var traders = await _dbContext.Traders.ToListAsync();
-        
         var crops = await _dbContext.Crops.SingleOrDefaultAsync(x => x.Id == 1);
         var wood = await _dbContext.Wood.SingleOrDefaultAsync(x => x.Id == 1);
         var medicine = await _dbContext.Medicines.SingleOrDefaultAsync(x => x.Id == 1);
         var herbs = await _dbContext.Herbs.SingleOrDefaultAsync(x => x.Id == 1);
         var weaponry = await _dbContext.Weaponry.SingleOrDefaultAsync(x => x.Id == 1);
         
-
-        for (int i = 1; i < traders.Count; i++)
-        {
-            _traderHandler.Trade(crops, wood, medicine, herbs, weaponry);
-        }
+        _traderHandler.Trade(crops, wood, medicine, herbs, weaponry);
         
         await _dbContext.SaveChangesAsync();
     }

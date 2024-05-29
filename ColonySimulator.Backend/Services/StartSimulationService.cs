@@ -1,6 +1,8 @@
+using ColonySimulator.Backend.Handlers.Interfaces;
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
+using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Persistence.Models.Resources;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,20 +45,33 @@ public class StartSimulationService
     {
         using var serviceScope = _serviceScopeFactory.CreateScope();
         var profHandler = serviceScope.ServiceProvider.GetService<IProfessionHandler>();
+        var resHandler = serviceScope.ServiceProvider.GetService<IResourceHandler>();
         var dbContext = serviceScope.ServiceProvider.GetService<ColonySimulatorContext>();
         
         Console.WriteLine("Starting simulation...");
         
-        if (profHandler is not null && dbContext is not null)
+        if (profHandler is not null && dbContext is not null && resHandler is not null)
         {
             //for this case simulation will go till everyone in population is dead
             //but for testing purposes, it will stop after 10 years
             for (;;)
             {
                 _year.YearOfSim++;
-                //await profHandler.HandleApothecary();
+                await profHandler.HandleApothecary();
                 await profHandler.HandleFarm();
+                await profHandler.HandleTimber();
+                await profHandler.HandleMedic();
+                await profHandler.HandleBlackSmith();
+                await resHandler.ConsumeResources(_counter.PopulationCount);
 
+                //For now task getting once
+                //I have cool idea for it now not really working
+                //for now please add only 1 trader per sim
+                //Basic display works changing data doesn't
+                if (_year.YearOfSim % 10 == 0 )
+                {
+                    await profHandler.HandleTrader();
+                }
                 
                     //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
                     
@@ -97,10 +112,10 @@ public class StartSimulationService
                     Console.WriteLine("Medicine: " + resourceOverview.MedicinesCount);
                     Console.WriteLine("PopulationCount: " + _counter.PopulationCount);
                     Console.WriteLine("Threats count: " + threatOverview.ThreatsDefeated.Count);
-                    if (_year.YearOfSim == 10)
-                    {
-                        break;
-                    }
+                    Console.WriteLine("\n");
+
+                    if (_year.YearOfSim == 10) break;
+                    
                     
                 if (_counter.PopulationCount == 0)
                 {
