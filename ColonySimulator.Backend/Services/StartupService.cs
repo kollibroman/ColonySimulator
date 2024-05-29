@@ -41,9 +41,6 @@ public class StartupService : IHostedService
         using var scope = _serviceScope.CreateScope();
         var dataSeeder = scope.ServiceProvider.GetService<DataSeeder>();
         var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
-        var testSeeder = scope.ServiceProvider.GetService<TestDataSeeder>();
-        
-        await testSeeder.SeedTestData();
 
         await dbContext!.Database.EnsureCreatedAsync(cancellationToken);
         

@@ -33,7 +33,6 @@ public class Program
             services.AddScoped<ResourceSeeder>();
             services.AddScoped<ThreatSeeder>();
             services.AddScoped<DataSeeder>();
-            services.AddScoped<TestDataSeeder>();
             
             services.AddScoped<IApothecaryHandler, ApothecaryHandler>();
             services.AddScoped<IBlackSmithHandler, BlackSmithHandler>();
