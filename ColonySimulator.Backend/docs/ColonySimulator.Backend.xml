@@ -119,6 +119,38 @@
             Traders list
             </summary>
         </member>
+        <member name="T:ColonySimulator.Backend.Helpers.Tests.TestDataHelper">
+            <summary>
+            Class with sample data to match in tests
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Helpers.Tests.TestDataHelper.TestSeederData">
+            <summary>
+            Method to test sample data from db
+            </summary>
+            <returns>List of professions</returns>
+        </member>
+        <member name="T:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder">
+            <summary>
+            Seeder to seed test data
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder.Context">
+            <summary>
+            Db context property
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder.#ctor(ColonySimulator.Backend.Persistence.ColonySimulatorContext)">
+            <summary>
+            Constructor in it
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder.SeedTestData">
+            <summary>
+            Method to seed test data in db
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Helpers.ThreatsOverview">
             <summary>
             Overview class for threats
@@ -179,6 +211,29 @@
         </member>
         <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+        </member>
+        <member name="T:ColonySimulator.Backend.Migrations.AddProfessionsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddProfessionsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddProfessionsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddProfessionsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.ColonySimulatorContext">
+            <summary>
+            Db context to operate with database linked to application
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Persistence.ColonySimulatorContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ColonySimulator.Backend.Persistence.ColonySimulatorContext})">
+            <summary>
+            Constructor with options
+            </summary>
+            <param name="options">dbContext options</param>
         </member>
         <member name="T:ColonySimulator.Backend.Seeders.DataSeeder">
             <summary>
