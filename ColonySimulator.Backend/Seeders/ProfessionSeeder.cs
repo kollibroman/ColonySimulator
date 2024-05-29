@@ -78,7 +78,7 @@ public class ProfessionSeeder
         {
             var entity = new BlackSmith
             {
-                Agility = 1,
+                Agility = 2,
                 BlackSmithLevel = rand.Next(1, 5),
                 Gender = (Gender)rand.Next(0, 1),
                 RequiredAgility = 2,
