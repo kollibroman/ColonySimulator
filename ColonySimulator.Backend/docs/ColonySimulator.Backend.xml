@@ -40,7 +40,7 @@
             <param name="parameters">threat overview</param>
             <param name="professionsOverview">Professions overview class</param>
         </member>
-        <member name="M:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.#ctor(`0,`1,System.Int32,System.Int32)">
+        <member name="M:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.#ctor(`0,`1,System.Int32,System.Int32,ColonySimulator.Backend.Helpers.ResourceOverview)">
             <summary>
             Main constructor with all needed parameters to show
             </summary>
@@ -327,7 +327,7 @@
             </summary>
             <param name="counter">Population counter class</param>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.DataDisplayService.SerializeAndDisplayData``2(``0,``1)">
+        <member name="M:ColonySimulator.Backend.Services.DataDisplayService.SerializeAndDisplayData``2(``0,``1,ColonySimulator.Backend.Helpers.ResourceOverview)">
             <summary>
             Serialize and display objects in a pleasant way
             </summary>

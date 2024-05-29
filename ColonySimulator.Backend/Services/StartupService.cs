@@ -1,5 +1,4 @@
 using ColonySimulator.Backend.Helpers;
-using ColonySimulator.Backend.Helpers.Tests;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Seeders;
@@ -64,8 +63,17 @@ public class StartupService : IHostedService
             ThreatsYieldedTo = await dbContext.PlagueThreats.Where(x => x.Id % 2 != 0).ToListAsync(cancellationToken),
         };
         
-        Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview));
-
+        var resourceOverview = new ResourceOverview
+        {
+            CropsCount = dbContext.Crops.SingleOrDefault(x => x.Id == 1).CropsCount,
+            HerbsCount = dbContext.Herbs.SingleOrDefault(x => x.Id == 1).HerbsCount,
+            WeaponryCount = dbContext.Weaponry.SingleOrDefault(x => x.Id == 1).WeaponryCount,
+            MedicinesCount = dbContext.Medicines.SingleOrDefault(x => x.Id == 1).MedicineCount,
+            WoodCount = dbContext.Wood.SingleOrDefault(x => x.Id == 1).WoodCount
+        };
+        
+        //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
+        
         await _simulationService.RunAsync(cancellationToken);
     }
     

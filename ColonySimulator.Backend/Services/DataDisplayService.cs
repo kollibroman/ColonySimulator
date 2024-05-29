@@ -25,9 +25,9 @@ public class DataDisplayService
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TR"></typeparam>
     /// <returns>Serialized string based on passed content</returns>
-    public string SerializeAndDisplayData<T,TR>(T professionsOverview, TR threatsOverview) where T : ProfessionsOverview where TR : ThreatsOverview
+    public string SerializeAndDisplayData<T,TR>(T professionsOverview, TR threatsOverview, ResourceOverview resourceOverview) where T : ProfessionsOverview where TR : ThreatsOverview
     {
-        var overview = new ConsequenceOverview<T, TR>(professionsOverview, threatsOverview, _counter.PopulationCount, _counter.PeopleLost);
+        var overview = new ConsequenceOverview<T, TR>(professionsOverview, threatsOverview, _counter.PopulationCount, _counter.PeopleLost, resourceOverview);
         var serializedString = JsonConvert.SerializeObject(overview, Formatting.Indented);
 
         return serializedString;

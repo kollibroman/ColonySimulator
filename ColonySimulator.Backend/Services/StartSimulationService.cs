@@ -1,6 +1,7 @@
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
+using ColonySimulator.Backend.Persistence.Models.Resources;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -43,7 +44,9 @@ public class StartSimulationService
         using var serviceScope = _serviceScopeFactory.CreateScope();
         var profHandler = serviceScope.ServiceProvider.GetService<IProfessionHandler>();
         var dbContext = serviceScope.ServiceProvider.GetService<ColonySimulatorContext>();
-
+        
+        Console.WriteLine("Starting simulation...");
+        
         if (profHandler is not null && dbContext is not null)
         {
             //for this case simulation will go till everyone in population is dead
@@ -51,12 +54,11 @@ public class StartSimulationService
             for (;;)
             {
                 _year.YearOfSim++;
-                await profHandler.HandleApothecary();
+                //await profHandler.HandleApothecary();
                 await profHandler.HandleFarm();
 
-                if (_year.YearOfSim == 10)
-                {
-                    Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
+                
+                    //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
                     
                     var profOverview = new ProfessionsOverview
                     {
@@ -74,12 +76,32 @@ public class StartSimulationService
                         ThreatsDefeated = await dbContext.PlagueThreats.Where(x => x.Id % 2 == 0).ToListAsync(ct),
                         ThreatsYieldedTo = await dbContext.PlagueThreats.Where(x => x.Id % 2 != 0).ToListAsync(ct),
                     };
+
+                    var resourceOverview = new ResourceOverview
+                    {
+                        CropsCount = dbContext.Crops.SingleOrDefault(x => x.Id == 1).CropsCount,
+                        HerbsCount = dbContext.Herbs.SingleOrDefault(x => x.Id == 1).HerbsCount,
+                        WeaponryCount = dbContext.Weaponry.SingleOrDefault(x => x.Id == 1).WeaponryCount,
+                        MedicinesCount = dbContext.Medicines.SingleOrDefault(x => x.Id == 1).MedicineCount,
+                        WoodCount = dbContext.Wood.SingleOrDefault(x => x.Id == 1).WoodCount
+                    };
                 
                     //Needs further improvement with new console lib in project
-                    Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview));
-                    break;
-                }
-                
+                    //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
+                    
+                    Console.WriteLine("Year: " + _year.YearOfSim);
+                    Console.WriteLine("Crops: " + resourceOverview.CropsCount);
+                    Console.WriteLine("Herbs: " + resourceOverview.HerbsCount);
+                    Console.WriteLine("Wood: " + resourceOverview.WoodCount);
+                    Console.WriteLine("Weapons: " + resourceOverview.WeaponryCount);
+                    Console.WriteLine("Medicine: " + resourceOverview.MedicinesCount);
+                    Console.WriteLine("PopulationCount: " + _counter.PopulationCount);
+                    Console.WriteLine("Threats count: " + threatOverview.ThreatsDefeated.Count + "\n");
+                    if (_year.YearOfSim == 10)
+                    {
+                        break;
+                    }
+                    
                 if (_counter.PopulationCount == 0)
                 {
                     Console.WriteLine("Everyone's dead, showing end data: ");
