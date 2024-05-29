@@ -45,7 +45,7 @@ public class TraderHandler : ITraderHandler
                 }
                 else
                 {
-                    //Works kinda need to be reworked to be seen in the display data
+                    //Kinda works but doesn't display data in the servicesimstart
                     Console.WriteLine("Max before: " + resourcesCount[indexMax]);
                     resourcesCount[indexMax] -= amountSold;
                     Console.WriteLine("Max after: " + resourcesCount[indexMax]);

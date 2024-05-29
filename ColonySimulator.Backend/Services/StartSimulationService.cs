@@ -46,11 +46,12 @@ public class StartSimulationService
         using var serviceScope = _serviceScopeFactory.CreateScope();
         var profHandler = serviceScope.ServiceProvider.GetService<IProfessionHandler>();
         var resHandler = serviceScope.ServiceProvider.GetService<IResourceHandler>();
+        var threatHandler = serviceScope.ServiceProvider.GetService<IThreatHandler>();
         var dbContext = serviceScope.ServiceProvider.GetService<ColonySimulatorContext>();
         
         Console.WriteLine("Starting simulation...");
         
-        if (profHandler is not null && dbContext is not null && resHandler is not null)
+        if (profHandler is not null && dbContext is not null && resHandler is not null && threatHandler is not null)
         {
             //for this case simulation will go till everyone in population is dead
             //but for testing purposes, it will stop after 10 years
