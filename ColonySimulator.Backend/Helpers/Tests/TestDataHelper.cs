@@ -8,7 +8,7 @@ namespace ColonySimulator.Backend.Helpers.Tests;
 /// Class with sample data to match in tests
 /// </summary>
 
-public static class TestDataHelper
+public static class TestDataHelper 
 {
     /// <summary>
     /// Method to test sample data from db

@@ -1,6 +1,7 @@
 using ColonySimulator.Backend.Helpers.Tests;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Models.Professions;
+using ColonySimulator.tests.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -10,35 +11,33 @@ namespace ColonySimulator.tests;
 
 public class DbSeedersTest
 {
-    private IServiceProvider ServicesProvider { get; set; }
-    protected ColonySimulatorContext Context { get; set; }
+    private readonly TestDataSeeder _dataSeeder;
+    public DbSeedersTest()
+    {
+        var options = new DbContextOptionsBuilder<ColonySimulatorContext>()
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .Options;
+
+        var context = new ColonySimulatorContext(options);
+
+        _dataSeeder = new TestDataSeeder(context);
+    }
     
-    [SetUp]
-    public void SetupBeforeEachTest()
-    {
-        var services = new ServiceCollection();
-        ConfigureServices(services);
-        ServicesProvider = services.BuildServiceProvider();
-
-        Context = ServicesProvider.GetService<ColonySimulatorContext>();
-    }
-
     [Fact]
-    public async Task GetProfessionSeederData()
+    public async Task Get_ProfessionsAsync()
     {
-        var colonyContextMock = new Mock<ColonySimulatorContext>();
+        // Arrange
+        await _dataSeeder.SeedTestData();
 
-        colonyContextMock.Setup<DbSet<Proffesion>>(x => x.Proffesions)
-            .ReturnsDbSet(TestDataHelper.TestSeederData());
+        // Act
+        var context = _dataSeeder.Context;
+        var professions = await context.Proffesions.ToListAsync();
 
-        var data = Context.Proffesions.ToList();
-        
-        Assert.NotNull(data);
-        Assert.Equals(TestDataHelper.TestSeederData(), data);
-    }
+        // Assert
+        Assert.NotNull(professions);
+        Assert.NotEmpty(professions);
 
-    private static void ConfigureServices(IServiceCollection services)
-    {
-        services.AddDbContext<ColonySimulatorContext>();
+        var entityList = TestDataHelper.TestSeederData();
+        Assert.Equal(entityList.Count, professions.Count);
     }
 }

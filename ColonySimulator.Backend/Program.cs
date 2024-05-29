@@ -4,6 +4,7 @@ using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Handlers.ProfessionHandlers;
 using ColonySimulator.Backend.Handlers.ResourceHandlers;
 using ColonySimulator.Backend.Helpers;
+using ColonySimulator.Backend.Helpers.Tests;
 using ColonySimulator.Backend.Services;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Seeders;
@@ -32,6 +33,7 @@ public class Program
             services.AddScoped<ResourceSeeder>();
             services.AddScoped<ThreatSeeder>();
             services.AddScoped<DataSeeder>();
+            services.AddScoped<TestDataSeeder>();
             
             services.AddScoped<IApothecaryHandler, ApothecaryHandler>();
             services.AddScoped<IBlackSmithHandler, BlackSmithHandler>();

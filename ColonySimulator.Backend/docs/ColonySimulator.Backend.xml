@@ -135,11 +135,16 @@
             Seeder to seed test data
             </summary>
         </member>
+        <member name="P:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder.Context">
+            <summary>
+            Db context property
+            </summary>
+        </member>
         <member name="M:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder.#ctor(ColonySimulator.Backend.Persistence.ColonySimulatorContext)">
             <summary>
-            Constructor for test data seeder
+            Constructor in it
             </summary>
-            <param name="dbContext">Db context</param>
+            <param name="context"></param>
         </member>
         <member name="M:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder.SeedTestData">
             <summary>

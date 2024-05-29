@@ -1,4 +1,5 @@
 using ColonySimulator.Backend.Helpers;
+using ColonySimulator.Backend.Helpers.Tests;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Seeders;
@@ -40,6 +41,9 @@ public class StartupService : IHostedService
         using var scope = _serviceScope.CreateScope();
         var dataSeeder = scope.ServiceProvider.GetService<DataSeeder>();
         var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
+        var testSeeder = scope.ServiceProvider.GetService<TestDataSeeder>();
+        
+        await testSeeder.SeedTestData();
 
         await dbContext!.Database.EnsureCreatedAsync(cancellationToken);
         
