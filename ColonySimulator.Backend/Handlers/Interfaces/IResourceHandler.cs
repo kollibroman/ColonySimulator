@@ -4,5 +4,5 @@ namespace ColonySimulator.Backend.Handlers.Interfaces;
 
 public interface IResourceHandler
 {
-    public Task ConsumeResources(Person person);
+    public Task ConsumeResources(int popCount);
 }

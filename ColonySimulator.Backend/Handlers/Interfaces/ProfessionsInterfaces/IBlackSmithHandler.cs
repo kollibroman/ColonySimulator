@@ -4,5 +4,5 @@ namespace ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 
 public interface IBlackSmithHandler : IPersonActivity
 {
-    public Task CreateWeapon(Weaponry weapon, Wood wood);
+    public Task CreateWeapon(Weaponry weapon, Wood wood, int blackLevel);
 }

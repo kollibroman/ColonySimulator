@@ -44,7 +44,7 @@ public class ProfessionSeeder
             var entity = new Apothecary
             {
                 Agility = 1,
-                ApothecaryLevel = rand.Next(1, 5),
+                ApothecaryLevel = rand.Next(1, 4),
                 Gender = (Gender)rand.Next(0, 1),
                 RequiredAgility = 1,
                 RequiredStrength = 1,

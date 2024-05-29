@@ -6,13 +6,15 @@ namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 
 public class FarmerHandler : IFarmerHandler
 {
-    public Task Farm(Crops crops)
+    public Task Farm(Crops crops, Herbs herbs, int farmLevel)
     {
-        crops.CropsCount++;
+        crops.CropsCount += 3 * farmLevel;
+        herbs.HerbsCount += 1 * farmLevel;
         return Task.CompletedTask;
     }
     public Task ExperienceThreat(Threat threat)
     {
         throw new NotImplementedException();
     }
+    
 }
