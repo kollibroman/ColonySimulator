@@ -10,16 +10,18 @@ namespace ColonySimulator.Backend.Helpers.Tests;
 
 public class TestDataSeeder
 {
-    private readonly ColonySimulatorContext _dbContext;
+    /// <summary>
+    /// Db context property
+    /// </summary>
+    public ColonySimulatorContext Context { get; }
     
     /// <summary>
-    /// Constructor for test data seeder
+    /// Constructor in it
     /// </summary>
-    /// <param name="dbContext">Db context</param>
-    
-    public TestDataSeeder(ColonySimulatorContext dbContext)
+    /// <param name="context"></param>
+    public TestDataSeeder(ColonySimulatorContext context)
     {
-        _dbContext = dbContext;
+        Context = context;
     }
     
     /// <summary>
@@ -28,88 +30,7 @@ public class TestDataSeeder
     
     public async Task SeedTestData()
     {
-        var list = new List<Proffesion> 
-        {
-            new Apothecary
-            {
-                Agility = 1,
-                ApothecaryLevel = 1,
-                Gender = Gender.Man,
-                RequiredAgility = 1,
-                RequiredStrength = 1,
-                Strength = 1,
-                Vitality = 3,
-                ResourceConsumption = 4.0,
-                IsSick = false
-            },
-
-            new BlackSmith
-            {
-                Agility = 2,
-                BlackSmithLevel = 1,
-                Gender = Gender.Man,
-                RequiredAgility = 2,
-                RequiredStrength = 4,
-                Strength = 1,
-                Vitality = 3,
-                ResourceConsumption = 4.0,
-                IsSick = false
-            },
-
-            new Farmer
-            {
-                Agility = 3,
-                FarmingLevel = 1,
-                Gender = Gender.Man,
-                RequiredAgility = 3,
-                RequiredStrength = 5,
-                Strength = 5,
-                Vitality = 3,
-                ResourceConsumption = 4.0,
-                IsSick = false
-            },
-
-            new Medic
-            {
-                Agility = 2,
-                MedicLevel = 1,
-                Gender = Gender.Man,
-                RequiredAgility = 2,
-                RequiredStrength = 1,
-                Strength = 1,
-                Vitality = 3,
-                ResourceConsumption = 4.0,
-                IsSick = false
-            },
-
-            new Timber
-            {
-                Agility = 4,
-                TimberLevel = 1,
-                Gender = Gender.Man,
-                RequiredAgility = 4,
-                RequiredStrength = 5,
-                Strength = 5,
-                Vitality = 3,
-                ResourceConsumption = 4.0,
-                IsSick = false
-            },
-
-            new Trader
-            {
-                Agility = 5,
-                TradingLevel = 1,
-                Gender = Gender.Man,
-                RequiredAgility = 5,
-                RequiredStrength = 1,
-                Strength = 1,
-                Vitality = 3,
-                ResourceConsumption = 4.0,
-                IsSick = false
-            }     
-        };
-
-        await _dbContext.Proffesions.AddRangeAsync(list);
-        await _dbContext.SaveChangesAsync();
+        await Context.Proffesions.AddRangeAsync(TestDataHelper.TestSeederData());
+        await Context.SaveChangesAsync();
     }
 }
