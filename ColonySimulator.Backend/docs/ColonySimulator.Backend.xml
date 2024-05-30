@@ -4,6 +4,66 @@
         <name>ColonySimulator.Backend</name>
     </assembly>
     <members>
+        <member name="T:ColonySimulator.Backend.Effects.Effect">
+            <summary>
+            General effects done to entities
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Effects.Effect.Name">
+            <summary>
+            Name of effect
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Effects.Effect.Damage">
+            <summary>
+            Damage done to single entity
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Effects.FightingThreatEffect">
+            <summary>
+            Threat effect from combat type threat
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Effects.FightingThreatEffect.ResourcesStolen">
+            <summary>
+            Resources stolen from colony
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Effects.NaturalEffect">
+            <summary>
+            Threat effect from natural effect
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Effects.NaturalEffect.IsHungry">
+            <summary>
+            Bool setting entity hunger status to true
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Effects.NaturalEffect.ResourcesLost">
+            <summary>
+            Resources lost due to threat
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Effects.PlagueEffect">
+            <summary>
+            Effects caused by plagues 
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Effects.PlagueEffect.IsSick">
+            <summary>
+            bool changing IsSick status of entity
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Effects.PlagueEffect.MedicineCount">
+            <summary>
+            Required medicine cout
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Effects.PlagueEffect.RequiredMedicLevel">
+            <summary>
+            Required level of medic to treat it
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler">
             <summary>
             Profession handler, it resolves and modifies data related to simuation
@@ -222,6 +282,18 @@
             <inheritdoc />
         </member>
         <member name="M:ColonySimulator.Backend.Migrations.AddProfessionsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ColonySimulator.Backend.Migrations.AddIsHungry">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddIsHungry.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddIsHungry.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddIsHungry.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:ColonySimulator.Backend.Persistence.ColonySimulatorContext">

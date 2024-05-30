@@ -7,6 +7,7 @@ namespace ColonySimulator.Backend.Handlers;
 
 public class Threathandler : IThreatHandler
 {
+    
     public Task CalculateAffection(Proffesion proffesion)
     {
         throw new NotImplementedException();

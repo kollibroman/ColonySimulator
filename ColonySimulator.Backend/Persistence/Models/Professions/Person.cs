@@ -13,4 +13,5 @@ public abstract class Person
     public Gender Gender { get; set; }
     public int ResourceConsumption { get; set; }
     public bool IsSick { get; set; }
+    public bool IsHungry { get; set; }
 }

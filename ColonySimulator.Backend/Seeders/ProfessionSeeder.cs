@@ -52,7 +52,8 @@ public class ProfessionSeeder
                 Strength = 1,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -87,7 +88,8 @@ public class ProfessionSeeder
                 Strength = 4,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -122,7 +124,8 @@ public class ProfessionSeeder
                 Strength = 5,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -157,7 +160,8 @@ public class ProfessionSeeder
                 Strength = 1,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -192,7 +196,8 @@ public class ProfessionSeeder
                 Strength = 5,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -225,7 +230,8 @@ public class ProfessionSeeder
             Strength = 1,
             Vitality = rand.Next(1, 10),
             ResourceConsumption = rand.Next(1, 10),
-            IsSick = false
+            IsSick = false,
+            IsHungry = false
         };
         
 
