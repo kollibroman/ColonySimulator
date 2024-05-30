@@ -1,11 +1,28 @@
 using ColonySimulator.Backend.Effects;
 using ColonySimulator.Backend.Persistence.Models.Professions;
+using ColonySimulator.Backend.Persistence.Models.Resources;
 using ColonySimulator.Backend.Persistence.Models.Threats;
 
 namespace ColonySimulator.Backend.Handlers.Interfaces;
 
+/// <summary>
+/// Handles threats
+/// </summary>
 public interface IThreatHandler
 {
-    public Task CalculateAffection(Proffesion proffesion);
-    public Task<Effect> GenerateEffects(Threat threat);
+    /// <summary>
+    /// Calculates entity's affection of threat
+    /// </summary>
+    /// <param name="profession">entities profession</param>
+    /// <param name="threat">Threat on which calculation is made</param>
+    /// <returns></returns>
+    public Task CalculateAffection(Proffesion profession, Threat threat);
+
+    /// <summary>
+    /// Generates effect of threat based on calculated affection
+    /// </summary>
+    /// <param name="threat">Passed threat</param>
+    /// <param name="resources"></param>
+    /// <returns>Generated effect</returns>
+    public Task<Effect> GenerateEffects(Threat threat, List<Resource> resources);
 }

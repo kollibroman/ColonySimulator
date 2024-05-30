@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ColonySimulator.Backend.Persistence.Models.Resources;
 
 namespace ColonySimulator.Backend.Effects;
@@ -7,7 +8,18 @@ namespace ColonySimulator.Backend.Effects;
 /// </summary>
 public class FightingThreatEffect : Effect
 {
-    
+    public FightingThreatEffect()
+    {
+    }
+
+    [SetsRequiredMembers]
+    public FightingThreatEffect(string name, int damage, List<Resource> resourcesStolen)
+    {
+        Name = name;
+        Damage = damage;
+        ResourcesStolen = resourcesStolen;
+    }
+
     /// <summary>
     /// Resources stolen from colony
     /// </summary>

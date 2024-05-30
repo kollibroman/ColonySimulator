@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ColonySimulator.Backend.Persistence.Models.Resources;
 
 namespace ColonySimulator.Backend.Effects;
@@ -7,6 +8,19 @@ namespace ColonySimulator.Backend.Effects;
 /// </summary>
 public class NaturalEffect : Effect
 {
+    public NaturalEffect()
+    {
+    }
+
+    [SetsRequiredMembers]
+    public NaturalEffect(string name, int damage, bool isHungry, List<Resource> resourcesLost)
+    {
+        Name = name;
+        Damage = damage;
+        IsHungry = isHungry;
+        ResourcesLost = resourcesLost;
+    }
+
     /// <summary>
     /// Bool setting entity hunger status to true
     /// </summary>

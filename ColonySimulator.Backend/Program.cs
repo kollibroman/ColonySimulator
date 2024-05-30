@@ -41,7 +41,7 @@ public class Program
             services.AddScoped<ITimberHandler, TimberHandler>();
             services.AddScoped<ITraderHandler, TraderHandler>();
             services.AddScoped<IResourceHandler, ResourceHandler>();
-            services.AddScoped<IThreatHandler, Threathandler>();
+            services.AddScoped<IThreatHandler, ThreatHandler>();
 
             services.AddScoped<IProfessionHandler, ProfessionHandler>();
             
