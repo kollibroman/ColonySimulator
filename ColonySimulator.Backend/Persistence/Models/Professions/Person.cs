@@ -11,6 +11,6 @@ public abstract class Person
     public int Strength { get; set; }
     public int Agility { get; set; }
     public Gender Gender { get; set; }
-    public double ResourceConsumption { get; set; }
+    public int ResourceConsumption { get; set; }
     public bool IsSick { get; set; }
 }

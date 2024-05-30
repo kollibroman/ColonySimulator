@@ -42,8 +42,8 @@ namespace ColonySimulator.Backend.Migrations
                     b.Property<double>("RequiredStrength")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("ResourceConsumption")
-                        .HasColumnType("REAL");
+                    b.Property<int>("ResourceConsumption")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Strength")
                         .HasColumnType("INTEGER");

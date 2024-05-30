@@ -8,7 +8,7 @@ public class FarmerHandler : IFarmerHandler
 {
     public Task Farm(Crops crops, Herbs herbs, int farmLevel)
     {
-        crops.CropsCount += 3 * farmLevel;
+        crops.CropsCount += 10 * farmLevel;
         herbs.HerbsCount += 1 * farmLevel;
         return Task.CompletedTask;
     }

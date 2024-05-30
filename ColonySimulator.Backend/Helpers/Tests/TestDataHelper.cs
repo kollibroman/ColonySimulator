@@ -27,7 +27,7 @@ public static class TestDataHelper
                 RequiredStrength = 1,
                 Strength = 1,
                 Vitality = 3,
-                ResourceConsumption = 4.0,
+                ResourceConsumption = 4,
                 IsSick = false
             },
 
@@ -40,7 +40,7 @@ public static class TestDataHelper
                 RequiredStrength = 4,
                 Strength = 1,
                 Vitality = 3,
-                ResourceConsumption = 4.0,
+                ResourceConsumption = 4,
                 IsSick = false
             },
 
@@ -53,7 +53,7 @@ public static class TestDataHelper
                 RequiredStrength = 5,
                 Strength = 5,
                 Vitality = 3,
-                ResourceConsumption = 4.0,
+                ResourceConsumption = 4,
                 IsSick = false
             },
 
@@ -66,7 +66,7 @@ public static class TestDataHelper
                 RequiredStrength = 1,
                 Strength = 1,
                 Vitality = 3,
-                ResourceConsumption = 4.0,
+                ResourceConsumption = 4,
                 IsSick = false
             },
 
@@ -79,7 +79,7 @@ public static class TestDataHelper
                 RequiredStrength = 5,
                 Strength = 5,
                 Vitality = 3,
-                ResourceConsumption = 4.0,
+                ResourceConsumption = 4,
                 IsSick = false
             },
 
@@ -92,7 +92,7 @@ public static class TestDataHelper
                 RequiredStrength = 1,
                 Strength = 1,
                 Vitality = 3,
-                ResourceConsumption = 4.0,
+                ResourceConsumption = 4,
                 IsSick = false
             }
         ];

@@ -21,7 +21,7 @@ namespace ColonySimulator.Backend.Migrations
                     Strength = table.Column<double>(type: "REAL", nullable: false),
                     Agility = table.Column<double>(type: "REAL", nullable: false),
                     Gender = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false)
                 },
@@ -41,7 +41,7 @@ namespace ColonySimulator.Backend.Migrations
                     Strength = table.Column<double>(type: "REAL", nullable: false),
                     Agility = table.Column<double>(type: "REAL", nullable: false),
                     Gender = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false)
                 },
@@ -75,7 +75,7 @@ namespace ColonySimulator.Backend.Migrations
                     Strength = table.Column<double>(type: "REAL", nullable: false),
                     Agility = table.Column<double>(type: "REAL", nullable: false),
                     Gender = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false)
                 },
@@ -125,7 +125,7 @@ namespace ColonySimulator.Backend.Migrations
                     Strength = table.Column<double>(type: "REAL", nullable: false),
                     Agility = table.Column<double>(type: "REAL", nullable: false),
                     Gender = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false)
                 },
@@ -177,7 +177,7 @@ namespace ColonySimulator.Backend.Migrations
                     Strength = table.Column<double>(type: "REAL", nullable: false),
                     Agility = table.Column<double>(type: "REAL", nullable: false),
                     Gender = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false)
                 },
@@ -197,7 +197,7 @@ namespace ColonySimulator.Backend.Migrations
                     Strength = table.Column<double>(type: "REAL", nullable: false),
                     Agility = table.Column<double>(type: "REAL", nullable: false),
                     Gender = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResourceConsumption = table.Column<double>(type: "REAL", nullable: false),
+                    ResourceConsumption = table.Column<int>(type: "INTEGER", nullable: false),
                     RequiredStrength = table.Column<double>(type: "REAL", nullable: false),
                     RequiredAgility = table.Column<double>(type: "REAL", nullable: false)
                 },

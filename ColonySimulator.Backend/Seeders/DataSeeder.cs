@@ -64,8 +64,8 @@ public class DataSeeder
             _timberCount = int.Parse(Console.ReadLine()!);
             Console.Write("Medics: ");
             _medicCount = int.Parse(Console.ReadLine()!);
-            Console.Write("Traders: ");
-            _traderCount = int.Parse(Console.ReadLine()!);
+            //Changed seeder for trader to create only one
+            _traderCount = 1;
             
             Console.Write("Crops: ");
             _cropsCount = int.Parse(Console.ReadLine()!);
