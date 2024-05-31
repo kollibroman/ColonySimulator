@@ -25,4 +25,10 @@ public interface IThreatHandler
     /// <param name="resources"></param>
     /// <returns>Generated effect</returns>
     public Task<Effect> GenerateEffects(Threat threat, List<Resource> resources);
+    
+    /// <summary>
+    /// Generates random threat
+    /// </summary>
+    /// <returns>Randomly generated threat</returns>
+    public Task<Threat?> GenerateRandomThreat(CancellationToken ct);
 }

@@ -1,4 +1,5 @@
 using ColonySimulator.Backend.Effects;
+using ColonySimulator.Backend.Handlers.Interfaces;
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Models.Professions;
@@ -20,7 +21,8 @@ public class ProfessionHandler : IProfessionHandler
     private readonly IMedicHandler _medicHandler;
     private readonly ITimberHandler _timberHandler;
     private readonly ITraderHandler _traderHandler;
-    private ColonySimulatorContext _dbContext;
+    private readonly IThreatHandler _threatHandler;
+    private readonly ColonySimulatorContext _dbContext;
 
     /// <summary>
     /// Constructor with DI parameters 
@@ -32,9 +34,10 @@ public class ProfessionHandler : IProfessionHandler
     /// <param name="timberHandler">timber handler</param>
     /// <param name="traderHandler">trader handler</param>
     /// <param name="dbContext">Db context class with db objects</param>
+    /// <param name="threatHandler">Threat handler interface</param>
     
     public ProfessionHandler(IFarmerHandler farmerHandler, IApothecaryHandler apothecaryHandler, IBlackSmithHandler blackSmithHandler,
-                                IMedicHandler medicHandler, ITimberHandler timberHandler, ITraderHandler traderHandler, ColonySimulatorContext dbContext)
+                                IMedicHandler medicHandler, ITimberHandler timberHandler, ITraderHandler traderHandler, ColonySimulatorContext dbContext, IThreatHandler threatHandler)
     {
         _farmerHandler = farmerHandler;
         _apothecaryHandler = apothecaryHandler;
@@ -43,6 +46,7 @@ public class ProfessionHandler : IProfessionHandler
         _timberHandler = timberHandler;
         _traderHandler = traderHandler;
         _dbContext = dbContext;
+        _threatHandler = threatHandler;
     }
     
     //All Handlers have to be balanced for later good working of program
@@ -83,7 +87,7 @@ public class ProfessionHandler : IProfessionHandler
        
         for(int i = 1; i < timbers.Count; i++)
         {
-            _timberHandler.CreateWood(wood, timbers[i].TimberLevel);
+            await _timberHandler.CreateWood(wood, timbers[i].TimberLevel);
         }
         
         await _dbContext.SaveChangesAsync();
@@ -97,7 +101,7 @@ public class ProfessionHandler : IProfessionHandler
 
         for (int i = 1; i < blackSmiths.Count; i++)
         {
-            _blackSmithHandler.CreateWeapon(weapon, wood, blackSmiths[i].BlackSmithLevel);
+            await _blackSmithHandler.CreateWeapon(weapon, wood, blackSmiths[i].BlackSmithLevel);
         }
         
         await _dbContext.SaveChangesAsync();
@@ -119,7 +123,7 @@ public class ProfessionHandler : IProfessionHandler
         {
             foreach (var sickPerson in sickPeople)
             {
-                _medicHandler.Heal(medicine, sickPerson, medics[i].MedicLevel);
+                await _medicHandler.Heal(medicine, sickPerson, medics[i].MedicLevel);
             }
         }
         
@@ -136,7 +140,7 @@ public class ProfessionHandler : IProfessionHandler
         var herbs = await _dbContext.Herbs.SingleOrDefaultAsync(x => x.Id == 1);
         var weaponry = await _dbContext.Weaponry.SingleOrDefaultAsync(x => x.Id == 1);
         
-        _traderHandler.Trade(crops, wood, medicine, herbs, weaponry);
+        await _traderHandler.Trade(crops, wood, medicine, herbs, weaponry);
         
         await _dbContext.SaveChangesAsync();
     }

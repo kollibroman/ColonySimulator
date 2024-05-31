@@ -53,6 +53,7 @@ public class StartSimulationService
         
         if (profHandler is not null && dbContext is not null && resHandler is not null && threatHandler is not null)
         {
+            var rnd = new Random();
             //for this case simulation will go till everyone in population is dead
             //but for testing purposes, it will stop after 10 years
             for (;;)
@@ -74,48 +75,48 @@ public class StartSimulationService
                     await profHandler.HandleTrader();
                 }
                 
-                    //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
-                    
-                    var profOverview = new ProfessionsOverview
-                    {
-                        Apothecaries = await dbContext.Apothecaries.ToListAsync(ct),
-                        BlackSmiths = await dbContext.BlackSmiths.ToListAsync(ct),
-                        Timbers = await dbContext.Timbers.ToListAsync(ct),
-                        Traders = await dbContext.Traders.ToListAsync(ct),
-                        Medics = await dbContext.Medics.ToListAsync(ct),
-                        Farmers = await dbContext.Farmers.ToListAsync(ct),
-                    };
-        
-                    //change to some reliable values later
-                    var threatOverview = new ThreatsOverview
-                    {
-                        ThreatsDefeated = await dbContext.PlagueThreats.Where(x => x.Id % 2 == 0).ToListAsync(ct),
-                        ThreatsYieldedTo = await dbContext.PlagueThreats.Where(x => x.Id % 2 != 0).ToListAsync(ct),
-                    };
-
-                    var resourceOverview = new ResourceOverview
-                    {
-                        CropsCount = dbContext.Crops.SingleOrDefault(x => x.Id == 1).CropsCount,
-                        HerbsCount = dbContext.Herbs.SingleOrDefault(x => x.Id == 1).HerbsCount,
-                        WeaponryCount = dbContext.Weaponry.SingleOrDefault(x => x.Id == 1).WeaponryCount,
-                        MedicinesCount = dbContext.Medicines.SingleOrDefault(x => x.Id == 1).MedicineCount,
-                        WoodCount = dbContext.Wood.SingleOrDefault(x => x.Id == 1).WoodCount
-                    };
+                //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
                 
-                    //Needs further improvement with new console lib in project
-                    //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
-                    
-                    Console.WriteLine("Year: " + _year.YearOfSim);
-                    Console.WriteLine("Crops: " + resourceOverview.CropsCount);
-                    Console.WriteLine("Herbs: " + resourceOverview.HerbsCount);
-                    Console.WriteLine("Wood: " + resourceOverview.WoodCount);
-                    Console.WriteLine("Weapons: " + resourceOverview.WeaponryCount);
-                    Console.WriteLine("Medicine: " + resourceOverview.MedicinesCount);
-                    Console.WriteLine("PopulationCount: " + _counter.PopulationCount);
-                    Console.WriteLine("Threats count: " + threatOverview.ThreatsDefeated.Count);
-                    Console.WriteLine("\n");
+                var profOverview = new ProfessionsOverview
+                {
+                    Apothecaries = await dbContext.Apothecaries.ToListAsync(ct),
+                    BlackSmiths = await dbContext.BlackSmiths.ToListAsync(ct),
+                    Timbers = await dbContext.Timbers.ToListAsync(ct),
+                    Traders = await dbContext.Traders.ToListAsync(ct),
+                    Medics = await dbContext.Medics.ToListAsync(ct),
+                    Farmers = await dbContext.Farmers.ToListAsync(ct),
+                };
+    
+                //change to some reliable values later
+                var threatOverview = new ThreatsOverview
+                {
+                    ThreatsDefeated = await dbContext.PlagueThreats.Where(x => x.Id % 2 == 0).ToListAsync(ct),
+                    ThreatsYieldedTo = await dbContext.PlagueThreats.Where(x => x.Id % 2 != 0).ToListAsync(ct),
+                };
 
-                    if (_year.YearOfSim == 10) break;
+                var resourceOverview = new ResourceOverview
+                {
+                    CropsCount = dbContext.Crops.SingleOrDefault(x => x.Id == 1)!.CropsCount,
+                    HerbsCount = dbContext.Herbs.SingleOrDefault(x => x.Id == 1)!.HerbsCount,
+                    WeaponryCount = dbContext.Weaponry.SingleOrDefault(x => x.Id == 1)!.WeaponryCount,
+                    MedicinesCount = dbContext.Medicines.SingleOrDefault(x => x.Id == 1)!.MedicineCount,
+                    WoodCount = dbContext.Wood.SingleOrDefault(x => x.Id == 1)!.WoodCount
+                };
+            
+                //Needs further improvement with new console lib in project
+                //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
+                
+                Console.WriteLine("Year: " + _year.YearOfSim);
+                Console.WriteLine("Crops: " + resourceOverview.CropsCount);
+                Console.WriteLine("Herbs: " + resourceOverview.HerbsCount);
+                Console.WriteLine("Wood: " + resourceOverview.WoodCount);
+                Console.WriteLine("Weapons: " + resourceOverview.WeaponryCount);
+                Console.WriteLine("Medicine: " + resourceOverview.MedicinesCount);
+                Console.WriteLine("PopulationCount: " + _counter.PopulationCount);
+                Console.WriteLine("Threats count: " + threatOverview.ThreatsDefeated.Count);
+                Console.WriteLine("\n");
+
+                if (_year.YearOfSim == 10) break;
                     
                     
                 if (_counter.PopulationCount == 0)

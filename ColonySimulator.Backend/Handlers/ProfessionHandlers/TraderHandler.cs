@@ -1,4 +1,5 @@
-﻿using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
+﻿using ColonySimulator.Backend.Effects;
+using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Persistence.Models.Resources;
 using ColonySimulator.Backend.Persistence.Models.Threats;
 
@@ -15,12 +16,14 @@ public class TraderHandler : ITraderHandler
         resources.Add("Herbs");
         resources.Add("Weaponry");
 
-        var resourcesCount = new List<int>();
-        resourcesCount.Add(crops.CropsCount);
-        resourcesCount.Add(wood.WoodCount);
-        resourcesCount.Add(medicine.MedicineCount);
-        resourcesCount.Add(herbs.HerbsCount);
-        resourcesCount.Add(weaponry.WeaponryCount);
+        var resourcesCount = new List<int>
+        {
+            crops.CropsCount,
+            wood.WoodCount,
+            medicine.MedicineCount,
+            herbs.HerbsCount,
+            weaponry.WeaponryCount
+        };
 
         var indexMax = resourcesCount.IndexOf(resourcesCount.Max());
         var indexMin = resourcesCount.IndexOf(resourcesCount.Min());
@@ -70,7 +73,7 @@ public class TraderHandler : ITraderHandler
         return Task.CompletedTask;
     }
     
-    public Task ExperienceThreat(Threat threat)
+    public Task ExperienceThreat(Effect effect)
     {
         throw new NotImplementedException();
     }

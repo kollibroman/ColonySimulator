@@ -40,7 +40,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<Apothecary>();
         
-        for (int i = 0; i <= apothecaryCount ; i++)
+        for (int i = 0; i < apothecaryCount ; i++)
         {
             var entity = new Apothecary
             {
@@ -76,7 +76,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<BlackSmith>();
         
-        for (int i = 0; i <= blacksmithCount ; i++)
+        for (int i = 0; i < blacksmithCount ; i++)
         {
             var entity = new BlackSmith
             {
@@ -112,7 +112,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<Farmer>();
         
-        for (int i = 0; i <= farmerCount ; i++)
+        for (int i = 0; i < farmerCount ; i++)
         {
             var entity = new Farmer
             {
@@ -148,7 +148,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<Medic>();
         
-        for (int i = 0; i <= medicCount ; i++)
+        for (int i = 0; i < medicCount ; i++)
         {
             var entity = new Medic
             {
@@ -184,7 +184,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<Timber>();
         
-        for (int i = 0; i <= timbersCount ; i++)
+        for (int i = 0; i < timbersCount ; i++)
         {
             var entity = new Timber
             {

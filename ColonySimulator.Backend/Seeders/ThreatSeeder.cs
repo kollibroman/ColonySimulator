@@ -22,7 +22,7 @@ public class ThreatSeeder
         
         var plagueList = new List<PlagueThreat>();
 
-        for (int i = 0; i <= 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             var threatLevel = rnd.Next(1, 5);
             var plague = new PlagueThreat
@@ -47,7 +47,7 @@ public class ThreatSeeder
 
         var naturalList = new List<NaturalThreat>();
 
-        for (int i = 0; i <= 15; i++)
+        for (int i = 0; i < 15; i++)
         {
             var threatLevel = rnd.Next(1, 5);
             var naturalThreat = new NaturalThreat
@@ -72,7 +72,7 @@ public class ThreatSeeder
 
         var fightingList = new List<FightingThreat>();
 
-        for (int i = 0; i <= 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             var threatLevel = rnd.Next(1, 5);
             var threat = new FightingThreat

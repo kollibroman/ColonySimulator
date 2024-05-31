@@ -1,7 +1,7 @@
-﻿using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
+﻿using ColonySimulator.Backend.Effects;
+using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Persistence.Models.Resources;
-using ColonySimulator.Backend.Persistence.Models.Threats;
 
 namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 
@@ -19,7 +19,7 @@ public class MedicHandler : IMedicHandler
         return Task.CompletedTask;
     }
     
-    public Task ExperienceThreat(Threat threat)
+    public Task ExperienceThreat(Effect effect)
     {
         throw new NotImplementedException();
     }

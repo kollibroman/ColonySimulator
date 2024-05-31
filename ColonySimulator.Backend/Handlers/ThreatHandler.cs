@@ -1,8 +1,10 @@
 using ColonySimulator.Backend.Effects;
 using ColonySimulator.Backend.Handlers.Interfaces;
+using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Persistence.Models.Resources;
 using ColonySimulator.Backend.Persistence.Models.Threats;
+using Microsoft.EntityFrameworkCore;
 
 namespace ColonySimulator.Backend.Handlers;
 
@@ -15,6 +17,17 @@ public class ThreatHandler : IThreatHandler
     /// Damage for an entity
     /// </summary>
     private int _damage;
+
+    private readonly ColonySimulatorContext _dbContext;
+    
+    /// <summary>
+    /// Constructor for class with DI parameters
+    /// </summary>
+    /// <param name="dbContext">Db context</param>
+    public ThreatHandler(ColonySimulatorContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
     
     /// <summary>
     /// Calculates affection by threat of entity
@@ -77,6 +90,26 @@ public class ThreatHandler : IThreatHandler
         };
 
         return Task.FromResult(effect);
+    }
+    
+    /// <summary>
+    /// Generates random threat
+    /// </summary>
+    /// <param name="ct"></param>
+    /// <returns>generated threat</returns>
+    public async Task<Threat?> GenerateRandomThreat(CancellationToken ct)
+    {
+        var rnd = new Random();
+
+        var rndThreatType = rnd.Next(1, 3);
+
+        return rndThreatType switch
+        {
+            1 => await _dbContext.FightingThreats.SingleOrDefaultAsync(x => x.Id == rnd.Next(1,10), ct),
+            2 => await _dbContext.NaturalThreats.SingleOrDefaultAsync(x => x.Id == rnd.Next(1,15), ct),
+            3 => await _dbContext.PlagueThreats.SingleOrDefaultAsync(x => x.Id == rnd.Next(1,10), ct),
+            _ => await _dbContext.PlagueThreats.SingleOrDefaultAsync(x => x.Id == 1, ct)
+        };
     }
 
     private static int CalculateForMedic(Medic medic, Threat threat) => 
