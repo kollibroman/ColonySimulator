@@ -75,6 +75,17 @@ public class StartSimulationService
                     await profHandler.HandleTrader();
                 }
                 
+                //Generate random threat and then handle it
+                if (rnd.NextDouble() <= 0.4)
+                {
+                    var threat = await threatHandler.GenerateRandomThreat(ct);
+
+                    if (threat is not null)
+                    {
+                        
+                    }
+                }
+                
                 //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
                 
                 var profOverview = new ProfessionsOverview

@@ -105,7 +105,7 @@ public class ThreatHandler : IThreatHandler
 
         return rndThreatType switch
         {
-            1 => await _dbContext.FightingThreats.SingleOrDefaultAsync(x => x.Id == rnd.Next(1,10), ct),
+            1 => await _dbContext.FightingThreats.SingleOrDefaultAsync(x => x!.Id == rnd.Next(1,10), ct),
             2 => await _dbContext.NaturalThreats.SingleOrDefaultAsync(x => x.Id == rnd.Next(1,15), ct),
             3 => await _dbContext.PlagueThreats.SingleOrDefaultAsync(x => x.Id == rnd.Next(1,10), ct),
             _ => await _dbContext.PlagueThreats.SingleOrDefaultAsync(x => x.Id == 1, ct)
