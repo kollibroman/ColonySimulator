@@ -50,6 +50,7 @@ public class Program
             services.AddSingleton<DataDisplayService>();
             services.AddSingleton<StartupService>();
             services.AddSingleton<StartSimulationService>();
+            services.AddSingleton<ThreatProvider>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })

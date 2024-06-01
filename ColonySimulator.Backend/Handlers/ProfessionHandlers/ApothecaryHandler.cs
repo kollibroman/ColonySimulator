@@ -64,8 +64,25 @@ public class ApothecaryHandler : IApothecaryHandler
                 var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
                 var herbsEffect = (Herbs)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
 
-                medicine.MedicineCount -= medicineEffect.MedicineCount;
-                herbs.HerbsCount -= herbsEffect.HerbsCount;
+                if (medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                {
+                    medicine.MedicineCount -= medicineEffect.MedicineCount;
+                }
+
+                else
+                {
+                    medicine.MedicineCount = 0;
+                }
+                
+                if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                {
+                    herbs.HerbsCount -= herbsEffect.HerbsCount;
+                }
+
+                else
+                {
+                    herbs.HerbsCount = 0;
+                }
 
             }
             catch (ArgumentNullException e)
@@ -97,8 +114,25 @@ public class ApothecaryHandler : IApothecaryHandler
                 var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
                 var herbsEffect = (Herbs)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
 
-                medicine.MedicineCount -= medicineEffect.MedicineCount;
-                herbs.HerbsCount -= herbsEffect.HerbsCount;
+                if (medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                {
+                    medicine.MedicineCount -= medicineEffect.MedicineCount;
+                }
+
+                else
+                {
+                    medicine.MedicineCount = 0;
+                }
+                
+                if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                {
+                    herbs.HerbsCount -= herbsEffect.HerbsCount;
+                }
+
+                else
+                {
+                    herbs.HerbsCount = 0;
+                }
             }
             catch (ArgumentNullException e)
             {

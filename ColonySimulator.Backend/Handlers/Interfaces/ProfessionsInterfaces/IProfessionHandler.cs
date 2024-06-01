@@ -15,6 +15,4 @@ public interface IProfessionHandler
     Task HandleBlackSmith();
     Task HandleTrader();
     Task HandleMedic();
-
-    public Threat ThreatToExperience { get; set; }
 }

@@ -18,6 +18,7 @@ public class StartSimulationService
     private readonly PopCounter _counter;
     private readonly Year _year;
     private readonly DataDisplayService _displayService;
+    private readonly ThreatProvider _threatProvider;
     
     /// <summary>
     /// Constructor for this service
@@ -26,12 +27,14 @@ public class StartSimulationService
     /// <param name="counter">Population counter class</param>
     /// <param name="year">current year in simulation</param>
     /// <param name="displayService">Data display service</param>
-    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, DataDisplayService displayService)
+    /// <param name="threatProvider">threat to provide</param>
+    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, DataDisplayService displayService, ThreatProvider threatProvider)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _counter = counter;
         _year = year;
         _displayService = displayService;
+        _threatProvider = threatProvider;
     }
     
     /// <summary>
@@ -65,8 +68,9 @@ public class StartSimulationService
 
                     if (threat is not null)
                     {
-                        profHandler.ThreatToExperience = threat;
+                        _threatProvider.ThreatToExperience = threat;
                     }
+                    Console.WriteLine(_threatProvider.ThreatToExperience.Name);
                 }
                 
                 await profHandler.HandleApothecary();
@@ -84,7 +88,8 @@ public class StartSimulationService
                 {
                     await profHandler.HandleTrader();
                 }
-                
+
+                _threatProvider.ThreatToExperience = null;
                 //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
                 
                 var profOverview = new ProfessionsOverview

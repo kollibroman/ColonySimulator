@@ -49,6 +49,55 @@ public class ThreatHandler : IThreatHandler
 
         return Task.CompletedTask;
     }
+    
+    /// <summary>
+    /// Calculate affected resources
+    /// </summary>
+    /// <param name="resources">resources to pass</param>
+    /// <param name="threat">threat passed</param>
+    /// <returns>List of resources affected by threat</returns>
+    public List<Resource> CalculateUsedResources(List<Resource> resources, Threat? threat)
+    {
+        var newResources = new List<Resource>();
+        if (threat is not null)
+        {
+            foreach (var item in resources)
+            {
+                Resource addedItem = item switch
+                {
+                    Crops crops => new Crops
+                    {
+                        Name = item.Name,
+                        CropsCount = threat.ThreatLevel / 2 + 1
+                    },
+                    Wood wood => new Wood
+                    {
+                        Name = item.Name,
+                        WoodCount = threat.ThreatLevel / 2 + 1
+                    },
+                    Herbs herbs => new Herbs
+                    {
+                        Name = item.Name,
+                        HerbsCount = threat.ThreatLevel / 2 + 1
+                    },
+                    Medicine medicine => new Medicine
+                    {
+                        Name = item.Name,
+                        MedicineCount = threat.ThreatLevel / 2 + 1
+                    },
+                    Weaponry weaponry => new Weaponry
+                    {
+                        Name = item.Name,
+                        WeaponryCount = threat.ThreatLevel / 2 + 1
+                    },
+                    _ => throw new InvalidOperationException("non handled threat type passed")
+                };
+            
+                newResources.Add(addedItem);
+            }
+        }
+        return newResources;
+    }
 
     /// <summary>
     /// Generates effect based on threat for entity
@@ -58,38 +107,51 @@ public class ThreatHandler : IThreatHandler
     /// <exception cref="InvalidOperationException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     /// <returns>Generated effect</returns>
-    public Task<Effect> GenerateEffects(Threat threat, List<Resource> resources)
+    public Task<Effect> GenerateEffects(Threat? threat, List<Resource> resources)
     {
-        ArgumentNullException.ThrowIfNull(threat);
         ArgumentNullException.ThrowIfNull(resources);
 
-        Effect effect = threat switch
+        if (threat is not null)
         {
-            PlagueThreat plagueThreat => new PlagueEffect(
-                name: plagueThreat.Name,
-                damage: _damage,
-                medicineCount: plagueThreat.RequiredMedicineCount,
-                isSick: true,
-                requiredMedicLevel: plagueThreat.RequiredMedicalLevel
-            ),
+            Effect effect = threat switch
+            {
+                PlagueThreat plagueThreat => new PlagueEffect(
+                    name: plagueThreat.Name,
+                    damage: _damage,
+                    medicineCount: plagueThreat.RequiredMedicineCount,
+                    isSick: true,
+                    requiredMedicLevel: plagueThreat.RequiredMedicalLevel
+                ),
         
-            NaturalThreat naturalThreat => new NaturalEffect(
-                name: naturalThreat.Name,
-                damage: _damage,
-                isHungry: true,
-                resourcesLost: resources
-            ),
+                NaturalThreat naturalThreat => new NaturalEffect(
+                    name: naturalThreat.Name,
+                    damage: _damage,
+                    isHungry: true,
+                    resourcesLost: resources
+                ),
         
-            FightingThreat fightingThreat => new FightingThreatEffect(
-                name: fightingThreat.Name,
-                damage: _damage,
-                resourcesStolen: resources
-            ),
+                FightingThreat fightingThreat => new FightingThreatEffect(
+                    name: fightingThreat.Name,
+                    damage: _damage,
+                    resourcesStolen: resources
+                ),
         
-            _ => throw new InvalidOperationException("Unknown threat type")
-        };
+                _ => throw new InvalidOperationException("Unknown threat type")
+            };
 
-        return Task.FromResult(effect);
+            return Task.FromResult(effect);
+        }
+
+        else
+        {
+            Effect emptyEffect = new EmptyEffect
+            {
+                Damage = 0,
+                Name = "None effect"
+            };
+            
+            return Task.FromResult(emptyEffect);
+        }
     }
     
     /// <summary>
@@ -101,13 +163,16 @@ public class ThreatHandler : IThreatHandler
     {
         var rnd = new Random();
 
+        var pfRnd = rnd.Next(1, 10);
+        var nRnd = rnd.Next(1, 15);
+        
         var rndThreatType = rnd.Next(1, 3);
 
         return rndThreatType switch
         {
-            1 => await _dbContext.FightingThreats.SingleOrDefaultAsync(x => x!.Id == rnd.Next(1,10), ct),
-            2 => await _dbContext.NaturalThreats.SingleOrDefaultAsync(x => x.Id == rnd.Next(1,15), ct),
-            3 => await _dbContext.PlagueThreats.SingleOrDefaultAsync(x => x.Id == rnd.Next(1,10), ct),
+            1 => await _dbContext.FightingThreats.SingleOrDefaultAsync(x => x!.Id == pfRnd, ct),
+            2 => await _dbContext.NaturalThreats.SingleOrDefaultAsync(x => x.Id == nRnd, ct),
+            3 => await _dbContext.PlagueThreats.SingleOrDefaultAsync(x => x.Id == pfRnd, ct),
             _ => await _dbContext.PlagueThreats.SingleOrDefaultAsync(x => x.Id == 1, ct)
         };
     }

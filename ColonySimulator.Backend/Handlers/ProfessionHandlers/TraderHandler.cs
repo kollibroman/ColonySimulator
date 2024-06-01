@@ -123,12 +123,51 @@ public class TraderHandler : ITraderHandler
                     woodEffect = (Wood)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
                     cropsEffect = (Crops)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
                     weaponryEffect = (Weaponry)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
-                    
-                    medicine.MedicineCount -= medicineEffect.MedicineCount;
-                    herbs.HerbsCount -= herbsEffect.HerbsCount;
-                    wood.WoodCount -= woodEffect.WoodCount;
-                    crops.CropsCount -= cropsEffect.CropsCount;
-                    weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
+
+                    if (medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                    {
+                        medicine.MedicineCount -= medicineEffect.MedicineCount;
+                    }
+                    else
+                    {
+                        medicine.MedicineCount = 0;
+                    }
+
+                    if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                    {
+                        herbs.HerbsCount -= herbsEffect.HerbsCount;
+                    }
+                    else
+                    {
+                        herbs.HerbsCount = 0;
+                    }
+
+                    if (wood.WoodCount - woodEffect.WoodCount >= 0)
+                    {
+                        wood.WoodCount -= woodEffect.WoodCount;
+                    }
+                    else
+                    {
+                        wood.WoodCount = 0;
+                    }
+
+                    if (crops.CropsCount - cropsEffect.CropsCount >= 0)
+                    {
+                        crops.CropsCount -= cropsEffect.CropsCount;
+                    }
+                    else
+                    {
+                        crops.CropsCount = 0;
+                    }
+
+                    if (weaponry.WeaponryCount - weaponryEffect.WeaponryCount >= 0)
+                    {
+                        weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
+                    }
+                    else
+                    {
+                        weaponry.WeaponryCount = 0;
+                    }
                     break;
                 
                 case NaturalEffect nEffect:
@@ -145,11 +184,50 @@ public class TraderHandler : ITraderHandler
                     cropsEffect = (Crops)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
                     weaponryEffect = (Weaponry)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
                     
-                    medicine.MedicineCount -= medicineEffect.MedicineCount;
-                    herbs.HerbsCount -= herbsEffect.HerbsCount;
-                    wood.WoodCount -= woodEffect.WoodCount;
-                    crops.CropsCount -= cropsEffect.CropsCount;
-                    weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
+                    if (medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                    {
+                        medicine.MedicineCount -= medicineEffect.MedicineCount;
+                    }
+                    else
+                    {
+                        medicine.MedicineCount = 0;
+                    }
+
+                    if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                    {
+                        herbs.HerbsCount -= herbsEffect.HerbsCount;
+                    }
+                    else
+                    {
+                        herbs.HerbsCount = 0;
+                    }
+
+                    if (wood.WoodCount - woodEffect.WoodCount >= 0)
+                    {
+                        wood.WoodCount -= woodEffect.WoodCount;
+                    }
+                    else
+                    {
+                        wood.WoodCount = 0;
+                    }
+
+                    if (crops.CropsCount - cropsEffect.CropsCount >= 0)
+                    {
+                        crops.CropsCount -= cropsEffect.CropsCount;
+                    }
+                    else
+                    {
+                        crops.CropsCount = 0;
+                    }
+
+                    if (weaponry.WeaponryCount - weaponryEffect.WeaponryCount >= 0)
+                    {
+                        weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
+                    }
+                    else
+                    {
+                        weaponry.WeaponryCount = 0;
+                    }
                     break;
             }
         }

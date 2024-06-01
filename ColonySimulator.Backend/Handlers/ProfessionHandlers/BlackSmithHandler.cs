@@ -52,8 +52,24 @@ public class BlackSmithHandler : IBlackSmithHandler
                 var wood = (Wood)resources.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
                 var woodEffect = (Wood)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
 
-                weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
-                wood.WoodCount -= woodEffect.WoodCount;
+                if (weaponry.WeaponryCount - weaponryEffect.WeaponryCount >= 0)
+                {
+                    weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
+                }
+                
+                else
+                {
+                    weaponry.WeaponryCount = 0;
+                }
+
+                if (wood.WoodCount - woodEffect.WoodCount >= 0)
+                {
+                    wood.WoodCount -= woodEffect.WoodCount;
+                }
+                else
+                {
+                    wood.WoodCount = 0;
+                }
 
             }
             catch (ArgumentNullException e)
@@ -84,9 +100,25 @@ public class BlackSmithHandler : IBlackSmithHandler
                 var weaponryEffect = (Weaponry)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
                 var wood = (Wood)resources.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
                 var woodEffect = (Wood)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
+                
+                if (weaponry.WeaponryCount - weaponryEffect.WeaponryCount >= 0)
+                {
+                    weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
+                }
+                
+                else
+                {
+                    weaponry.WeaponryCount = 0;
+                }
 
-                weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
-                wood.WoodCount -= woodEffect.WoodCount;
+                if (wood.WoodCount - woodEffect.WoodCount >= 0)
+                {
+                    wood.WoodCount -= woodEffect.WoodCount;
+                }
+                else
+                {
+                    wood.WoodCount = 0;
+                }
             }
             catch (ArgumentNullException e)
             {

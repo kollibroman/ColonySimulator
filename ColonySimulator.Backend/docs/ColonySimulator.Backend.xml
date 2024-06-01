@@ -19,6 +19,11 @@
             Damage done to single entity
             </summary>
         </member>
+        <member name="T:ColonySimulator.Backend.Effects.EmptyEffect">
+            <summary>
+            Empty effect
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Effects.FightingThreatEffect">
             <summary>
             Threat effect from combat type threat
@@ -147,6 +152,14 @@
             </summary>
             <returns>Randomly generated threat</returns>
         </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler.CalculateUsedResources(System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource},ColonySimulator.Backend.Persistence.Models.Threats.Threat)">
+            <summary>
+            Calculates affected resources
+            </summary>
+            <param name="resources">List of resources to pass</param>
+            <param name="threat">threat affecting</param>
+            <returns>list of affected resources</returns>
+        </member>
         <member name="T:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IProfessionHandler">
             <summary>
             Handles professions
@@ -206,17 +219,58 @@
             <param name="resources">resources lost</param>
             <returns></returns>
         </member>
+        <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.FarmerHandler">
+            <summary>
+            Handle farmer
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.FarmerHandler.Farm(ColonySimulator.Backend.Persistence.Models.Resources.Crops,ColonySimulator.Backend.Persistence.Models.Resources.Herbs,System.Int32)">
+            <summary>
+            Generate new resources
+            </summary>
+            <param name="crops">crops</param>
+            <param name="herbs">herbs</param>
+            <param name="farmLevel">level of entity</param>
+            <returns></returns>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.FarmerHandler.ExperienceThreat(ColonySimulator.Backend.Effects.Effect,ColonySimulator.Backend.Persistence.Models.Professions.Proffesion,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
+            <summary>
+            Experience threat
+            </summary>
+            <param name="effect">effect of threat</param>
+            <param name="proffesion">profession</param>
+            <param name="resources">resources affected</param>
+            <returns></returns>
+        </member>
+        <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.MedicHandler">
+            <summary>
+            Handler for medic
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.MedicHandler.Heal(ColonySimulator.Backend.Persistence.Models.Resources.Medicine,ColonySimulator.Backend.Persistence.Models.Professions.Person,System.Int32)">
+            <summary>
+            heal given person
+            </summary>
+            <param name="medicine">medicine entity used</param>
+            <param name="person">person affected</param>
+            <param name="medLevel">level of entity</param>
+            <returns></returns>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.MedicHandler.ExperienceThreat(ColonySimulator.Backend.Effects.Effect,ColonySimulator.Backend.Persistence.Models.Professions.Proffesion,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
+            <summary>
+            Experienced threat by entity
+            </summary>
+            <param name="effect">effect of threat</param>
+            <param name="proffesion">entity's profession</param>
+            <param name="resources">resources affected</param>
+            <returns></returns>
+        </member>
         <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler">
             <summary>
             Profession handler, it resolves and modifies data related to simulation
             </summary>
         </member>
-        <member name="P:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler.ThreatToExperience">
-            <summary>
-            Global threat to experience for an entity
-            </summary>
-        </member>
-        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler.#ctor(ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IFarmerHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IApothecaryHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IBlackSmithHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IMedicHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITimberHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITraderHandler,ColonySimulator.Backend.Persistence.ColonySimulatorContext,ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler)">
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler.#ctor(ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IFarmerHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IApothecaryHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IBlackSmithHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IMedicHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITimberHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITraderHandler,ColonySimulator.Backend.Persistence.ColonySimulatorContext,ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler,ColonySimulator.Backend.Helpers.ThreatProvider)">
             <summary>
             Constructor with DI parameters 
             </summary>
@@ -228,6 +282,7 @@
             <param name="traderHandler">trader handler</param>
             <param name="dbContext">Db context class with db objects</param>
             <param name="threatHandler">Threat handler interface</param>
+            <param name="threatProvider">Threat provider class</param>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler.HandleFarm">
             <summary>
@@ -282,6 +337,31 @@
             <returns>Completed task</returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.TraderHandler">
+            <summary>
+            Trader handler
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.TraderHandler.Trade(ColonySimulator.Backend.Persistence.Models.Resources.Crops,ColonySimulator.Backend.Persistence.Models.Resources.Wood,ColonySimulator.Backend.Persistence.Models.Resources.Medicine,ColonySimulator.Backend.Persistence.Models.Resources.Herbs,ColonySimulator.Backend.Persistence.Models.Resources.Weaponry)">
+            <summary>
+            Generate new resources by trader
+            </summary>
+            <param name="crops">Crops</param>
+            <param name="wood">Wood</param>
+            <param name="medicine">Medicine</param>
+            <param name="herbs">Herbs</param>
+            <param name="weaponry">Weaponry</param>
+            <returns>Completed task</returns>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.TraderHandler.ExperienceThreat(ColonySimulator.Backend.Effects.Effect,ColonySimulator.Backend.Persistence.Models.Professions.Proffesion,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
+            <summary>
+            Threat experience for trader
+            </summary>
+            <param name="effect">threat effect</param>
+            <param name="proffesion">profession of entity</param>
+            <param name="resources">resources affected</param>
+            <returns>completed task</returns>
+        </member>
         <member name="T:ColonySimulator.Backend.Handlers.ThreatHandler">
             <summary>
             Implementation of IThreatHandler
@@ -305,6 +385,14 @@
             <param name="profession">Profession of entity</param>
             <param name="threat">threat passed on as parameter</param>
             <returns></returns>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ThreatHandler.CalculateUsedResources(System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource},ColonySimulator.Backend.Persistence.Models.Threats.Threat)">
+            <summary>
+            Calculate affected resources
+            </summary>
+            <param name="resources">resources to pass</param>
+            <param name="threat">threat passed</param>
+            <returns>List of resources affected by threat</returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ThreatHandler.GenerateEffects(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
             <summary>
@@ -453,6 +541,16 @@
             Method to seed test data in db
             </summary>
         </member>
+        <member name="T:ColonySimulator.Backend.Helpers.ThreatProvider">
+            <summary>
+            Global threat storing class
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ThreatProvider.ThreatToExperience">
+            <summary>
+            Threat to experience for a class
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Helpers.ThreatsOverview">
             <summary>
             Overview class for threats
@@ -478,16 +576,16 @@
             Current year of simulation
             </summary>
         </member>
-        <member name="T:ColonySimulator.Backend.Migrations.init">
+        <member name="T:ColonySimulator.Backend.Migrations.AddIsHungry">
             <inheritdoc />
         </member>
-        <member name="M:ColonySimulator.Backend.Migrations.init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:ColonySimulator.Backend.Migrations.AddIsHungry.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:ColonySimulator.Backend.Migrations.init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:ColonySimulator.Backend.Migrations.AddIsHungry.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:ColonySimulator.Backend.Migrations.init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:ColonySimulator.Backend.Migrations.AddIsHungry.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:ColonySimulator.Backend.Migrations.AddIsSick">
@@ -502,18 +600,6 @@
         <member name="M:ColonySimulator.Backend.Migrations.AddIsSick.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:ColonySimulator.Backend.Migrations.CosmeticChanges">
-            <inheritdoc />
-        </member>
-        <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
         <member name="T:ColonySimulator.Backend.Migrations.AddProfessionsTable">
             <inheritdoc />
         </member>
@@ -526,16 +612,28 @@
         <member name="M:ColonySimulator.Backend.Migrations.AddProfessionsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:ColonySimulator.Backend.Migrations.AddIsHungry">
+        <member name="T:ColonySimulator.Backend.Migrations.CosmeticChanges">
             <inheritdoc />
         </member>
-        <member name="M:ColonySimulator.Backend.Migrations.AddIsHungry.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:ColonySimulator.Backend.Migrations.AddIsHungry.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:ColonySimulator.Backend.Migrations.AddIsHungry.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:ColonySimulator.Backend.Migrations.CosmeticChanges.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ColonySimulator.Backend.Migrations.init">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:ColonySimulator.Backend.Persistence.ColonySimulatorContext">
@@ -654,7 +752,7 @@
             Class to fire up simulation
             </summary>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Helpers.PopCounter,ColonySimulator.Backend.Helpers.Year,ColonySimulator.Backend.Services.DataDisplayService)">
+        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Helpers.PopCounter,ColonySimulator.Backend.Helpers.Year,ColonySimulator.Backend.Services.DataDisplayService,ColonySimulator.Backend.Helpers.ThreatProvider)">
             <summary>
             Constructor for this service
             </summary>
@@ -662,6 +760,7 @@
             <param name="counter">Population counter class</param>
             <param name="year">current year in simulation</param>
             <param name="displayService">Data display service</param>
+            <param name="threatProvider">threat to provide</param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.StartSimulationService.RunAsync(System.Threading.CancellationToken)">
             <summary>

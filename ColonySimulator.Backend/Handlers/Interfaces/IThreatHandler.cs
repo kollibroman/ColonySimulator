@@ -31,4 +31,12 @@ public interface IThreatHandler
     /// </summary>
     /// <returns>Randomly generated threat</returns>
     public Task<Threat?> GenerateRandomThreat(CancellationToken ct);
+    
+    /// <summary>
+    /// Calculates affected resources
+    /// </summary>
+    /// <param name="resources">List of resources to pass</param>
+    /// <param name="threat">threat affecting</param>
+    /// <returns>list of affected resources</returns>
+    public List<Resource> CalculateUsedResources(List<Resource> resources, Threat threat);
 }

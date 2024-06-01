@@ -43,7 +43,14 @@ public class TimberHandler : ITimberHandler
                 var wood = (Wood)resources.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
                 var woodEffect = (Wood)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
 
-                wood.WoodCount -= woodEffect.WoodCount;
+                if (wood.WoodCount - woodEffect.WoodCount >= 0)
+                {
+                    wood.WoodCount -= woodEffect.WoodCount;
+                }
+                else
+                {
+                    wood.WoodCount = 0;
+                }
             }
             catch (ArgumentNullException e)
             {
@@ -72,7 +79,14 @@ public class TimberHandler : ITimberHandler
                 var wood = (Wood)resources.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
                 var woodEffect = (Wood)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
 
-                wood.WoodCount -= woodEffect.WoodCount;
+                if (wood.WoodCount - woodEffect.WoodCount >= 0)
+                {
+                    wood.WoodCount -= woodEffect.WoodCount;
+                }
+                else
+                {
+                    wood.WoodCount = 0;
+                }
             }
             catch (ArgumentNullException e)
             {

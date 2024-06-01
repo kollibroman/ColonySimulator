@@ -46,8 +46,23 @@ public class FarmerHandler : IFarmerHandler
                 var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
                 var herbsEffect = (Herbs)fEffect.ResourcesStolen?.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
 
-                crops.CropsCount -= cropsEffect.CropsCount;
-                herbs.HerbsCount -= herbsEffect.HerbsCount;
+                if (crops.CropsCount - cropsEffect.CropsCount >= 0)
+                {
+                    crops.CropsCount -= cropsEffect.CropsCount;
+                }
+                else
+                {
+                    crops.CropsCount = 0;
+                }
+
+                if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                {
+                    herbs.HerbsCount -= herbsEffect.HerbsCount;    
+                }
+                else
+                {
+                    herbs.HerbsCount = 0;
+                }
 
             }
             catch (ArgumentNullException e)
@@ -79,8 +94,24 @@ public class FarmerHandler : IFarmerHandler
                 var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
                 var herbsEffect = (Herbs)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
 
-                crops.CropsCount -= cropsEffect.CropsCount;
-                herbs.HerbsCount -= herbsEffect.HerbsCount;
+                if (crops.CropsCount - cropsEffect.CropsCount >= 0)
+                {
+                    crops.CropsCount -= cropsEffect.CropsCount;
+                }
+                else
+                {
+                    crops.CropsCount = 0;
+                }
+
+                if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                {
+                    herbs.HerbsCount -= herbsEffect.HerbsCount;    
+                }
+                else
+                {
+                    herbs.HerbsCount = 0;
+                }
+                
             }
             catch (ArgumentNullException e)
             {

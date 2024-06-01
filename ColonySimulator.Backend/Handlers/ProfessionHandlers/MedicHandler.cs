@@ -35,7 +35,7 @@ public class MedicHandler : IMedicHandler
     /// <param name="effect">effect of threat</param>
     /// <param name="proffesion">entity's profession</param>
     /// <param name="resources">resources affected</param>
-    /// <returns></returns>
+    /// <returns>Completed task</returns>
     public Task ExperienceThreat(Effect effect, Proffesion proffesion, List<Resource> resources)
     {
         if (effect.GetType() == typeof(FightingThreatEffect))
@@ -49,7 +49,14 @@ public class MedicHandler : IMedicHandler
                 var medicine = (Medicine)resources.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
                 var medicineEffect = (Medicine)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
 
-                medicine.MedicineCount -= medicineEffect.MedicineCount;
+                if(medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                {
+                    medicine.MedicineCount -= medicineEffect.MedicineCount;
+                }
+                else
+                {
+                    medicine.MedicineCount = 0;
+                }
             }
             catch (ArgumentNullException e)
             {
@@ -78,7 +85,14 @@ public class MedicHandler : IMedicHandler
                 var medicine = (Medicine)resources.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
                 var medicineEffect = (Medicine)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
 
-                medicine.MedicineCount -= medicineEffect.MedicineCount;
+                if(medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                {
+                    medicine.MedicineCount -= medicineEffect.MedicineCount;
+                }
+                else
+                {
+                    medicine.MedicineCount = 0;
+                }
             }
             catch (ArgumentNullException e)
             {
