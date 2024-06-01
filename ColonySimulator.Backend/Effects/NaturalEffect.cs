@@ -8,10 +8,20 @@ namespace ColonySimulator.Backend.Effects;
 /// </summary>
 public class NaturalEffect : Effect
 {
+    /// <summary>
+    /// empty constructor
+    /// </summary>
     public NaturalEffect()
     {
     }
-
+    
+    /// <summary>
+    /// Constructor with parameters to pass
+    /// </summary>
+    /// <param name="name">Name of effect</param>
+    /// <param name="damage">damage done to entity</param>
+    /// <param name="isHungry">parameter to set in entity</param>
+    /// <param name="resourcesLost">resources lost due to threat</param>
     [SetsRequiredMembers]
     public NaturalEffect(string name, int damage, bool isHungry, List<Resource> resourcesLost)
     {

@@ -8,10 +8,19 @@ namespace ColonySimulator.Backend.Effects;
 /// </summary>
 public class FightingThreatEffect : Effect
 {
+    /// <summary>
+    /// Empty contstructor
+    /// </summary>
     public FightingThreatEffect()
     {
     }
-
+    
+    /// <summary>
+    /// Constructor with parameters
+    /// </summary>
+    /// <param name="name">Name of effect</param>
+    /// <param name="damage">damage done to entities</param>
+    /// <param name="resourcesStolen">resources lost</param>
     [SetsRequiredMembers]
     public FightingThreatEffect(string name, int damage, List<Resource> resourcesStolen)
     {

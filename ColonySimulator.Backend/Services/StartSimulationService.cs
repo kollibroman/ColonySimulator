@@ -12,7 +12,6 @@ namespace ColonySimulator.Backend.Services;
 /// <summary>
 /// Class to fire up simulation
 /// </summary>
-
 public class StartSimulationService
 {
     private readonly IServiceScopeFactory _serviceScopeFactory;
@@ -27,7 +26,6 @@ public class StartSimulationService
     /// <param name="counter">Population counter class</param>
     /// <param name="year">current year in simulation</param>
     /// <param name="displayService">Data display service</param>
-    
     public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, DataDisplayService displayService)
     {
         _serviceScopeFactory = serviceScopeFactory;
@@ -59,6 +57,18 @@ public class StartSimulationService
             for (;;)
             {
                 _year.YearOfSim++;
+                
+                //Generate random threat and then handle it
+                if (rnd.NextDouble() <= 0.4)
+                {
+                    var threat = await threatHandler.GenerateRandomThreat(ct);
+
+                    if (threat is not null)
+                    {
+                        profHandler.ThreatToExperience = threat;
+                    }
+                }
+                
                 await profHandler.HandleApothecary();
                 await profHandler.HandleFarm();
                 await profHandler.HandleTimber();
@@ -73,17 +83,6 @@ public class StartSimulationService
                 if (_year.YearOfSim % 10 == 0 )
                 {
                     await profHandler.HandleTrader();
-                }
-                
-                //Generate random threat and then handle it
-                if (rnd.NextDouble() <= 0.4)
-                {
-                    var threat = await threatHandler.GenerateRandomThreat(ct);
-
-                    if (threat is not null)
-                    {
-                        
-                    }
                 }
                 
                 //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
@@ -116,7 +115,6 @@ public class StartSimulationService
             
                 //Needs further improvement with new console lib in project
                 //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
-                
                 Console.WriteLine("Year: " + _year.YearOfSim);
                 Console.WriteLine("Crops: " + resourceOverview.CropsCount);
                 Console.WriteLine("Herbs: " + resourceOverview.HerbsCount);

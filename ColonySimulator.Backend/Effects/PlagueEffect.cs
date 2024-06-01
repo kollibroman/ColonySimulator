@@ -15,7 +15,7 @@ public class PlagueEffect : Effect
     }
     
     /// <summary>
-    /// Setting contructor
+    /// Setting constructor
     /// </summary>
     /// <param name="name">Name of threat</param>
     /// <param name="damage">Amount of entity damage done</param>

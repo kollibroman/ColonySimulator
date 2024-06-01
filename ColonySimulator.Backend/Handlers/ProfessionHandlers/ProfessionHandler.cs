@@ -1,4 +1,3 @@
-using ColonySimulator.Backend.Effects;
 using ColonySimulator.Backend.Handlers.Interfaces;
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Persistence;
@@ -10,9 +9,8 @@ using Microsoft.EntityFrameworkCore;
 namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 
 /// <summary>
-/// Profession handler, it resolves and modifies data related to simuation
+/// Profession handler, it resolves and modifies data related to simulation
 /// </summary>
-
 public class ProfessionHandler : IProfessionHandler
 {
     
@@ -77,7 +75,7 @@ public class ProfessionHandler : IProfessionHandler
             await _threatHandler.CalculateAffection(farmers[i], ThreatToExperience);
             var effect = await _threatHandler.GenerateEffects(ThreatToExperience, resources);
 
-            await _farmerHandler.ExperienceThreat(effect);
+            await _farmerHandler.ExperienceThreat(effect, farmers[i], resources);
         }
 
         await _dbContext.SaveChangesAsync();
@@ -105,7 +103,7 @@ public class ProfessionHandler : IProfessionHandler
             await _threatHandler.CalculateAffection(apothecaries[i], ThreatToExperience);
             var effect = await _threatHandler.GenerateEffects(ThreatToExperience, resources);
 
-            await _apothecaryHandler.ExperienceThreat(effect);
+            await _apothecaryHandler.ExperienceThreat(effect, apothecaries[i], resources);
         }
         
         await _dbContext.SaveChangesAsync();
@@ -131,7 +129,7 @@ public class ProfessionHandler : IProfessionHandler
             await _threatHandler.CalculateAffection(timbers[i], ThreatToExperience);
             var effect = await _threatHandler.GenerateEffects(ThreatToExperience, resources);
 
-            await _timberHandler.ExperienceThreat(effect);
+            await _timberHandler.ExperienceThreat(effect, timbers[i], resources);
         }
         
         await _dbContext.SaveChangesAsync();
@@ -158,7 +156,7 @@ public class ProfessionHandler : IProfessionHandler
             await _threatHandler.CalculateAffection(blackSmiths[i], ThreatToExperience);
             var effect = await _threatHandler.GenerateEffects(ThreatToExperience, resources);
 
-            await _blackSmithHandler.ExperienceThreat(effect);
+            await _blackSmithHandler.ExperienceThreat(effect, blackSmiths[i], resources);
         }
         
         await _dbContext.SaveChangesAsync();
@@ -195,7 +193,7 @@ public class ProfessionHandler : IProfessionHandler
             await _threatHandler.CalculateAffection(medics[i], ThreatToExperience);
             var effect = await _threatHandler.GenerateEffects(ThreatToExperience, resources);
 
-            await _medicHandler.ExperienceThreat(effect);
+            await _medicHandler.ExperienceThreat(effect, medics[i], resources);
         }
         
         await _dbContext.SaveChangesAsync();
