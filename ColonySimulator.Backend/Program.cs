@@ -41,7 +41,7 @@ public class Program
             services.AddScoped<ITimberHandler, TimberHandler>();
             services.AddScoped<ITraderHandler, TraderHandler>();
             services.AddScoped<IResourceHandler, ResourceHandler>();
-            services.AddScoped<IThreatHandler, Threathandler>();
+            services.AddScoped<IThreatHandler, ThreatHandler>();
 
             services.AddScoped<IProfessionHandler, ProfessionHandler>();
             
@@ -50,6 +50,7 @@ public class Program
             services.AddSingleton<DataDisplayService>();
             services.AddSingleton<StartupService>();
             services.AddSingleton<StartSimulationService>();
+            services.AddSingleton<ThreatProvider>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })

@@ -40,7 +40,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<Apothecary>();
         
-        for (int i = 0; i <= apothecaryCount ; i++)
+        for (int i = 0; i < apothecaryCount ; i++)
         {
             var entity = new Apothecary
             {
@@ -52,7 +52,8 @@ public class ProfessionSeeder
                 Strength = 1,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -75,7 +76,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<BlackSmith>();
         
-        for (int i = 0; i <= blacksmithCount ; i++)
+        for (int i = 0; i < blacksmithCount ; i++)
         {
             var entity = new BlackSmith
             {
@@ -87,7 +88,8 @@ public class ProfessionSeeder
                 Strength = 4,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -110,7 +112,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<Farmer>();
         
-        for (int i = 0; i <= farmerCount ; i++)
+        for (int i = 0; i < farmerCount ; i++)
         {
             var entity = new Farmer
             {
@@ -122,7 +124,8 @@ public class ProfessionSeeder
                 Strength = 5,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -145,7 +148,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<Medic>();
         
-        for (int i = 0; i <= medicCount ; i++)
+        for (int i = 0; i < medicCount ; i++)
         {
             var entity = new Medic
             {
@@ -157,7 +160,8 @@ public class ProfessionSeeder
                 Strength = 1,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -180,7 +184,7 @@ public class ProfessionSeeder
         var rand = new Random();
         var entityList = new List<Timber>();
         
-        for (int i = 0; i <= timbersCount ; i++)
+        for (int i = 0; i < timbersCount ; i++)
         {
             var entity = new Timber
             {
@@ -192,7 +196,8 @@ public class ProfessionSeeder
                 Strength = 5,
                 Vitality = rand.Next(1, 10),
                 ResourceConsumption = rand.Next(1, 10),
-                IsSick = false
+                IsSick = false,
+                IsHungry = false
             };
             
             entityList.Add(entity);
@@ -225,7 +230,8 @@ public class ProfessionSeeder
             Strength = 1,
             Vitality = rand.Next(1, 10),
             ResourceConsumption = rand.Next(1, 10),
-            IsSick = false
+            IsSick = false,
+            IsHungry = false
         };
         
 
