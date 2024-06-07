@@ -46,7 +46,7 @@ public class TraderHandler : ITraderHandler
             + resourcesCount.Max() + " --> " + resourcesCount.Min());
         
         var rnd = new Random();
-        var amountTraded = (int)rnd.NextInt64(1, resourcesCount[indexMax] / 2);
+        var amountTraded = (int)rnd.NextInt64(1, (long)Math.Ceiling(resourcesCount[indexMax] * 0.7));
 
         resourcesCount[indexMax] -= amountTraded;
         resourcesCount[indexMin] += amountTraded;
