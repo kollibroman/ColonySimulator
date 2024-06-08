@@ -2,6 +2,7 @@
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Persistence.Models.Resources;
+using Spectre.Console;
 
 namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 
@@ -42,7 +43,7 @@ public class TraderHandler : ITraderHandler
         var indexMax = resourcesCount.IndexOf(resourcesCount.Max());
         var indexMin = resourcesCount.IndexOf(resourcesCount.Min());
 
-        Console.WriteLine("Trade: \n" + resources[indexMax] + " --> " + resources[indexMin] + "" + "\n" 
+        AnsiConsole.WriteLine("Trade: \n" + resources[indexMax] + " --> " + resources[indexMin] + "" + "\n" 
             + resourcesCount.Max() + " --> " + resourcesCount.Min());
         
         var rnd = new Random();
@@ -51,8 +52,7 @@ public class TraderHandler : ITraderHandler
         resourcesCount[indexMax] -= amountTraded;
         resourcesCount[indexMin] += amountTraded;
 
-        Console.WriteLine("Amount traded: " + amountTraded + "\nNew amount of " + resources[indexMax] + ": " + resourcesCount[indexMax]
-        + "\nNew amount of " + resources[indexMin] + ": " + resourcesCount[indexMin]);
+        AnsiConsole.WriteLine("Amount traded: " + amountTraded);
         
         return Task.CompletedTask;
     }
