@@ -263,7 +263,7 @@
             <param name="effect">effect of threat</param>
             <param name="proffesion">entity's profession</param>
             <param name="resources">resources affected</param>
-            <returns></returns>
+            <returns>Completed task</returns>
         </member>
         <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler">
             <summary>

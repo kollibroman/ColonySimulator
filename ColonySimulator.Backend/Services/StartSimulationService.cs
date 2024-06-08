@@ -84,10 +84,7 @@ public class StartSimulationService
                 //I have cool idea for it now not really working
                 //for now please add only 1 trader per sim
                 //Basic display works changing data doesn't
-                if (_year.YearOfSim % 10 == 0 )
-                {
-                    await profHandler.HandleTrader();
-                }
+                
 
                 _threatProvider.ThreatToExperience = null;
                 //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
@@ -128,8 +125,14 @@ public class StartSimulationService
                 Console.WriteLine("Medicine: " + resourceOverview.MedicinesCount);
                 Console.WriteLine("PopulationCount: " + _counter.PopulationCount);
                 Console.WriteLine("Threats count: " + threatOverview.ThreatsDefeated.Count);
-                Console.WriteLine("\n");
 
+                if (rnd.NextDouble() <= 0.2)
+                {
+                    profHandler.HandleTrader();
+                }
+
+                Console.WriteLine("\n");
+                
                 if (_year.YearOfSim == 10) break;
                     
                     

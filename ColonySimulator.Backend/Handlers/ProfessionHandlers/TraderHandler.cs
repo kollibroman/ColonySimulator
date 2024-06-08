@@ -42,46 +42,17 @@ public class TraderHandler : ITraderHandler
         var indexMax = resourcesCount.IndexOf(resourcesCount.Max());
         var indexMin = resourcesCount.IndexOf(resourcesCount.Min());
 
-        Console.WriteLine("You can trade: \n" + resources[indexMax] + " --> " + resources[indexMin] + "" + "\n" 
+        Console.WriteLine("Trade: \n" + resources[indexMax] + " --> " + resources[indexMin] + "" + "\n" 
             + resourcesCount.Max() + " --> " + resourcesCount.Min());
+        
+        var rnd = new Random();
+        var amountTraded = (int)rnd.NextInt64(1, (long)Math.Ceiling(resourcesCount[indexMax] * 0.7));
 
-        int willingToTrade, amountSold;
+        resourcesCount[indexMax] -= amountTraded;
+        resourcesCount[indexMin] += amountTraded;
 
-        try
-        {
-            Console.WriteLine("If you are willing to trade (type: 1), if not (type: 0): ");
-            willingToTrade = int.Parse(Console.ReadLine()!);
-            if (willingToTrade == 1)
-            {
-                Console.WriteLine("How much you want to trade: ");
-                amountSold = int.Parse(Console.ReadLine()!);
-                if (amountSold > resourcesCount.Max() || amountSold < 0)
-                {
-                    //Needs adding some sort of loop to get user input again 
-                    Console.WriteLine("Can't trade this amount of resource");
-                }
-                else
-                {
-                    //Kinda works but doesn't display data in the servicesStart
-                    Console.WriteLine("Max before: " + resourcesCount[indexMax]);
-                    resourcesCount[indexMax] -= amountSold;
-                    Console.WriteLine("Max after: " + resourcesCount[indexMax]);
-                    Console.WriteLine("Min before: " + resourcesCount[indexMin]);
-                    resourcesCount[indexMin] += amountSold;
-                    Console.WriteLine("Min after: " + resourcesCount[indexMin]);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Transaction rejected");
-                return Task.CompletedTask;
-            }
-        }
-        //Need to add logger I think
-        catch (ArgumentNullException ex)
-        {
-            
-        }
+        Console.WriteLine("Amount traded: " + amountTraded + "\nNew amount of " + resources[indexMax] + ": " + resourcesCount[indexMax]
+        + "\nNew amount of " + resources[indexMin] + ": " + resourcesCount[indexMin]);
         
         return Task.CompletedTask;
     }
