@@ -1,3 +1,4 @@
+using System.Text;
 using ColonySimulator.Backend.Handlers.Interfaces;
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
@@ -6,6 +7,7 @@ using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Persistence.Models.Resources;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Spectre.Console;
 
 namespace ColonySimulator.Backend.Services;
 
@@ -57,6 +59,8 @@ public class StartSimulationService
             var rnd = new Random();
             //for this case simulation will go till everyone in population is dead
             //but for testing purposes, it will stop after 10 years
+            
+            Console.Clear();
             for (;;)
             {
                 _year.YearOfSim++;
@@ -70,7 +74,6 @@ public class StartSimulationService
                     {
                         _threatProvider.ThreatToExperience = threat;
                     }
-                    Console.WriteLine(_threatProvider.ThreatToExperience.Name);
                 }
                 
                 await profHandler.HandleApothecary();
@@ -117,30 +120,58 @@ public class StartSimulationService
             
                 //Needs further improvement with new console lib in project
                 //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
-                Console.WriteLine("Year: " + _year.YearOfSim);
-                Console.WriteLine("Crops: " + resourceOverview.CropsCount);
-                Console.WriteLine("Herbs: " + resourceOverview.HerbsCount);
-                Console.WriteLine("Wood: " + resourceOverview.WoodCount);
-                Console.WriteLine("Weapons: " + resourceOverview.WeaponryCount);
-                Console.WriteLine("Medicine: " + resourceOverview.MedicinesCount);
-                Console.WriteLine("PopulationCount: " + _counter.PopulationCount);
-                Console.WriteLine("Threats count: " + threatOverview.ThreatsDefeated.Count);
+                //Adding year rule on top of console
+                var yearRule = new Rule("Year: [red]" + _year.YearOfSim + "[/]\n");
+                AnsiConsole.Write(yearRule);
+
+                //Population Counter Panel
+                var popCountPanel = new Panel(
+                    new Markup(_counter.PopulationCount.ToString())
+                );
+                popCountPanel.Border = BoxBorder.Heavy;
+                popCountPanel.Header = new PanelHeader(" Population ");
+                popCountPanel.Width = 20;
+                AnsiConsole.Write(popCountPanel);
+                
+                //Resources Panel
+                var resourcePanel = new Panel(new BarChart()
+                    .Width(150)
+                    .AddItem("Crops: ", resourceOverview.CropsCount, Color.Green)
+                    .AddItem("Herbs: ", resourceOverview.HerbsCount, Color.Green1)
+                    .AddItem("Wood: ", resourceOverview.WoodCount, Color.RosyBrown)
+                    .AddItem("Medicine: ", resourceOverview.MedicinesCount, Color.Aqua)
+                    .AddItem("Weaponry: ", resourceOverview.WeaponryCount, Color.Red1)
+                );
+                resourcePanel.Border = BoxBorder.Heavy;
+                resourcePanel.Header = new PanelHeader(" Resources ");
+                resourcePanel.Padding(1, 1, 1, 1);
+                AnsiConsole.Write(resourcePanel);
+
 
                 if (rnd.NextDouble() <= 0.2)
                 {
                     profHandler.HandleTrader();
                 }
-
-                Console.WriteLine("\n");
+                
+                if (_threatProvider.ThreatToExperience is not null)
+                {
+                    AnsiConsole.Write(_threatProvider.ThreatToExperience.Name);
+                }
+                
+                
+                
                 
                 if (_year.YearOfSim == 10) break;
-                    
                     
                 if (_counter.PopulationCount == 0)
                 {
                     Console.WriteLine("Everyone's dead, showing end data: ");
                     break;
                 }
+                
+                Console.ReadLine();
+                Console.Clear();
+                
             }
         }
     }

@@ -1,4 +1,5 @@
 using Serilog;
+using Spectre.Console;
 
 namespace ColonySimulator.Backend.Seeders;
 
@@ -54,29 +55,121 @@ public class DataSeeder
 
         try
         {
-            Console.Write("Apothecaries: ");
-            _apothecaryCount = int.Parse(Console.ReadLine()!);
-            Console.Write("Blacksmiths: ");
-            _blackSmithCount = int.Parse(Console.ReadLine()!);
-            Console.Write("Farmers: ");
-            _farmerCount = int.Parse(Console.ReadLine()!);
-            Console.Write("Timbers: ");
-            _timberCount = int.Parse(Console.ReadLine()!);
-            Console.Write("Medics: ");
-            _medicCount = int.Parse(Console.ReadLine()!);
+            //New input seeder validating data when prompting
+             _apothecaryCount = AnsiConsole.Prompt(new TextPrompt<int>("Apothecaries: ")
+                .ValidationErrorMessage("[red]Inproper input!![/]")
+                .Validate(_apothecaryCount =>
+                {
+                    return _apothecaryCount switch
+                    {
+                        <= 0 => ValidationResult.Error("[red]You need at least one apothecary[/]"),
+                        >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed apothecaries[/]"),
+                        _ => ValidationResult.Success()
+                   };
+                }));
+             //Adding Some better looking input
+             _blackSmithCount = AnsiConsole.Prompt(new TextPrompt<int>("Black Smiths: ")
+                 .ValidationErrorMessage("[red]Inproper input!![/]")
+                 .Validate(_blackSmithCount =>
+                 {
+                     return _blackSmithCount switch
+                     {
+                         <= 0 => ValidationResult.Error("[red]You need at least one black smith[/]"),
+                         >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed black smiths[/]"),
+                         _ => ValidationResult.Success()
+                     };
+                 }));
+             _farmerCount = AnsiConsole.Prompt(new TextPrompt<int>("Farmers: ")
+                 .ValidationErrorMessage("[red]Inproper input!![/]")
+                 .Validate(_farmerCount =>
+                 {
+                     return _farmerCount switch
+                     {
+                         <= 0 => ValidationResult.Error("[red]You need at least one farmer[/]"),
+                         >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed Farmers[/]"),
+                         _ => ValidationResult.Success()
+                     };
+                 }));
+             _timberCount = AnsiConsole.Prompt(new TextPrompt<int>("Timbers: ")
+                 .ValidationErrorMessage("[red]Inproper input!![/]")
+                 .Validate(_timberCount =>
+                 {
+                     return _timberCount switch
+                     {
+                         <= 0 => ValidationResult.Error("[red]You need at least one timber[/]"),
+                         >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed Timbers[/]"),
+                         _ => ValidationResult.Success()
+                     };
+                 }));
+             _medicCount = AnsiConsole.Prompt(new TextPrompt<int>("Medics: ")
+                 .ValidationErrorMessage("[red]Inproper input!![/]")
+                 .Validate(_medicCount =>
+                 {
+                     return _medicCount switch
+                     {
+                         <= 0 => ValidationResult.Error("[red]You need at least one medic[/]"),
+                         >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed Medics[/]"),
+                         _ => ValidationResult.Success()
+                     };
+                 }));
             //Changed seeder for trader to create only one
             _traderCount = 1;
             
-            Console.Write("Crops: ");
-            _cropsCount = int.Parse(Console.ReadLine()!);
-            Console.Write("Herbs: ");
-            _herbsCount = int.Parse(Console.ReadLine()!);
-            Console.Write("Medicine: ");
-            _medicineCount = int.Parse(Console.ReadLine()!);
-            Console.Write("Weaponry: ");
-            _weaponryCount = int.Parse(Console.ReadLine()!);
-            Console.Write("Wood: ");
-            _woodCount = int.Parse(Console.ReadLine()!);
+            _cropsCount = AnsiConsole.Prompt(new TextPrompt<int>("Crops: ")
+                .ValidationErrorMessage("[red]Inproper input!![/]")
+                .Validate(_cropsCount =>
+                {
+                    return _cropsCount switch
+                    {
+                        < 100 => ValidationResult.Error("[red]You need at least 100 crop[/]"),
+                        >= 300 => ValidationResult.Error("[red]Don't exceed 300 inputed Crops[/]"),
+                        _ => ValidationResult.Success()
+                    };
+                }));
+            _herbsCount = AnsiConsole.Prompt(new TextPrompt<int>("Herbs: ")
+                .ValidationErrorMessage("[red]Inproper input!![/]")
+                .Validate(_herbsCount =>
+                {
+                    return _herbsCount switch
+                    {
+                        < 10 => ValidationResult.Error("[red]You need at least 10 herbs[/]"),
+                        >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed Herbs[/]"),
+                        _ => ValidationResult.Success()
+                    };
+                }));
+            _medicCount = AnsiConsole.Prompt(new TextPrompt<int>("Medicine: ")
+                .ValidationErrorMessage("[red]Inproper input!![/]")
+                .Validate(_medicCount =>
+                {
+                    return _medicCount switch
+                    {
+                        < 5 => ValidationResult.Error("[red]You need at least 5 medicine[/]"),
+                        >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed Medicine[/]"),
+                        _ => ValidationResult.Success()
+                    };
+                }));
+            _weaponryCount = AnsiConsole.Prompt(new TextPrompt<int>("Weaponry: ")
+                .ValidationErrorMessage("[red]Inproper input!![/]")
+                .Validate(_weaponryCount =>
+                {
+                    return _weaponryCount switch
+                    {
+                        < 10 => ValidationResult.Error("[red]You need at least 10 weaponry[/]"),
+                        >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed Weaponry[/]"),
+                        _ => ValidationResult.Success()
+                    };
+                }));
+            _woodCount = AnsiConsole.Prompt(new TextPrompt<int>("Wood: ")
+                .ValidationErrorMessage("[red]Inproper input!![/]")
+                .Validate(_woodCount =>
+                {
+                    return _woodCount switch
+                    {
+                        < 10 => ValidationResult.Error("[red]You need at least 10 wood[/]"),
+                        >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed Wood[/]"),
+                        _ => ValidationResult.Success()
+                    };
+                }));
         }
         catch (ArgumentNullException ex)
         {

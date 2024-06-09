@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Spectre.Console;
+using Spectre.Console.Cli;
 using ILogger = Serilog.ILogger;
 
 namespace ColonySimulator.Backend.Services;

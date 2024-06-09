@@ -34,7 +34,7 @@ public class ResourceHandler : IResourceHandler
             if(crop.CropsCount - person.ResourceConsumption < 0){}
             else
             {
-                crop.CropsCount -= person.ResourceConsumption;
+                crop.CropsCount -= person.ResourceConsumption/4;
             }
         }
     }
