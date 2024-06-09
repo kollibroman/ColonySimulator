@@ -108,8 +108,7 @@ public class StartSimulationService
                 };
                 
                 //Needs further improvement with new console lib in project
-                //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
-                
+                //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview))          
                 /*################################## Layout GUI ##################################*/
                 //Adding year rule on top of console
                 var yearRule = new Rule("Year: [red]" + _year.YearOfSim + "[/]\n");
@@ -136,8 +135,7 @@ public class StartSimulationService
                 resourcePanel.Border = BoxBorder.Heavy;
                 resourcePanel.Header = new PanelHeader(" Resources ");
                 resourcePanel.Padding(1, 1, 1, 1);
-                
-
+            
                 //Threat Panel
                 var threatPanel = new Panel(
                     new Markup(threatName)
@@ -227,7 +225,6 @@ public class StartSimulationService
                 }
 
                 Console.ReadLine();
-
             }
         }
     }
