@@ -108,7 +108,7 @@ public class DataSeeder
                      return _medicCount switch
                      {
                          <= 0 => ValidationResult.Error("[red]You need at least one medic[/]"),
-                         >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed Medics[/]"),
+                         >= 201 => ValidationResult.Error("[red]Don't exceed 100 inputed Medics[/]"),
                          _ => ValidationResult.Success()
                      };
                  }));
@@ -132,7 +132,7 @@ public class DataSeeder
                 {
                     return _herbsCount switch
                     {
-                        < 10 => ValidationResult.Error("[red]You need at least 10 herbs[/]"),
+                        < 1 => ValidationResult.Error("[red]You need at least 10 herbs[/]"),
                         >= 100 => ValidationResult.Error("[red]Don't exceed 100 inputed Herbs[/]"),
                         _ => ValidationResult.Success()
                     };

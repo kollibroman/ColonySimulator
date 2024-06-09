@@ -66,13 +66,15 @@ public class StartSimulationService
                 _year.YearOfSim++;
                 
                 //Generate random threat and then handle it
-                if (rnd.NextDouble() <= 0.4)
+                var threatName = "No threats this year";
+                if (rnd.NextDouble() <= 0.1)
                 {
                     var threat = await threatHandler.GenerateRandomThreat(ct);
 
                     if (threat is not null)
                     {
                         _threatProvider.ThreatToExperience = threat;
+                        threatName = _threatProvider.ThreatToExperience.Name;
                     }
                 }
                 
@@ -82,13 +84,7 @@ public class StartSimulationService
                 await profHandler.HandleMedic();
                 await profHandler.HandleBlackSmith();
                 await resHandler.ConsumeResources(_counter.PopulationCount);
-
-                //For now task getting once
-                //I have cool idea for it now not really working
-                //for now please add only 1 trader per sim
-                //Basic display works changing data doesn't
                 
-
                 _threatProvider.ThreatToExperience = null;
                 //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
                 
@@ -101,13 +97,6 @@ public class StartSimulationService
                     Medics = await dbContext.Medics.ToListAsync(ct),
                     Farmers = await dbContext.Farmers.ToListAsync(ct),
                 };
-    
-                //change to some reliable values later
-                var threatOverview = new ThreatsOverview
-                {
-                    ThreatsDefeated = await dbContext.PlagueThreats.Where(x => x.Id % 2 == 0).ToListAsync(ct),
-                    ThreatsYieldedTo = await dbContext.PlagueThreats.Where(x => x.Id % 2 != 0).ToListAsync(ct),
-                };
 
                 var resourceOverview = new ResourceOverview
                 {
@@ -117,21 +106,23 @@ public class StartSimulationService
                     MedicinesCount = dbContext.Medicines.SingleOrDefault(x => x.Id == 1)!.MedicineCount,
                     WoodCount = dbContext.Wood.SingleOrDefault(x => x.Id == 1)!.WoodCount
                 };
-            
+                
                 //Needs further improvement with new console lib in project
                 //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
+                
+                /*################################## Layout GUI ##################################*/
                 //Adding year rule on top of console
                 var yearRule = new Rule("Year: [red]" + _year.YearOfSim + "[/]\n");
-                AnsiConsole.Write(yearRule);
 
                 //Population Counter Panel
                 var popCountPanel = new Panel(
-                    new Markup(_counter.PopulationCount.ToString())
+                    new Markup("Apothecaries: " + dbContext.Apothecaries.Count()
+                        + "\nBlack smiths: " + dbContext.BlackSmiths.Count() + "\nFarmers: " + dbContext.Farmers.Count()
+                        + "\nMedics: " + dbContext.Medics.Count() + "\nTimbers: " + dbContext.Timbers.Count() + "\nSummary: "+ _counter.PopulationCount)
                 );
                 popCountPanel.Border = BoxBorder.Heavy;
                 popCountPanel.Header = new PanelHeader(" Population ");
                 popCountPanel.Width = 20;
-                AnsiConsole.Write(popCountPanel);
                 
                 //Resources Panel
                 var resourcePanel = new Panel(new BarChart()
@@ -145,21 +136,87 @@ public class StartSimulationService
                 resourcePanel.Border = BoxBorder.Heavy;
                 resourcePanel.Header = new PanelHeader(" Resources ");
                 resourcePanel.Padding(1, 1, 1, 1);
-                AnsiConsole.Write(resourcePanel);
+                
 
-
+                //Threat Panel
+                var threatPanel = new Panel(
+                    new Markup(threatName)
+                );
+                threatPanel.Border = BoxBorder.Heavy;
+                threatPanel.Header = new PanelHeader(" Threats: ");
+                threatPanel.Width = 20;
+                
+                //Trader Panel
+                //Generate Trader and handle it
+                var traderString = "No trader this year";
                 if (rnd.NextDouble() <= 0.2)
                 {
-                    profHandler.HandleTrader();
+                    var resourcesCount = new List<int>
+                    {
+                        resourceOverview.CropsCount,
+                        resourceOverview.HerbsCount,
+                        resourceOverview.MedicinesCount,
+                        resourceOverview.WeaponryCount,
+                        resourceOverview.WoodCount
+                    };
+
+                    var resourcesName = new List<String>
+                    {
+                        "Crops",
+                        "Herbs",
+                        "Medicine",
+                        "Weaponry",
+                        "Wood"
+                    };
+
+                    var indexMax = resourcesCount.IndexOf(resourcesCount.Max());
+                    var indexMin = resourcesCount.IndexOf(resourcesCount.Min());
+                    var amountTraded = (int)Math.Ceiling(resourcesCount[indexMax] * 0.7);
+
+                    traderString = resourcesName[indexMax] + " --> " + resourcesName[indexMin] + "\n"
+                        + resourcesCount[indexMax] + " --> " + resourcesCount[indexMin] + "\nAmount traded: " + amountTraded;
+
+                    await profHandler.HandleTrader();
                 }
+
+                var traderPanel = new Panel(
+                    new Markup(traderString)
+                );
+                traderPanel.Border = BoxBorder.Heavy;
+                traderPanel.Header = new PanelHeader("Trader: ");
                 
-                if (_threatProvider.ThreatToExperience is not null)
-                {
-                    AnsiConsole.Write(_threatProvider.ThreatToExperience.Name);
-                }
+                //Layout
+                var layout = new Layout("Root")
+                    .SplitRows(
+                        new Layout("Top")
+                            .SplitRows(
+                                new Layout("TopT"),
+                                new Layout("BotT")
+                                    .SplitColumns(
+                                        new Layout("Left"),
+                                        new Layout("Right")
+                                            .SplitRows(new Layout("RTop"), new Layout("RBot"))
+                                    )
+                            ),
+                        new Layout("Bottom")
+                    );
                 
+                layout["TopT"].Update(yearRule).Ratio(1);
+
+                layout["BotT"].Ratio(10);
                 
+                layout["Left"].Update(popCountPanel).Size(20);
                 
+                layout["Right"].MinimumSize(20);
+
+                layout["Rtop"].Update(threatPanel).Ratio(1);
+
+                layout["RBot"].Update(traderPanel).Ratio(2);
+                
+                layout["Bottom"].Update(resourcePanel);
+                
+                Console.Clear();
+                AnsiConsole.Write(layout);
                 
                 if (_year.YearOfSim == 10) break;
                     
@@ -168,10 +225,9 @@ public class StartSimulationService
                     Console.WriteLine("Everyone's dead, showing end data: ");
                     break;
                 }
-                
+
                 Console.ReadLine();
-                Console.Clear();
-                
+
             }
         }
     }

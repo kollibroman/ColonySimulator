@@ -11,6 +11,10 @@ namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 /// </summary>
 public class TraderHandler : ITraderHandler
 {
+    
+    
+    
+    
     /// <summary>
     /// Generate new resources by trader
     /// </summary>
@@ -31,7 +35,7 @@ public class TraderHandler : ITraderHandler
             "Weaponry"
         };
 
-        var resourcesCount = new List<int>
+        List<int> resourcesCount = new List<int>
         {
             crops.CropsCount,
             wood.WoodCount,
@@ -43,17 +47,11 @@ public class TraderHandler : ITraderHandler
         var indexMax = resourcesCount.IndexOf(resourcesCount.Max());
         var indexMin = resourcesCount.IndexOf(resourcesCount.Min());
 
-        AnsiConsole.WriteLine("Trade: \n" + resources[indexMax] + " --> " + resources[indexMin] + "" + "\n" 
-            + resourcesCount.Max() + " --> " + resourcesCount.Min());
+        var amountTraded = (int)Math.Ceiling(resourcesCount[indexMax] * 0.7);
         
-        var rnd = new Random();
-        var amountTraded = (int)rnd.NextInt64(1, (long)Math.Ceiling(resourcesCount[indexMax] * 0.7));
-
         resourcesCount[indexMax] -= amountTraded;
         resourcesCount[indexMin] += amountTraded;
 
-        AnsiConsole.WriteLine("Amount traded: " + amountTraded);
-        
         return Task.CompletedTask;
     }
     
