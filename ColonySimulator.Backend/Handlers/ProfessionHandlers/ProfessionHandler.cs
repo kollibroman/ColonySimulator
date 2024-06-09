@@ -1,3 +1,4 @@
+using System.Runtime.Versioning;
 using ColonySimulator.Backend.Handlers.Interfaces;
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
@@ -6,6 +7,7 @@ using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Persistence.Models.Resources;
 using ColonySimulator.Backend.Persistence.Models.Threats;
 using Microsoft.EntityFrameworkCore;
+using Spectre.Console;
 
 namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 
