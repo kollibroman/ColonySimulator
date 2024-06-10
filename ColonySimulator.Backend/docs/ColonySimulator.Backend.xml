@@ -270,7 +270,7 @@
             Profession handler, it resolves and modifies data related to simulation
             </summary>
         </member>
-        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler.#ctor(ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IFarmerHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IApothecaryHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IBlackSmithHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IMedicHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITimberHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITraderHandler,ColonySimulator.Backend.Persistence.ColonySimulatorContext,ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler,ColonySimulator.Backend.Helpers.ThreatProvider)">
+        <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.ProfessionHandler.#ctor(ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IFarmerHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IApothecaryHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IBlackSmithHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IMedicHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITimberHandler,ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITraderHandler,ColonySimulator.Backend.Persistence.ColonySimulatorContext,ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler,ColonySimulator.Backend.Helpers.Interfaces.IThreatProvider)">
             <summary>
             Constructor with DI parameters 
             </summary>
