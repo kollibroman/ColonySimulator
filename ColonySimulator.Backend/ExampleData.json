@@ -1,0 +1,16 @@
+{
+    "Duration": 50,
+    "Data": {
+        "ApothecaryCount": 12,
+        "BlacksmithCount": 15,
+        "FarmerCount": 10,
+        "TimberCount": 20,
+        "MedicCount": 5,
+        "TraderCount": 1,
+        "CropsCount": 120,
+        "WeaponryCount": 50,
+        "HerbsCount": 10,
+        "MedicineCount": 20,
+        "WoodCount": 200
+    }
+}

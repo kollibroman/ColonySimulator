@@ -15,14 +15,20 @@ namespace ColonySimulator.Backend.Services;
 /// <summary>
 /// Startup class
 /// </summary>
-
 public class StartupService : IHostedService
 {
     private readonly ILogger _logger;
     private readonly IServiceScopeFactory _serviceScope;
     private readonly DataDisplayService _displayService;
     private readonly StartSimulationService _simulationService;
-
+    
+    /// <summary>
+    /// Constructor for StartupService
+    /// </summary>
+    /// <param name="logger">logger</param>
+    /// <param name="serviceScope">Scope of services</param>
+    /// <param name="displayService">display service</param>
+    /// <param name="simulationService">Simulation start service</param>
     public StartupService(ILogger logger, IServiceScopeFactory serviceScope,
         DataDisplayService displayService, StartSimulationService simulationService)
     {
@@ -43,38 +49,34 @@ public class StartupService : IHostedService
 
         await dbContext!.Database.EnsureCreatedAsync(cancellationToken);
         
-        await dataSeeder!.GetSeedingDataAsync(cancellationToken);
-        await dataSeeder.SeedData(cancellationToken);
+        var inputChoice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[red]Choose seed data method[/]")
+                .PageSize(3)
+                .AddChoices(["[green]Seed manually[/]", "[blue]Seed data from file[/]", "[yellow]Seed data randomly[/]"]
+                ));
+        
+        bool isManual = false;
+        
+        switch (inputChoice)
+        {
+            case "[green]Seed manually[/]":
+                AnsiConsole.Markup("[red]Seeding data manually[/]");
+                await dataSeeder!.GetSeedingDataAsync(cancellationToken);
+                break;
+            case "[blue]Seed data from file[/]":
+                AnsiConsole.Markup("[red]Seeding data from file[/]");
+                await dataSeeder!.LoadDataFromFileAsync(cancellationToken);
+                break;
+            case "[yellow]Seed data randomly[/]":
+                AnsiConsole.Markup("[red]Seeding data randomly[/]");
+                await dataSeeder!.SeedRandomData(cancellationToken);
+                break;
+        }
 
-        var profOverview = new ProfessionsOverview
-        {
-            Apothecaries = await dbContext.Apothecaries.ToListAsync(cancellationToken),
-            BlackSmiths = await dbContext.BlackSmiths.ToListAsync(cancellationToken),
-            Timbers = await dbContext.Timbers.ToListAsync(cancellationToken),
-            Traders = await dbContext.Traders.ToListAsync(cancellationToken),
-            Medics = await dbContext.Medics.ToListAsync(cancellationToken),
-            Farmers = await dbContext.Farmers.ToListAsync(cancellationToken),
-        };
+        await dataSeeder.SeedData(cancellationToken);
+        await _simulationService.RunAsync(isManual, cancellationToken);
         
-        //change to some reliable values later
-        var threatOverview = new ThreatsOverview
-        {
-            ThreatsDefeated = await dbContext.PlagueThreats.Where(x => x.Id % 2 == 0).ToListAsync(cancellationToken),
-            ThreatsYieldedTo = await dbContext.PlagueThreats.Where(x => x.Id % 2 != 0).ToListAsync(cancellationToken),
-        };
-        
-        var resourceOverview = new ResourceOverview
-        {
-            CropsCount = dbContext.Crops.SingleOrDefault(x => x.Id == 1).CropsCount,
-            HerbsCount = dbContext.Herbs.SingleOrDefault(x => x.Id == 1).HerbsCount,
-            WeaponryCount = dbContext.Weaponry.SingleOrDefault(x => x.Id == 1).WeaponryCount,
-            MedicinesCount = dbContext.Medicines.SingleOrDefault(x => x.Id == 1).MedicineCount,
-            WoodCount = dbContext.Wood.SingleOrDefault(x => x.Id == 1).WoodCount
-        };
-        
-        //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview));
-        
-        await _simulationService.RunAsync(cancellationToken);
     }
     
     /// <summary>
