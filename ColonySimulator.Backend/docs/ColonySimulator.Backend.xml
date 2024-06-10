@@ -926,12 +926,6 @@
             <param name="entityManagementService">Entity lifecycle service</param>
             <param name="threatProvider">threat to provide</param>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.RunAsync(System.Threading.CancellationToken)">
-            <summary>
-            Start simulation based on specified parameters and don't stop till everyone is dead
-            </summary>
-            <param name="ct">Cancellation token</param>
-        </member>
         <member name="M:ColonySimulator.Backend.Services.StartSimulationService.RunAsync(System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Start simulation based on specified parameters and don't stop till everyone is dead

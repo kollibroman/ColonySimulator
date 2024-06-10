@@ -59,24 +59,17 @@ public class StartupService : IHostedService
                 break;
             case "[blue]Seed data from file[/]":
                 AnsiConsole.Markup("[red]Seeding data from file[/]");
-                isManual = true;
                 await dataSeeder!.LoadDataFromFileAsync(cancellationToken);
                 break;
             case "[yellow]Seed data randomly[/]":
                 AnsiConsole.Markup("[red]Seeding data randomly[/]");
-                isManual = true;
                 await dataSeeder!.SeedRandomData(cancellationToken);
                 break;
         }
 
-        if (isManual)
-        {
-            await _simulationService.RunAsync(isManual, cancellationToken);
-        }
-        else
-        {
-            await _simulationService.RunAsync(cancellationToken);
-        }
+        await dataSeeder.SeedData(cancellationToken);
+        await _simulationService.RunAsync(isManual, cancellationToken);
+        
     }
     
     /// <summary>
