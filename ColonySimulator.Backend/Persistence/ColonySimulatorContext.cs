@@ -19,23 +19,23 @@ public class ColonySimulatorContext : DbContext
     {
     }
 
-    public DbSet<Apothecary> Apothecaries => Set<Apothecary>();
-    public DbSet<BlackSmith> BlackSmiths => Set<BlackSmith>();
-    public DbSet<Farmer> Farmers => Set<Farmer>();
-    public DbSet<Medic> Medics => Set<Medic>();
-    public DbSet<Timber> Timbers => Set<Timber>();
-    public DbSet<Trader> Traders => Set<Trader>();
-    public DbSet<Crops> Crops => Set<Crops>();
-    public DbSet<Medicine> Medicines => Set<Medicine>();
-    public DbSet<Weaponry> Weaponry => Set<Weaponry>();
-    public DbSet<Wood> Wood => Set<Wood>();
-    public DbSet<Herbs> Herbs => Set<Herbs>();
-    public DbSet<FightingThreat?> FightingThreats => Set<FightingThreat>();
-    public DbSet<NaturalThreat> NaturalThreats => Set<NaturalThreat>();
-    public DbSet<PlagueThreat> PlagueThreats => Set<PlagueThreat>();
+    public virtual DbSet<Apothecary> Apothecaries => Set<Apothecary>();
+    public virtual DbSet<BlackSmith> BlackSmiths => Set<BlackSmith>();
+    public virtual DbSet<Farmer> Farmers => Set<Farmer>();
+    public virtual DbSet<Medic> Medics => Set<Medic>();
+    public virtual DbSet<Timber> Timbers => Set<Timber>();
+    public virtual DbSet<Trader> Traders => Set<Trader>();
+    public virtual DbSet<Crops> Crops => Set<Crops>();
+    public virtual DbSet<Medicine> Medicines => Set<Medicine>();
+    public virtual DbSet<Weaponry> Weaponry => Set<Weaponry>();
+    public virtual DbSet<Wood> Wood => Set<Wood>();
+    public virtual DbSet<Herbs> Herbs => Set<Herbs>();
+    public virtual DbSet<FightingThreat?> FightingThreats => Set<FightingThreat>();
+    public virtual DbSet<NaturalThreat> NaturalThreats => Set<NaturalThreat>();
+    public virtual DbSet<PlagueThreat> PlagueThreats => Set<PlagueThreat>();
 
     //for testing purposes only, don't seed with other data than test 
-    public DbSet<Proffesion> Proffesions => Set<Proffesion>();
+    public virtual DbSet<Proffesion> Proffesions => Set<Proffesion>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
