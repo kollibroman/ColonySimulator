@@ -15,7 +15,8 @@ public class DataSeeder
     private readonly ResourceSeeder _resourceSeeder;
     private readonly ThreatSeeder _threatSeeder;
     private readonly ILogger _logger;
-    private PopCounter _popCount;
+    private readonly PopCounter _popCount;
+    private readonly Year _year;
     
     //Profession config
     private int _apothecaryCount;
@@ -39,13 +40,14 @@ public class DataSeeder
     /// <param name="resourceSeeder">Resource seeder class</param>
     /// <param name="threatSeeder">Threat seeder class</param>
     /// <param name="logger">logger class to log data</param>
-    public DataSeeder(ProfessionSeeder professionSeeder, ResourceSeeder resourceSeeder, ThreatSeeder threatSeeder, ILogger logger, PopCounter counter)
+    public DataSeeder(ProfessionSeeder professionSeeder, ResourceSeeder resourceSeeder, ThreatSeeder threatSeeder, ILogger logger, PopCounter counter, Year year)
     {
         _professionSeeder = professionSeeder;
         _resourceSeeder = resourceSeeder;
         _threatSeeder = threatSeeder;
         _logger = logger;
         _popCount = counter;
+        _year = year;
     }
     
     /// <summary>
@@ -198,6 +200,7 @@ public class DataSeeder
 
         if (data is not null)
         {
+            _year.SimDuration = data.Duration;
             _apothecaryCount = data.Data.ApothecaryCount;
             _blackSmithCount = data.Data.BlackSmithCount;
             _farmerCount = data.Data.FarmerCount;
@@ -210,6 +213,33 @@ public class DataSeeder
             _weaponryCount = data.Data.WeaponryCount;
             _woodCount = data.Data.WoodCount;
         }
+        
+        Console.WriteLine(serializedString);
+    }
+    
+    /// <summary>
+    /// Seeds data with random amounts of data
+    /// </summary>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>Completed task</returns>
+    public Task SeedRandomData(CancellationToken ct)
+    {
+        var rnd = new Random();
+        
+        _year.SimDuration = rnd.Next(10, 300);
+        _apothecaryCount = rnd.Next(1, 100);
+        _blackSmithCount = rnd.Next(1, 100);
+        _farmerCount = rnd.Next(1, 100);
+        _timberCount = rnd.Next(1, 100);
+        _medicCount = rnd.Next(1, 100);
+        _traderCount = 1;
+        _cropsCount = rnd.Next(100, 500);
+        _herbsCount = rnd.Next(10, 100);
+        _medicineCount = rnd.Next(5, 100);
+        _weaponryCount = rnd.Next(10, 100);
+        _woodCount = rnd.Next(10, 100);
+        
+        return Task.CompletedTask;
     }
 
     /// <summary>
