@@ -1,5 +1,6 @@
 using Serilog;
 using Spectre.Console;
+using ColonySimulator.Backend.Helpers;
 
 namespace ColonySimulator.Backend.Seeders;
 
@@ -13,6 +14,7 @@ public class DataSeeder
     private readonly ResourceSeeder _resourceSeeder;
     private readonly ThreatSeeder _threatSeeder;
     private readonly ILogger _logger;
+    private PopCounter _popCount;
     
     //Profession config
     private int _apothecaryCount;
@@ -36,12 +38,13 @@ public class DataSeeder
     /// <param name="resourceSeeder">Resource seeder class</param>
     /// <param name="threatSeeder">Threat seeder class</param>
     /// <param name="logger">logger class to log data</param>
-    public DataSeeder(ProfessionSeeder professionSeeder, ResourceSeeder resourceSeeder, ThreatSeeder threatSeeder, ILogger logger)
+    public DataSeeder(ProfessionSeeder professionSeeder, ResourceSeeder resourceSeeder, ThreatSeeder threatSeeder, ILogger logger, PopCounter counter)
     {
         _professionSeeder = professionSeeder;
         _resourceSeeder = resourceSeeder;
         _threatSeeder = threatSeeder;
         _logger = logger;
+        _popCount = counter;
     }
     
     /// <summary>
@@ -114,6 +117,11 @@ public class DataSeeder
                  }));
             //Changed seeder for trader to create only one
             _traderCount = 1;
+            _popCount.ApothecariesCount = _apothecaryCount;
+            _popCount.BlackSmithCount = _blackSmithCount;
+            _popCount.FarmerCount = _farmerCount;
+            _popCount.TimberCount = _timberCount;
+            _popCount.MedicCount = _medicCount;
             
             _cropsCount = AnsiConsole.Prompt(new TextPrompt<int>("Crops: ")
                 .ValidationErrorMessage("[red]Inproper input!![/]")

@@ -10,7 +10,7 @@ public class ProfessionsOverview
     /// <summary>
     /// Apothecaries list
     /// </summary>
-    public ICollection<Apothecary> Apothecaries { get; set; } = default!;
+    public ICollection<Apothecary> Apothecaries { get; init; } = default!;
     
     /// <summary>
     /// BlackSmith list

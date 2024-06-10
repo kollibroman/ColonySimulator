@@ -663,7 +663,7 @@
             Data seeder class, with combined other seeders
             </summary>
         </member>
-        <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.#ctor(ColonySimulator.Backend.Seeders.ProfessionSeeder,ColonySimulator.Backend.Seeders.ResourceSeeder,ColonySimulator.Backend.Seeders.ThreatSeeder,Serilog.ILogger)">
+        <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.#ctor(ColonySimulator.Backend.Seeders.ProfessionSeeder,ColonySimulator.Backend.Seeders.ResourceSeeder,ColonySimulator.Backend.Seeders.ThreatSeeder,Serilog.ILogger,ColonySimulator.Backend.Helpers.PopCounter)">
             <summary>
             Constructor for it
             </summary>
