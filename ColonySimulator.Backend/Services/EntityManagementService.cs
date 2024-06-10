@@ -38,6 +38,7 @@ public class EntityManagementService : IEntityManagementService
         {
             using var scope = _serviceScope.CreateScope();
             var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
+            
             var rand = new Random();
 
             int quantity = rand.Next(1, 5);
@@ -116,27 +117,32 @@ public class EntityManagementService : IEntityManagementService
             {
                 for (int i = 0; i < quantity; i++)
                 {
-                    var id = rand.Next(0, 1);
+                    var id = rand.Next(0, 5);
 
                     if (entityList[id].GetType() == typeof(Apothecary))
                     {
                         await dbContext.Apothecaries.AddAsync((Apothecary)entityList[id], ct);
+                        _counter.ApothecariesCount++;
                     }
                     else if(entityList[id].GetType() == typeof(BlackSmith))
                     {
                         await dbContext.BlackSmiths.AddAsync((BlackSmith)entityList[id], ct);
+                        _counter.BlackSmithCount++;
                     }
                     else if (entityList[id].GetType() == typeof(Farmer))
                     {
                         await dbContext.Farmers.AddAsync((Farmer)entityList[id], ct);
+                        _counter.FarmerCount++;
                     }
                     else if (entityList[id].GetType() == typeof(Medic))
                     {
                         await dbContext.Medics.AddAsync((Medic)entityList[id], ct);
+                        _counter.MedicCount++;
                     }
                     else if (entityList[id].GetType() == typeof(Timber))
                     {
                         await dbContext.Timbers.AddAsync((Timber)entityList[id], ct);
+                        _counter.TimberCount++;
                     }
                 }
             }
@@ -162,6 +168,20 @@ public class EntityManagementService : IEntityManagementService
             professions.AddRange(await dbContext.Timbers.Where(x => x.Vitality == 0).ToListAsync(ct));
 
             _counter.PopulationCount -= professions.Count;
+
+            List<int> professionCount = new();
+            professionCount.Add(dbContext.Apothecaries.Where(x => x.Vitality == 0).Count());
+            professionCount.Add(dbContext.Farmers.Where(x => x.Vitality == 0).Count());
+            professionCount.Add(dbContext.BlackSmiths.Where(x => x.Vitality == 0).Count());
+            professionCount.Add(dbContext.Medics.Where(x => x.Vitality == 0).Count());
+            professionCount.Add(dbContext.Timbers.Where(x => x.Vitality == 0).Count());
+
+            _counter.ApothecariesCount -= professionCount[0];
+            _counter.BlackSmithCount -= professionCount[2];
+            _counter.FarmerCount -= professionCount[1];
+            _counter.MedicCount -= professionCount[3];
+            _counter.TimberCount -= professionCount[4];
+            
             
             dbContext.RemoveRange(professions);
             await dbContext.SaveChangesAsync(ct);

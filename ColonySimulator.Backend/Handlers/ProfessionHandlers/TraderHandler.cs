@@ -26,16 +26,7 @@ public class TraderHandler : ITraderHandler
     /// <returns>Completed task</returns>
     public Task Trade(Crops crops, Wood wood, Medicine medicine, Herbs herbs, Weaponry weaponry)
     {
-        var resources = new List<String>
-        {
-            "Crops",
-            "Wood",
-            "Medicine",
-            "Herbs",
-            "Weaponry"
-        };
-
-        List<int> resourcesCount = new List<int>
+        var resourcesCount = new List<int>
         {
             crops.CropsCount,
             wood.WoodCount,
