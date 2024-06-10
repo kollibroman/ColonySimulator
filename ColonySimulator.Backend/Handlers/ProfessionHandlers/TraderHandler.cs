@@ -11,10 +11,6 @@ namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 /// </summary>
 public class TraderHandler : ITraderHandler
 {
-    
-    
-    
-    
     /// <summary>
     /// Generate new resources by trader
     /// </summary>
@@ -91,7 +87,8 @@ public class TraderHandler : ITraderHandler
                     herbsEffect = (Herbs)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
                     woodEffect = (Wood)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
                     cropsEffect = (Crops)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
-                    weaponryEffect = (Weaponry)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
+                    weaponryEffect =
+                        (Weaponry)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
 
                     if (medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
                     {
