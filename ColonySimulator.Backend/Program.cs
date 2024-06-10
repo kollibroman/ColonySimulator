@@ -8,6 +8,7 @@ using ColonySimulator.Backend.Helpers.Tests;
 using ColonySimulator.Backend.Services;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Seeders;
+using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,6 +16,9 @@ using Serilog;
 
 namespace ColonySimulator.Backend;
 
+/// <summary>
+/// Main entry point of simulation
+/// </summary>
 public class Program
 {
     public static async Task Main(string[] args)
@@ -51,6 +55,7 @@ public class Program
             services.AddSingleton<StartupService>();
             services.AddSingleton<StartSimulationService>();
             services.AddSingleton<ThreatProvider>();
+            services.AddSingleton<IEntityManagementService, EntityManagementService>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })
