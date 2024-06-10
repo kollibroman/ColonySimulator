@@ -227,7 +227,7 @@ public class ProfessionHandler : IProfessionHandler
             crops!, medicine!, weaponry!, wood!, herbs!
         };
         
-        var affectedResources = _threatHandler.CalculateUsedResources(resources, _threatProvider.ThreatToExperience ?? throw new NullReferenceException());
+        var affectedResources = _threatHandler.CalculateUsedResources(resources, _threatProvider.ThreatToExperience);
         
         var effect = await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
 

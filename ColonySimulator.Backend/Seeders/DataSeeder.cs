@@ -1,6 +1,7 @@
 using Serilog;
 using Spectre.Console;
 using ColonySimulator.Backend.Helpers;
+using Newtonsoft.Json;
 
 namespace ColonySimulator.Backend.Seeders;
 
@@ -183,6 +184,31 @@ public class DataSeeder
         {
              _logger.Error(ex.Message);
              Console.WriteLine("You can't pass empty input!");
+        }
+    }
+    
+    /// <summary>
+    /// Loads data from file
+    /// </summary>
+    /// <param name="ct">Cancellation token</param>
+    public async Task LoadDataFromFileAsync(CancellationToken ct)
+    {
+        var serializedString = await File.ReadAllTextAsync("ExampleData.json", ct);
+        var data = JsonConvert.DeserializeObject<InputStorer>(serializedString);
+
+        if (data is not null)
+        {
+            _apothecaryCount = data.Data.ApothecaryCount;
+            _blackSmithCount = data.Data.BlackSmithCount;
+            _farmerCount = data.Data.FarmerCount;
+            _timberCount = data.Data.TimberCount;
+            _medicCount = data.Data.MedicCount;
+            _traderCount = data.Data.TraderCount;
+            _cropsCount = data.Data.CropsCount;
+            _herbsCount = data.Data.HerbsCount;
+            _medicineCount = data.Data.MedicineCount;
+            _weaponryCount = data.Data.WeaponryCount;
+            _woodCount = data.Data.WoodCount;
         }
     }
 
