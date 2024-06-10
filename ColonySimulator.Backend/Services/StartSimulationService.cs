@@ -1,10 +1,8 @@
-using System.Text;
 using ColonySimulator.Backend.Handlers.Interfaces;
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
-using ColonySimulator.Backend.Persistence.Models.Professions;
-using ColonySimulator.Backend.Persistence.Models.Resources;
+using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console;
@@ -19,7 +17,7 @@ public class StartSimulationService
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly PopCounter _counter;
     private readonly Year _year;
-    private readonly DataDisplayService _displayService;
+    private readonly IEntityManagementService _entityManagementService;
     private readonly ThreatProvider _threatProvider;
     
     /// <summary>
@@ -28,14 +26,14 @@ public class StartSimulationService
     /// <param name="serviceScopeFactory">Service scope factory</param>
     /// <param name="counter">Population counter class</param>
     /// <param name="year">current year in simulation</param>
-    /// <param name="displayService">Data display service</param>
+    /// <param name="entityManagementService">Entity lifecycle service</param>
     /// <param name="threatProvider">threat to provide</param>
-    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, DataDisplayService displayService, ThreatProvider threatProvider)
+    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, IEntityManagementService entityManagementService, ThreatProvider threatProvider)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _counter = counter;
         _year = year;
-        _displayService = displayService;
+        _entityManagementService = entityManagementService;
         _threatProvider = threatProvider;
     }
     
@@ -118,11 +116,13 @@ public class StartSimulationService
                     new Markup("Apothecaries: " + dbContext.Apothecaries.Count()
                         + "\nBlack smiths: " + dbContext.BlackSmiths.Count() + "\nFarmers: " + dbContext.Farmers.Count()
                         + "\nMedics: " + dbContext.Medics.Count() + "\nTimbers: " + dbContext.Timbers.Count() + "\nSummary: "+ _counter.PopulationCount)
-                );
-                popCountPanel.Border = BoxBorder.Heavy;
-                popCountPanel.Header = new PanelHeader(" Population ");
-                popCountPanel.Width = 20;
-                
+                )
+                {
+                    Border = BoxBorder.Heavy,
+                    Header = new PanelHeader(" Population "),
+                    Width = 20
+                };
+
                 //Resources Panel
                 var resourcePanel = new Panel(new BarChart()
                     .Width(150)
@@ -131,9 +131,11 @@ public class StartSimulationService
                     .AddItem("Wood: ", resourceOverview.WoodCount, Color.RosyBrown)
                     .AddItem("Medicine: ", resourceOverview.MedicinesCount, Color.Aqua)
                     .AddItem("Weaponry: ", resourceOverview.WeaponryCount, Color.Red1)
-                );
-                resourcePanel.Border = BoxBorder.Heavy;
-                resourcePanel.Header = new PanelHeader(" Resources ");
+                )
+                {
+                    Border = BoxBorder.Heavy,
+                    Header = new PanelHeader(" Resources ")
+                };
                 resourcePanel.Padding(1, 1, 1, 1);
             
                 //Threat Panel
@@ -179,10 +181,12 @@ public class StartSimulationService
 
                 var traderPanel = new Panel(
                     new Markup(traderString)
-                );
-                traderPanel.Border = BoxBorder.Heavy;
-                traderPanel.Header = new PanelHeader("Trader: ");
-                
+                )
+                {
+                    Border = BoxBorder.Heavy,
+                    Header = new PanelHeader("Trader: ")
+                };
+
                 //Layout
                 var layout = new Layout("Root")
                     .SplitRows(
@@ -216,8 +220,17 @@ public class StartSimulationService
                 Console.Clear();
                 AnsiConsole.Write(layout);
                 
-                if (_year.YearOfSim == 10) break;
-                    
+                if (_year.YearOfSim == 20) break;
+
+                int summaricCount = resourceOverview.MedicinesCount + resourceOverview.HerbsCount +
+                                    resourceOverview.CropsCount + resourceOverview.WeaponryCount +
+                                    resourceOverview.WoodCount;
+                
+                await _entityManagementService.CleanupDeadEntities(ct);
+                await _entityManagementService.GenerateNewEntity(summaricCount, ct);
+                await _entityManagementService.CheckHungerStatus(ct);
+                await _entityManagementService.CheckSickStatus(ct);
+                
                 if (_counter.PopulationCount == 0)
                 {
                     Console.WriteLine("Everyone's dead, showing end data: ");

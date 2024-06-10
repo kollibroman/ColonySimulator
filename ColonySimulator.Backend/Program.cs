@@ -4,10 +4,10 @@ using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Handlers.ProfessionHandlers;
 using ColonySimulator.Backend.Handlers.ResourceHandlers;
 using ColonySimulator.Backend.Helpers;
-using ColonySimulator.Backend.Helpers.Tests;
 using ColonySimulator.Backend.Services;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Seeders;
+using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,8 +15,15 @@ using Serilog;
 
 namespace ColonySimulator.Backend;
 
+/// <summary>
+/// Main entry point of simulation
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// Main entry point of program
+    /// </summary>
+    /// <param name="args">CLI arguments</param>
     public static async Task Main(string[] args)
     {
         var builder = Host.CreateDefaultBuilder(args);
@@ -51,6 +58,7 @@ public class Program
             services.AddSingleton<StartupService>();
             services.AddSingleton<StartSimulationService>();
             services.AddSingleton<ThreatProvider>();
+            services.AddSingleton<IEntityManagementService, EntityManagementService>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })

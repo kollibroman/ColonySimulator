@@ -647,6 +647,17 @@
             </summary>
             <param name="options">dbContext options</param>
         </member>
+        <member name="T:ColonySimulator.Backend.Program">
+            <summary>
+            Main entry point of simulation
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Program.Main(System.String[])">
+            <summary>
+            Main entry point of program
+            </summary>
+            <param name="args">CLI arguments</param>
+        </member>
         <member name="T:ColonySimulator.Backend.Seeders.DataSeeder">
             <summary>
             Data seeder class, with combined other seeders
@@ -747,19 +758,84 @@
             <typeparam name="TR"></typeparam>
             <returns>Serialized string based on passed content</returns>
         </member>
+        <member name="T:ColonySimulator.Backend.Services.EntityManagementService">
+            <summary>
+            Manages entities in simulation
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.EntityManagementService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Helpers.PopCounter)">
+            <summary>
+            Constructor for service
+            </summary>
+            <param name="serviceScope">Service scope</param>
+            <param name="counter">Population counter</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.EntityManagementService.GenerateNewEntity(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="summaricCount">Summaric count of entities</param>
+            <param name="ct"></param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.EntityManagementService.CleanupDeadEntities(System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="ct"></param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.EntityManagementService.CheckSickStatus(System.Threading.CancellationToken)">
+            <summary>
+            Handle sick status
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.EntityManagementService.CheckHungerStatus(System.Threading.CancellationToken)">
+            <summary>
+            Handle hunger status
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService">
+            <summary>
+            Manages entity's quantity
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService.GenerateNewEntity(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Generates new entity
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService.CleanupDeadEntities(System.Threading.CancellationToken)">
+            <summary>
+            Cleans up dead entities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService.CheckSickStatus(System.Threading.CancellationToken)">
+            <summary>
+            Handle health of entities
+            </summary>
+            <param name="ct"></param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService.CheckHungerStatus(System.Threading.CancellationToken)">
+            <summary>
+            Handle Hunger of entities
+            </summary>
+            <param name="ct"></param>
+        </member>
         <member name="T:ColonySimulator.Backend.Services.StartSimulationService">
             <summary>
             Class to fire up simulation
             </summary>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Helpers.PopCounter,ColonySimulator.Backend.Helpers.Year,ColonySimulator.Backend.Services.DataDisplayService,ColonySimulator.Backend.Helpers.ThreatProvider)">
+        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Helpers.PopCounter,ColonySimulator.Backend.Helpers.Year,ColonySimulator.Backend.Services.Interfaces.IEntityManagementService,ColonySimulator.Backend.Helpers.ThreatProvider)">
             <summary>
             Constructor for this service
             </summary>
             <param name="serviceScopeFactory">Service scope factory</param>
             <param name="counter">Population counter class</param>
             <param name="year">current year in simulation</param>
-            <param name="displayService">Data display service</param>
+            <param name="entityManagementService">Entity lifecycle service</param>
             <param name="threatProvider">threat to provide</param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.StartSimulationService.RunAsync(System.Threading.CancellationToken)">
