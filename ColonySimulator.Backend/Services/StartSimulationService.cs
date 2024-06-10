@@ -1,6 +1,7 @@
 using ColonySimulator.Backend.Handlers.Interfaces;
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
+using ColonySimulator.Backend.Helpers.Interfaces;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Services.Interfaces;
@@ -20,7 +21,7 @@ public class StartSimulationService
     private readonly PopCounter _counter;
     private readonly Year _year;
     private readonly IEntityManagementService _entityManagementService;
-    private readonly ThreatProvider _threatProvider;
+    private readonly IThreatProvider _threatProvider;
     
     /// <summary>
     /// Constructor for this service
@@ -30,7 +31,7 @@ public class StartSimulationService
     /// <param name="year">current year in simulation</param>
     /// <param name="entityManagementService">Entity lifecycle service</param>
     /// <param name="threatProvider">threat to provide</param>
-    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, IEntityManagementService entityManagementService, ThreatProvider threatProvider)
+    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, IEntityManagementService entityManagementService, IThreatProvider threatProvider)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _counter = counter;
@@ -44,7 +45,7 @@ public class StartSimulationService
     /// </summary>
     /// <param name="ct">Cancellation token</param>
 
-    public async Task RunAsync(CancellationToken ct)
+    public async Task RunAsync(bool isManually, CancellationToken ct)
     {
         using var serviceScope = _serviceScopeFactory.CreateScope();
         var profHandler = serviceScope.ServiceProvider.GetService<IProfessionHandler>();
@@ -55,23 +56,29 @@ public class StartSimulationService
         int yearsToFinish;
         int yearsByUser;
 
-        Console.WriteLine("Starting simulation...");
-
         if (profHandler is not null && dbContext is not null && resHandler is not null && threatHandler is not null)
         {
             var rnd = new Random();
 
-            yearsToFinish = AnsiConsole.Prompt(new TextPrompt<int>("For how many years should simulation be running: ")
-                .ValidationErrorMessage("[red]Inproper input!![/]")
-                .Validate(yearsToFinish =>
-                {
-                    return yearsToFinish switch
+            if (isManually)
+            {
+                yearsToFinish = AnsiConsole.Prompt(new TextPrompt<int>("For how many years should simulation be running: ")
+                    .ValidationErrorMessage("[red]Inproper input!![/]")
+                    .Validate(yearsToFinish =>
                     {
-                        <= 0 => ValidationResult.Error("[red]You need at least one year of simulation[/]"),
-                        >= 250 => ValidationResult.Error("[red]Don't exceed 250 years[/]"),
-                        _ => ValidationResult.Success()
-                    };
-                }));
+                        return yearsToFinish switch
+                        {
+                            <= 0 => ValidationResult.Error("[red]You need at least one year of simulation[/]"),
+                            >= 250 => ValidationResult.Error("[red]Don't exceed 250 years[/]"),
+                            _ => ValidationResult.Success()
+                        };
+                    }));
+            }
+            
+            else
+            {
+                yearsToFinish = _year.SimDuration;
+            }
             
             Console.Clear();
             for (;;)

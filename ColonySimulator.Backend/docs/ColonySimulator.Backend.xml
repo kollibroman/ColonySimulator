@@ -459,6 +459,21 @@
             second generic parameter to pass
             </summary>
         </member>
+        <member name="T:ColonySimulator.Backend.Helpers.InputStorer">
+            <summary>
+            Stores input data for simulation
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.InputStorer.Duration">
+            <summary>
+            Duration of simulation
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.InputStorer.Data">
+            <summary>
+            Simulation data
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Helpers.PopCounter">
             <summary>
             Population counter class
@@ -507,6 +522,66 @@
         <member name="P:ColonySimulator.Backend.Helpers.ProfessionsOverview.Traders">
             <summary>
             Traders list
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Helpers.SimulationData">
+            <summary>
+            Simulation data
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.ApothecaryCount">
+            <summary>
+            Number of apothecaries
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.BlackSmithCount">
+            <summary>
+            Number of blacksmiths
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.FarmerCount">
+            <summary>
+            Number of farmers
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.TimberCount">
+            <summary>
+            Number of timbers
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.MedicCount">
+            <summary>
+            Number of medics
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.TraderCount">
+            <summary>
+            Number of traders
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.CropsCount">
+            <summary>
+            Number of crops
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.HerbsCount">
+            <summary>
+            Number of herbs
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.MedicineCount">
+            <summary>
+            Number of medicine
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.WeaponryCount">
+            <summary>
+            Number of weaponry
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.SimulationData.WoodCount">
+            <summary>
+            Number of wood
             </summary>
         </member>
         <member name="T:ColonySimulator.Backend.Helpers.Tests.TestDataHelper">
@@ -663,7 +738,7 @@
             Data seeder class, with combined other seeders
             </summary>
         </member>
-        <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.#ctor(ColonySimulator.Backend.Seeders.ProfessionSeeder,ColonySimulator.Backend.Seeders.ResourceSeeder,ColonySimulator.Backend.Seeders.ThreatSeeder,Serilog.ILogger,ColonySimulator.Backend.Helpers.PopCounter)">
+        <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.#ctor(ColonySimulator.Backend.Seeders.ProfessionSeeder,ColonySimulator.Backend.Seeders.ResourceSeeder,ColonySimulator.Backend.Seeders.ThreatSeeder,Serilog.ILogger,ColonySimulator.Backend.Helpers.PopCounter,ColonySimulator.Backend.Helpers.Year)">
             <summary>
             Constructor for it
             </summary>
@@ -677,6 +752,19 @@
             Gets seeding data
             </summary>
             <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.LoadDataFromFileAsync(System.Threading.CancellationToken)">
+            <summary>
+            Loads data from file
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.SeedRandomData(System.Threading.CancellationToken)">
+            <summary>
+            Seeds data with random amounts of data
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Completed task</returns>
         </member>
         <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.SeedData(System.Threading.CancellationToken)">
             <summary>
@@ -828,7 +916,7 @@
             Class to fire up simulation
             </summary>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Helpers.PopCounter,ColonySimulator.Backend.Helpers.Year,ColonySimulator.Backend.Services.Interfaces.IEntityManagementService,ColonySimulator.Backend.Helpers.ThreatProvider)">
+        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Helpers.PopCounter,ColonySimulator.Backend.Helpers.Year,ColonySimulator.Backend.Services.Interfaces.IEntityManagementService,ColonySimulator.Backend.Helpers.Interfaces.IThreatProvider)">
             <summary>
             Constructor for this service
             </summary>
@@ -838,7 +926,7 @@
             <param name="entityManagementService">Entity lifecycle service</param>
             <param name="threatProvider">threat to provide</param>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.RunAsync(System.Threading.CancellationToken)">
+        <member name="M:ColonySimulator.Backend.Services.StartSimulationService.RunAsync(System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Start simulation based on specified parameters and don't stop till everyone is dead
             </summary>
