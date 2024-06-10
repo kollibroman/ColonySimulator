@@ -9,6 +9,9 @@ public class Year
     /// Current year of simulation
     /// </summary>
     public int YearOfSim { get; set; } = 0;
-
+    
+    /// <summary>
+    /// Duration of simulation
+    /// </summary>
     public int SimDuration { get; set; } = 0;
 }

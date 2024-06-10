@@ -21,7 +21,14 @@ public class StartupService : IHostedService
     private readonly IServiceScopeFactory _serviceScope;
     private readonly DataDisplayService _displayService;
     private readonly StartSimulationService _simulationService;
-
+    
+    /// <summary>
+    /// Constructor for StartupService
+    /// </summary>
+    /// <param name="logger">logger</param>
+    /// <param name="serviceScope">Scope of services</param>
+    /// <param name="displayService">display service</param>
+    /// <param name="simulationService">Simulation start service</param>
     public StartupService(ILogger logger, IServiceScopeFactory serviceScope,
         DataDisplayService displayService, StartSimulationService simulationService)
     {
