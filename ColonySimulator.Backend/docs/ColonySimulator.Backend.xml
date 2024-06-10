@@ -125,6 +125,18 @@
             <param name="resources">resources to modify</param>
             <returns></returns>
         </member>
+        <member name="T:ColonySimulator.Backend.Handlers.Interfaces.IResourceHandler">
+            <summary>
+            Handler for resources
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.IResourceHandler.ConsumeResources(System.Int32)">
+            <summary>
+            Handles resource consumption
+            </summary>
+            <param name="popCount">Population counter</param>
+            <returns>Completed task</returns>
+        </member>
         <member name="T:ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler">
             <summary>
             Handles threats
@@ -160,10 +172,132 @@
             <param name="threat">threat affecting</param>
             <returns>list of affected resources</returns>
         </member>
+        <member name="T:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IApothecaryHandler">
+            <summary>
+            Handler for apothecary
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IApothecaryHandler.CreateMedicine(ColonySimulator.Backend.Persistence.Models.Resources.Herbs,ColonySimulator.Backend.Persistence.Models.Resources.Medicine,System.Int32)">
+            <summary>
+            Handles creating medicine
+            </summary>
+            <param name="herbs">Herbs</param>
+            <param name="medicine">medicine</param>
+            <param name="apoLevel">level of entity</param>
+            <returns></returns>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IApothecaryHandler.CollectingHerbs(ColonySimulator.Backend.Persistence.Models.Resources.Herbs,System.Int32)">
+            <summary>
+            Handles herbs collection
+            </summary>
+            <param name="herbs">Herbs</param>
+            <param name="apoLevel">level of entity</param>
+            <returns></returns>
+        </member>
+        <member name="T:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IBlackSmithHandler">
+            <summary>
+            Handler for blacksmiths
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IBlackSmithHandler.CreateWeapon(ColonySimulator.Backend.Persistence.Models.Resources.Weaponry,ColonySimulator.Backend.Persistence.Models.Resources.Wood,System.Int32)">
+            <summary>
+            Handles weapon creation
+            </summary>
+            <param name="weapon">Weapon</param>
+            <param name="wood">Wood</param>
+            <param name="blackLevel">level of entity</param>
+            <returns></returns>
+        </member>
+        <member name="T:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IFarmerHandler">
+            <summary>
+            Handler for farmers
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IFarmerHandler.Farm(ColonySimulator.Backend.Persistence.Models.Resources.Crops,ColonySimulator.Backend.Persistence.Models.Resources.Herbs,System.Int32)">
+            <summary>
+            Handles farming
+            </summary>
+            <param name="crops">Crops</param>
+            <param name="herbs">herbs</param>
+            <param name="farmLevel">level of entity</param>
+            <returns></returns>
+        </member>
+        <member name="T:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IMedicHandler">
+            <summary>
+            Handler for medics
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IMedicHandler.Heal(ColonySimulator.Backend.Persistence.Models.Resources.Medicine,ColonySimulator.Backend.Persistence.Models.Professions.Person,System.Int32)">
+            <summary>
+            Handles healing
+            </summary>
+            <param name="medicine">medicine</param>
+            <param name="person">Person</param>
+            <param name="medLevel">level of entity</param>
+            <returns></returns>
+        </member>
         <member name="T:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IProfessionHandler">
             <summary>
             Handles professions
             </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IProfessionHandler.HandleFarm">
+            <summary>
+            Handles farmers
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IProfessionHandler.HandleApothecary">
+            <summary>
+            Handles apothecaries
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IProfessionHandler.HandleTimber">
+            <summary>
+            Handles timbers
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IProfessionHandler.HandleBlackSmith">
+            <summary>
+            Handles blacksmiths
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IProfessionHandler.HandleTrader">
+            <summary>
+            Handles trader
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.IProfessionHandler.HandleMedic">
+            <summary>
+            Handles medics
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITimberHandler">
+            <summary>
+            Handler for timber
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITimberHandler.CreateWood(ColonySimulator.Backend.Persistence.Models.Resources.Wood,System.Int32)">
+            <summary>
+            Handles wood creation
+            </summary>
+            <param name="wood">Wood</param>
+            <param name="timLevel">level of entity</param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITraderHandler">
+            <summary>
+            Handler for traders
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces.ITraderHandler.Trade(ColonySimulator.Backend.Persistence.Models.Resources.Crops,ColonySimulator.Backend.Persistence.Models.Resources.Wood,ColonySimulator.Backend.Persistence.Models.Resources.Medicine,ColonySimulator.Backend.Persistence.Models.Resources.Herbs,ColonySimulator.Backend.Persistence.Models.Resources.Weaponry)">
+            <summary>
+            Handles trading
+            </summary>
+            <param name="crops">Crops</param>
+            <param name="wood">Wood</param>
+            <param name="medicine">Medicine</param>
+            <param name="herbs">Herbs</param>
+            <param name="weaponry">Weaponry</param>
         </member>
         <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.ApothecaryHandler">
             <summary>
@@ -362,6 +496,23 @@
             <param name="resources">resources affected</param>
             <returns>completed task</returns>
         </member>
+        <member name="T:ColonySimulator.Backend.Handlers.ResourceHandlers.ResourceHandler">
+            <summary>
+            Handler for resources
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ResourceHandlers.ResourceHandler.#ctor(ColonySimulator.Backend.Persistence.ColonySimulatorContext)">
+            <summary>
+            Constructor for this handler
+            </summary>
+            <param name="dbContext">Database context</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ResourceHandlers.ResourceHandler.ConsumeResources(System.Int32)">
+            <summary>
+            Handles resource consumption
+            </summary>
+            <param name="popCount">Population counter</param>
+        </member>
         <member name="T:ColonySimulator.Backend.Handlers.ThreatHandler">
             <summary>
             Implementation of IThreatHandler
@@ -438,6 +589,7 @@
             <param name="professionsOverview">Professions overview class</param>
             <param name="populationCount">Actual population count</param>
             <param name="peopleLost">Number of people lost</param>
+            <param name="resourceOverview">Resource overview</param>
         </member>
         <member name="P:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.Parameters">
             <summary>
@@ -459,6 +611,11 @@
             second generic parameter to pass
             </summary>
         </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.ResourceOverview">
+            <summary>
+            Resource overview
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Helpers.InputStorer">
             <summary>
             Stores input data for simulation
@@ -474,6 +631,16 @@
             Simulation data
             </summary>
         </member>
+        <member name="T:ColonySimulator.Backend.Helpers.Interfaces.IThreatProvider">
+            <summary>
+            Provides threat to experience by entity
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.Interfaces.IThreatProvider.ThreatToExperience">
+            <summary>
+            Threat to experience by entity
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Helpers.PopCounter">
             <summary>
             Population counter class
@@ -482,6 +649,31 @@
         <member name="P:ColonySimulator.Backend.Helpers.PopCounter.PopulationCount">
             <summary>
             Actual number of people 
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.PopCounter.ApothecariesCount">
+            <summary>
+            Number of apothecaries
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.PopCounter.BlackSmithCount">
+            <summary>
+            Number of Blacksmiths
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.PopCounter.FarmerCount">
+            <summary>
+            Number of farmers
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.PopCounter.MedicCount">
+            <summary>
+            Number of medics
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.PopCounter.TimberCount">
+            <summary>
+            Number of timbers
             </summary>
         </member>
         <member name="P:ColonySimulator.Backend.Helpers.PopCounter.PeopleLost">
@@ -522,6 +714,36 @@
         <member name="P:ColonySimulator.Backend.Helpers.ProfessionsOverview.Traders">
             <summary>
             Traders list
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Helpers.ResourceOverview">
+            <summary>
+            Overview of resources
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ResourceOverview.CropsCount">
+            <summary>
+            Number of crops
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ResourceOverview.MedicinesCount">
+            <summary>
+            Number of medicines
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ResourceOverview.WeaponryCount">
+            <summary>
+            Number of weapons
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ResourceOverview.WoodCount">
+            <summary>
+            Number of wood
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Helpers.ResourceOverview.HerbsCount">
+            <summary>
+            Number of herbs
             </summary>
         </member>
         <member name="T:ColonySimulator.Backend.Helpers.SimulationData">
@@ -651,6 +873,11 @@
             Current year of simulation
             </summary>
         </member>
+        <member name="P:ColonySimulator.Backend.Helpers.Year.SimDuration">
+            <summary>
+            Duration of simulation
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Migrations.AddIsHungry">
             <inheritdoc />
         </member>
@@ -722,6 +949,352 @@
             </summary>
             <param name="options">dbContext options</param>
         </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Apothecaries">
+            <summary>
+            Apothecaries DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.BlackSmiths">
+            <summary>
+            BlackSmiths DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Farmers">
+            <summary>
+            Farmers DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Medics">
+            <summary>
+            Medics DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Timbers">
+            <summary>
+            Timbers DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Traders">
+            <summary>
+            Trader DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Crops">
+            <summary>
+            Crops DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Medicines">
+            <summary>
+            Medicines DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Weaponry">
+            <summary>
+            Weaponry DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Wood">
+            <summary>
+            Wood DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Herbs">
+            <summary>
+            Herbs DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.FightingThreats">
+            <summary>
+            Fighting threats DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.NaturalThreats">
+            <summary>
+            Natural threats DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.PlagueThreats">
+            <summary>
+            Plague threats DbSet
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.ColonySimulatorContext.Proffesions">
+            <summary>
+            Proffesions DbSet
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Persistence.ColonySimulatorContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            On model creating method
+            </summary>
+            <param name="modelBuilder">ModelBuilder class</param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Enums.Gender">
+            <summary>
+            Gender enum
+            </summary>
+        </member>
+        <member name="F:ColonySimulator.Backend.Persistence.Enums.Gender.Man">
+            <summary>
+            Man
+            </summary>
+        </member>
+        <member name="F:ColonySimulator.Backend.Persistence.Enums.Gender.Woman">
+            <summary>
+            Woman
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Professions.Apothecary">
+            <summary>
+            Apothecary entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Apothecary.ApothecaryLevel">
+            <summary>
+            Level of entity
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Professions.BlackSmith">
+            <summary>
+            Blacksmith entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.BlackSmith.BlackSmithLevel">
+            <summary>
+            Level of entity
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Professions.Farmer">
+            <summary>
+            Farmer entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Farmer.FarmingLevel">
+            <summary>
+            Level of entity
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Professions.Medic">
+            <summary>
+            Medic entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Medic.MedicLevel">
+            <summary>
+            Level of entity
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Professions.Person">
+            <summary>
+            Main person entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Person.Id">
+            <summary>
+            Id of entity
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Person.Vitality">
+            <summary>
+            Vitality of entity
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Person.Strength">
+            <summary>
+            Strength of entity
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Person.Agility">
+            <summary>
+            Agility of entity
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Person.Gender">
+            <summary>
+            Gender of entity
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Person.ResourceConsumption">
+            <summary>
+            Resource consumption of entity
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Person.IsSick">
+            <summary>
+            Sick status of entity
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Person.IsHungry">
+            <summary>
+            Hunger status of entity
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Professions.Proffesion">
+            <summary>
+            Profession entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Proffesion.RequiredStrength">
+            <summary>
+            Required strength for profession
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Proffesion.RequiredAgility">
+            <summary>
+            Required agility for profession
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Professions.Timber">
+            <summary>
+            Timber entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Timber.TimberLevel">
+            <summary>
+            Level of entity
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Professions.Trader">
+            <summary>
+            Trader entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Professions.Trader.TradingLevel">
+            <summary>
+            Level of entity
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Resources.Crops">
+            <summary>
+            Crops entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Resources.Crops.CropsCount">
+            <summary>
+            Number of crops
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Resources.Herbs">
+            <summary>
+            Herbs entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Resources.Herbs.HerbsCount">
+            <summary>
+            Number of herbs
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Resources.Medicine">
+            <summary>
+            Medicine entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Resources.Medicine.MedicineCount">
+            <summary>
+            Number of medicine
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Resources.Resource">
+            <summary>
+            Main class for resources
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Resources.Resource.Id">
+            <summary>
+            Id of the resource
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Resources.Resource.Name">
+            <summary>
+            Name of resource
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Resources.Weaponry">
+            <summary>
+            Weaponry entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Resources.Weaponry.WeaponryCount">
+            <summary>
+            Number of weaponry
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Resources.Wood">
+            <summary>
+            Wood enrity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Resources.Wood.WoodCount">
+            <summary>
+            Number of wood
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Threats.FightingThreat">
+            <summary>
+            FightingThreat entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.FightingThreat.RequiredSmithingLevel">
+            <summary>
+            Required level of blacksmith
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.FightingThreat.RequiredWeaponryCount">
+            <summary>
+            Required weaponry count
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Threats.NaturalThreat">
+            <summary>
+            NaturalThreat entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.NaturalThreat.RequiredFarmingLevel">
+            <summary>
+            Required level of farming
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.NaturalThreat.RequiredCropsCount">
+            <summary>
+            Required crops count
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Threats.PlagueThreat">
+            <summary>
+            PlagueThreat entity model
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.PlagueThreat.RequiredMedicalLevel">
+            <summary>
+            Required level of medical staff
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.PlagueThreat.RequiredMedicineCount">
+            <summary>
+            Required medicine count
+            </summary>
+        </member>
+        <member name="T:ColonySimulator.Backend.Persistence.Models.Threats.Threat">
+            <summary>
+            Main class for threat
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.Threat.Id">
+            <summary>
+            Id of the threat
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.Threat.ThreatLevel">
+            <summary>
+            Level of threat
+            </summary>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.Threat.Name">
+            <summary>
+            Name of threat
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Program">
             <summary>
             Main entry point of simulation
@@ -746,6 +1319,8 @@
             <param name="resourceSeeder">Resource seeder class</param>
             <param name="threatSeeder">Threat seeder class</param>
             <param name="logger">logger class to log data</param>
+            <param name="counter">Population counter</param>
+            <param name="year">Year counter class</param>
         </member>
         <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.GetSeedingDataAsync(System.Threading.CancellationToken)">
             <summary>
@@ -825,6 +1400,82 @@
             Seed traders
             </summary>
             <param name="traderCount">Number of traders to seed</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Seeders.ResourceSeeder">
+            <summary>
+            Seeder for resources
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ResourceSeeder.#ctor(ColonySimulator.Backend.Persistence.ColonySimulatorContext)">
+            <summary>
+            Constructor for it with DI parameters
+            </summary>
+            <param name="dbContext">Db context</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ResourceSeeder.SeedCrops(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seeder for crops
+            </summary>
+            <param name="cropsCount">Number of crops</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ResourceSeeder.SeedHerbs(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seeder for herbs
+            </summary>
+            <param name="herbsCount">Number of herbs</param>
+            <param name="ct">Cacellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ResourceSeeder.SeedMedicine(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seeder for medicine
+            </summary>
+            <param name="medicineCount">Number of medicine</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ResourceSeeder.SeedWeaponry(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seeder for weaponry
+            </summary>
+            <param name="weaponryCount">Number of weaponry</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ResourceSeeder.SeedWood(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Seeder for wood
+            </summary>
+            <param name="woodCount">Number of wood</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Seeders.ThreatSeeder">
+            <summary>
+            Seeder for threats
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ThreatSeeder.#ctor(ColonySimulator.Backend.Persistence.ColonySimulatorContext,ColonySimulator.Backend.Helpers.PopCounter)">
+            <summary>
+            Constructor for it with DI parameters
+            </summary>
+            <param name="dbContext">Database context</param>
+            <param name="counter">population counter</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ThreatSeeder.SeedPlagues(System.Threading.CancellationToken)">
+            <summary>
+            Seeder for plagues
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ThreatSeeder.SeedNatural(System.Threading.CancellationToken)">
+            <summary>
+            Seeder for natural threats
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Seeders.ThreatSeeder.SeedFighting(System.Threading.CancellationToken)">
+            <summary>
+            Seeder for fighting threats
+            </summary>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="T:ColonySimulator.Backend.Services.DataDisplayService">
@@ -936,6 +1587,15 @@
             <summary>
             Startup class
             </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.StartupService.#ctor(Serilog.ILogger,Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Services.DataDisplayService,ColonySimulator.Backend.Services.StartSimulationService)">
+            <summary>
+            Constructor for StartupService
+            </summary>
+            <param name="logger">logger</param>
+            <param name="serviceScope">Scope of services</param>
+            <param name="displayService">display service</param>
+            <param name="simulationService">Simulation start service</param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.StartupService.StartAsync(System.Threading.CancellationToken)">
             <summary>

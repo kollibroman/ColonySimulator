@@ -40,6 +40,8 @@ public class DataSeeder
     /// <param name="resourceSeeder">Resource seeder class</param>
     /// <param name="threatSeeder">Threat seeder class</param>
     /// <param name="logger">logger class to log data</param>
+    /// <param name="counter">Population counter</param>
+    /// <param name="year">Year counter class</param>
     public DataSeeder(ProfessionSeeder professionSeeder, ResourceSeeder resourceSeeder, ThreatSeeder threatSeeder, ILogger logger, PopCounter counter, Year year)
     {
         _professionSeeder = professionSeeder;
