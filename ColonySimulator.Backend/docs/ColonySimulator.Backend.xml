@@ -652,6 +652,12 @@
             Main entry point of simulation
             </summary>
         </member>
+        <member name="M:ColonySimulator.Backend.Program.Main(System.String[])">
+            <summary>
+            Main entry point of program
+            </summary>
+            <param name="args">CLI arguments</param>
+        </member>
         <member name="T:ColonySimulator.Backend.Seeders.DataSeeder">
             <summary>
             Data seeder class, with combined other seeders

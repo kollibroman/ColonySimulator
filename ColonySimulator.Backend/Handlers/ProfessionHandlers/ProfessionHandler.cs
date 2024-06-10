@@ -1,13 +1,10 @@
-using System.Runtime.Versioning;
 using ColonySimulator.Backend.Handlers.Interfaces;
 using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Persistence.Models.Resources;
-using ColonySimulator.Backend.Persistence.Models.Threats;
 using Microsoft.EntityFrameworkCore;
-using Spectre.Console;
 
 namespace ColonySimulator.Backend.Handlers.ProfessionHandlers;
 
@@ -227,14 +224,14 @@ public class ProfessionHandler : IProfessionHandler
             crops!, medicine!, weaponry!, wood!, herbs!
         };
         
-        var affectedResources = _threatHandler.CalculateUsedResources(resources, _threatProvider.ThreatToExperience);
+        var affectedResources = _threatHandler.CalculateUsedResources(resources, _threatProvider.ThreatToExperience ?? throw new NullReferenceException());
         
         var effect = await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
 
         if (trader.Count != 0)
         {
             await _traderHandler.Trade(crops!, wood!, medicine!, herbs!, weaponry!);
-            await _traderHandler.ExperienceThreat(effect, await _dbContext.Traders.SingleOrDefaultAsync(x => x.Id == 1),
+            await _traderHandler.ExperienceThreat(effect, await _dbContext.Traders.SingleOrDefaultAsync(x => x.Id == 1) ?? throw new NullReferenceException("It is nulL!"),
                 resources);
         }
         

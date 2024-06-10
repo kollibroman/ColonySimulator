@@ -209,6 +209,22 @@ public class EntityManagementService : IEntityManagementService
 
         if (dbContext is not null)
         {
+            if (dbContext.Crops.SingleOrDefault(x => x.Id == 1)!.CropsCount == 0)
+            {
+                var people = new List<Person>();
+                people.AddRange(await dbContext.Medics.ToListAsync(ct));
+                people.AddRange(await dbContext.Timbers.ToListAsync(ct));
+                people.AddRange(await dbContext.Farmers.ToListAsync(ct));
+                people.AddRange(await dbContext.BlackSmiths.ToListAsync(ct));
+                people.AddRange(await dbContext.Apothecaries.ToListAsync(ct));
+                people.AddRange(await dbContext.Traders.ToListAsync(ct));
+
+                foreach (var person in people)
+                {
+                    person.IsHungry = true;
+                }
+            }
+            
             var hungryPeople = new List<Person>();
             hungryPeople.AddRange(await dbContext.Medics.Where(x => x.IsHungry == true).ToListAsync(ct));
             hungryPeople.AddRange(await dbContext.Timbers.Where(x => x.IsHungry == true).ToListAsync(ct));
