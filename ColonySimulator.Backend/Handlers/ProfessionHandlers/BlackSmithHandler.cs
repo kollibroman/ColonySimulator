@@ -20,11 +20,14 @@ public class BlackSmithHandler : IBlackSmithHandler
     /// <returns></returns>
     public Task CreateWeapon(Weaponry weapon, Wood wood, int blackLevel)
     {
-        if (wood.WoodCount - 4 <= 0){}
-        else
+        if (wood.WoodCount != 0)
         {
-            weapon.WeaponryCount += 1 * blackLevel;
-            wood.WoodCount -= 4;
+            if (wood.WoodCount - 4 <= 0){}
+            else
+            {
+                weapon.WeaponryCount += 1 * blackLevel;
+                wood.WoodCount -= 4;
+            }
         }
         
         return Task.CompletedTask;

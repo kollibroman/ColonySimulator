@@ -20,11 +20,18 @@ public class ApothecaryHandler : IApothecaryHandler
     /// <returns></returns>
     public Task CreateMedicine(Herbs herbs, Medicine medicine, int apoLevel)
     {
-        if (herbs.HerbsCount - 6 <= 0){}
-        else
+        if (herbs.HerbsCount != 0)
         {
-            medicine.MedicineCount += 1 * apoLevel;
-            herbs.HerbsCount -= 6;
+            if (herbs.HerbsCount - 6 <= 0)
+            {
+                medicine.MedicineCount += 0;
+                herbs.HerbsCount -= 0;
+            }
+            else
+            {
+                medicine.MedicineCount += 1 * apoLevel;
+                herbs.HerbsCount -= 6;
+            }
         }
         
         return Task.CompletedTask;

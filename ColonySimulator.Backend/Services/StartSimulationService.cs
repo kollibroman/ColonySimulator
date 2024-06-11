@@ -20,6 +20,7 @@ public class StartSimulationService
     private readonly Year _year;
     private readonly IEntityManagementService _entityManagementService;
     private readonly IThreatProvider _threatProvider;
+    private readonly EndDataStorer _dataStorer;
     
     /// <summary>
     /// Constructor for this service
@@ -29,13 +30,14 @@ public class StartSimulationService
     /// <param name="year">current year in simulation</param>
     /// <param name="entityManagementService">Entity lifecycle service</param>
     /// <param name="threatProvider">threat to provide</param>
-    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, IEntityManagementService entityManagementService, IThreatProvider threatProvider)
+    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, IEntityManagementService entityManagementService, IThreatProvider threatProvider, EndDataStorer dataStorer)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _counter = counter;
         _year = year;
         _entityManagementService = entityManagementService;
         _threatProvider = threatProvider;
+        _dataStorer = dataStorer;
     }
 
     /// <summary>
@@ -242,25 +244,52 @@ public class StartSimulationService
                 await _entityManagementService.CheckHungerStatus(ct);
                 await _entityManagementService.CheckSickStatus(ct);
 
-                if (_counter.PopulationCount == 0)
+                List<int> resourcesCountList =
+                [
+                    resourceOverview.CropsCount,
+                    resourceOverview.HerbsCount,
+                    resourceOverview.MedicinesCount,
+                    resourceOverview.WoodCount,
+                    resourceOverview.WeaponryCount
+                ];
+                
+                if (_counter.PopulationCount - 1 <= 0)
                 {
-                    Console.WriteLine("Everyone's dead, showing end data: ");
+                    Console.WriteLine("Everyone's dead, stopping Simulation: ");
+                    
+                    _dataStorer.PopulationCount = _counter.PopulationCount - 1;
+                    _dataStorer.PopulationLost = _counter.PeopleLost;
+                    _dataStorer.ProfessionsOverview = profOverview;
+                    _dataStorer.ResourceOverview = resourceOverview;
+                    
+                    break;
+                }
+
+                if (resourcesCountList.Count(x => x == 0) >= 4)
+                {
+                    AnsiConsole.Markup("[red]Too much resources has run out![/]");
+                    
+                    _dataStorer.PopulationCount = _counter.PopulationCount - 1;
+                    _dataStorer.PopulationLost = _counter.PeopleLost;
+                    _dataStorer.ProfessionsOverview = profOverview;
+                    _dataStorer.ResourceOverview = resourceOverview;
+                    
                     break;
                 }
 
                 if (_year.YearOfSim == yearsToFinish)
                 {
+                    AnsiConsole.Markup("[red]Simulation has ended[/]");
+                    
+                    _dataStorer.PopulationCount = _counter.PopulationCount - 1;
+                    _dataStorer.PopulationLost = _counter.PeopleLost;
+                    _dataStorer.ProfessionsOverview = profOverview;
+                    _dataStorer.ResourceOverview = resourceOverview;
+                    
                     break;
                 }
 
-                if (traderString != "No trader this year")
-                {
-                    Thread.Sleep(500);
-                }
-                else
-                {
-                    Thread.Sleep(200);
-                }
+                Thread.Sleep(500);
             }
         }
     }

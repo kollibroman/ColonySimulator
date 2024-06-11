@@ -17,6 +17,7 @@ public class DataSeeder
     private readonly ILogger _logger;
     private readonly PopCounter _popCount;
     private readonly Year _year;
+    private readonly RandomSeedingData _randomSeedingData;
     
     //Profession config
     private int _apothecaryCount;
@@ -32,7 +33,7 @@ public class DataSeeder
     private int _medicineCount;
     private int _weaponryCount;
     private int _woodCount;
-    
+
     /// <summary>
     /// Constructor for it
     /// </summary>
@@ -42,7 +43,9 @@ public class DataSeeder
     /// <param name="logger">logger class to log data</param>
     /// <param name="counter">Population counter</param>
     /// <param name="year">Year counter class</param>
-    public DataSeeder(ProfessionSeeder professionSeeder, ResourceSeeder resourceSeeder, ThreatSeeder threatSeeder, ILogger logger, PopCounter counter, Year year)
+    /// <param name="randomSeedingData"></param>
+    public DataSeeder(ProfessionSeeder professionSeeder, ResourceSeeder resourceSeeder, ThreatSeeder threatSeeder,
+        ILogger logger, PopCounter counter, Year year, RandomSeedingData randomSeedingData)
     {
         _professionSeeder = professionSeeder;
         _resourceSeeder = resourceSeeder;
@@ -50,6 +53,7 @@ public class DataSeeder
         _logger = logger;
         _popCount = counter;
         _year = year;
+        _randomSeedingData = randomSeedingData;
     }
     
     /// <summary>
@@ -240,6 +244,20 @@ public class DataSeeder
         _medicineCount = rnd.Next(5, 100);
         _weaponryCount = rnd.Next(10, 100);
         _woodCount = rnd.Next(10, 100);
+
+        _randomSeedingData.Duration = _year.SimDuration;
+        _randomSeedingData.Data.ApothecaryCount = _apothecaryCount;
+        _randomSeedingData.Data.BlackSmithCount = _blackSmithCount;
+        _randomSeedingData.Data.FarmerCount = _farmerCount;
+        _randomSeedingData.Data.TimberCount = _timberCount;
+        _randomSeedingData.Data.MedicCount = _medicCount;
+        _randomSeedingData.Data.TraderCount = _traderCount;
+        _randomSeedingData.Data.CropsCount = _cropsCount;
+        _randomSeedingData.Data.HerbsCount = _herbsCount;
+        _randomSeedingData.Data.MedicineCount = _medicineCount;
+        _randomSeedingData.Data.WeaponryCount = _weaponryCount;
+        _randomSeedingData.Data.WoodCount = _woodCount;
+        
         
         return Task.CompletedTask;
     }

@@ -161,19 +161,19 @@ public class EntityManagementService : IEntityManagementService
 
         if (dbContext is not null)
         {
-            var apothecaries = await dbContext.Apothecaries.Where(x => x.Vitality == 0).ToListAsync(ct);
-            var farmers = await dbContext.Farmers.Where(x => x.Vitality == 0).ToListAsync(ct);
-            var blacksmiths = await dbContext.BlackSmiths.Where(x => x.Vitality == 0).ToListAsync(ct);
-            var medics = await dbContext.Medics.Where(x => x.Vitality == 0).ToListAsync(ct);
-            var timbers = await dbContext.Timbers.Where(x => x.Vitality == 0).ToListAsync(ct);
+            var apothecaries = await dbContext.Apothecaries.Where(x => x.Vitality <= 0).ToListAsync(ct);
+            var farmers = await dbContext.Farmers.Where(x => x.Vitality <= 0).ToListAsync(ct);
+            var blacksmiths = await dbContext.BlackSmiths.Where(x => x.Vitality <= 0).ToListAsync(ct);
+            var medics = await dbContext.Medics.Where(x => x.Vitality <= 0).ToListAsync(ct);
+            var timbers = await dbContext.Timbers.Where(x => x.Vitality <= 0).ToListAsync(ct);
 
             List<int> professionCount =
             [
-                dbContext.Apothecaries.Count(x => x.Vitality == 0),
-                dbContext.Farmers.Count(x => x.Vitality == 0),
-                dbContext.BlackSmiths.Count(x => x.Vitality == 0),
-                dbContext.Medics.Count(x => x.Vitality == 0),
-                dbContext.Timbers.Count(x => x.Vitality == 0)
+                dbContext.Apothecaries.Count(x => x.Vitality <= 0),
+                dbContext.Farmers.Count(x => x.Vitality <= 0),
+                dbContext.BlackSmiths.Count(x => x.Vitality <= 0),
+                dbContext.Medics.Count(x => x.Vitality <= 0),
+                dbContext.Timbers.Count(x => x.Vitality <= 0)
             ];
 
             if (_counter.ApothecariesCount - professionCount[0] >= 0)
@@ -253,7 +253,7 @@ public class EntityManagementService : IEntityManagementService
 
             foreach (var item in sickPeople)
             {
-                item.Vitality -= 1;
+                item.Vitality -= 2;
             }
 
             await dbContext.SaveChangesAsync(ct);
@@ -300,7 +300,9 @@ public class EntityManagementService : IEntityManagementService
                 item.Vitality -= 1;
             }
 
-            if (dbContext.Crops.SingleOrDefault(x => x.Id == 1)!.CropsCount >= _counter.PopulationCount)
+            if (dbContext.Crops.SingleOrDefault(x => x.Id == 1)!.CropsCount >= _counter.PopulationCount
+                && dbContext.Herbs.SingleOrDefault(x => x.Id == 1)!.HerbsCount >= 1 && dbContext.Wood.SingleOrDefault(x => x.Id == 1)!.WoodCount >= 1
+                && dbContext.Medicines.SingleOrDefault(x => x.Id == 1)!.MedicineCount >= 1)
             {
                 foreach (var item in hungryPeople)
                 {

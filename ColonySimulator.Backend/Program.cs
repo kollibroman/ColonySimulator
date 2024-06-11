@@ -60,6 +60,8 @@ public class Program
             services.AddSingleton<StartSimulationService>();
             services.AddSingleton<IThreatProvider, ThreatProvider>();
             services.AddSingleton<IEntityManagementService, EntityManagementService>();
+            services.AddSingleton<EndDataStorer>();
+            services.AddSingleton<RandomSeedingData>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })
