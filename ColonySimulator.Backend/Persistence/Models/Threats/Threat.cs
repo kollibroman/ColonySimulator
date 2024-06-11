@@ -8,4 +8,9 @@ public abstract class Threat
     public int Id { get; set; }
     public int ThreatLevel { get; set; }
     public required string Name { get; set; }
+    
+    /// <summary>
+    /// Activity status check
+    /// </summary>
+    public bool IsActive { get; set; }
 }

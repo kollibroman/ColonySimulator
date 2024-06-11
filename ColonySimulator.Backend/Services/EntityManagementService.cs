@@ -2,6 +2,7 @@ using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Enums;
 using ColonySimulator.Backend.Persistence.Models.Professions;
+using ColonySimulator.Backend.Persistence.Models.Threats;
 using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,11 +31,11 @@ public class EntityManagementService : IEntityManagementService
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="summaricCount">Summaric count of entities</param>
+    /// <param name="cropsCount">Crops count of entities</param>
     /// <param name="ct"></param>
-    public async Task GenerateNewEntity(int summaricCount, CancellationToken ct)
+    public async Task GenerateNewEntity(int cropsCount, CancellationToken ct)
     {
-        if (summaricCount >= 50)
+        if (cropsCount >= 10)
         {
             using var scope = _serviceScope.CreateScope();
             var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
@@ -160,21 +161,20 @@ public class EntityManagementService : IEntityManagementService
 
         if (dbContext is not null)
         {
-            List<Proffesion> professions = new();
-            professions.AddRange(await dbContext.Apothecaries.Where(x => x.Vitality == 0).ToListAsync(ct));
-            professions.AddRange(await dbContext.Farmers.Where(x => x.Vitality == 0).ToListAsync(ct));
-            professions.AddRange(await dbContext.BlackSmiths.Where(x => x.Vitality == 0).ToListAsync(ct));
-            professions.AddRange(await dbContext.Medics.Where(x => x.Vitality == 0).ToListAsync(ct));
-            professions.AddRange(await dbContext.Timbers.Where(x => x.Vitality == 0).ToListAsync(ct));
+            var apothecaries = await dbContext.Apothecaries.Where(x => x.Vitality == 0).ToListAsync(ct);
+            var farmers = await dbContext.Farmers.Where(x => x.Vitality == 0).ToListAsync(ct);
+            var blacksmiths = await dbContext.BlackSmiths.Where(x => x.Vitality == 0).ToListAsync(ct);
+            var medics = await dbContext.Medics.Where(x => x.Vitality == 0).ToListAsync(ct);
+            var timbers = await dbContext.Timbers.Where(x => x.Vitality == 0).ToListAsync(ct);
 
-            _counter.PopulationCount -= professions.Count;
-
-            List<int> professionCount = new();
-            professionCount.Add(dbContext.Apothecaries.Where(x => x.Vitality == 0).Count());
-            professionCount.Add(dbContext.Farmers.Where(x => x.Vitality == 0).Count());
-            professionCount.Add(dbContext.BlackSmiths.Where(x => x.Vitality == 0).Count());
-            professionCount.Add(dbContext.Medics.Where(x => x.Vitality == 0).Count());
-            professionCount.Add(dbContext.Timbers.Where(x => x.Vitality == 0).Count());
+            List<int> professionCount =
+            [
+                dbContext.Apothecaries.Count(x => x.Vitality == 0),
+                dbContext.Farmers.Count(x => x.Vitality == 0),
+                dbContext.BlackSmiths.Count(x => x.Vitality == 0),
+                dbContext.Medics.Count(x => x.Vitality == 0),
+                dbContext.Timbers.Count(x => x.Vitality == 0)
+            ];
 
             _counter.ApothecariesCount -= professionCount[0];
             _counter.BlackSmithCount -= professionCount[2];
@@ -182,8 +182,14 @@ public class EntityManagementService : IEntityManagementService
             _counter.MedicCount -= professionCount[3];
             _counter.TimberCount -= professionCount[4];
             
+            _counter.PopulationCount -= professionCount.Sum();
             
-            dbContext.RemoveRange(professions);
+            dbContext.Apothecaries.RemoveRange(apothecaries);
+            dbContext.Farmers.RemoveRange(farmers);
+            dbContext.BlackSmiths.RemoveRange(blacksmiths);
+            dbContext.Medics.RemoveRange(medics);
+            dbContext.Timbers.RemoveRange(timbers);
+            
             await dbContext.SaveChangesAsync(ct);
         }
     }
@@ -268,5 +274,15 @@ public class EntityManagementService : IEntityManagementService
 
             await dbContext.SaveChangesAsync(ct);
         }
+    }
+
+    /// <summary>
+    /// Checks actual threat status
+    /// </summary>
+    /// <param name="currentThreat">Current threat in simulation</param>
+    /// <param name="ct">Cancellation token</param>
+    public async Task CheckThreatStatus(Threat currentThreat, CancellationToken ct)
+    {
+        
     }
 }

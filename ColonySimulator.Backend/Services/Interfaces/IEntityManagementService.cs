@@ -1,3 +1,5 @@
+using ColonySimulator.Backend.Persistence.Models.Threats;
+
 namespace ColonySimulator.Backend.Services.Interfaces;
 
 /// <summary>
@@ -27,4 +29,11 @@ public interface IEntityManagementService
     /// </summary>
     /// <param name="ct"></param>
     public Task CheckHungerStatus(CancellationToken ct);
+
+    /// <summary>
+    /// Checks actual threat status
+    /// </summary>
+    /// <param name="currentThreat">Current threat</param>
+    /// <param name="ct">Cancellation token</param>
+    public Task CheckThreatStatus(Threat currentThreat, CancellationToken ct);
 }

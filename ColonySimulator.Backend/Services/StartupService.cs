@@ -62,6 +62,7 @@ public class StartupService : IHostedService
         {
             case "[green]Seed manually[/]":
                 AnsiConsole.Markup("[red]Seeding data manually[/]");
+                isManual = true;
                 await dataSeeder!.GetSeedingDataAsync(cancellationToken);
                 break;
             case "[blue]Seed data from file[/]":

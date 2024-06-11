@@ -233,13 +233,9 @@ public class StartSimulationService
 
                 Console.Clear();
                 AnsiConsole.Write(layout);
-
-                int summaricCount = resourceOverview.MedicinesCount + resourceOverview.HerbsCount +
-                                    resourceOverview.CropsCount + resourceOverview.WeaponryCount +
-                                    resourceOverview.WoodCount;
-
+                
                 await _entityManagementService.CleanupDeadEntities(ct);
-                await _entityManagementService.GenerateNewEntity(summaricCount, ct);
+                await _entityManagementService.GenerateNewEntity(resourceOverview.CropsCount, ct);
                 await _entityManagementService.CheckHungerStatus(ct);
                 await _entityManagementService.CheckSickStatus(ct);
 

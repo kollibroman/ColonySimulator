@@ -651,6 +651,11 @@
             Current year of simulation
             </summary>
         </member>
+        <member name="P:ColonySimulator.Backend.Helpers.Year.SimDuration">
+            <summary>
+            Duration of simulation
+            </summary>
+        </member>
         <member name="T:ColonySimulator.Backend.Migrations.AddIsHungry">
             <inheritdoc />
         </member>
@@ -862,7 +867,7 @@
             <summary>
             
             </summary>
-            <param name="summaricCount">Summaric count of entities</param>
+            <param name="cropsCount">Crops count of entities</param>
             <param name="ct"></param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.EntityManagementService.CleanupDeadEntities(System.Threading.CancellationToken)">
@@ -936,6 +941,15 @@
             <summary>
             Startup class
             </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.StartupService.#ctor(Serilog.ILogger,Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Services.DataDisplayService,ColonySimulator.Backend.Services.StartSimulationService)">
+            <summary>
+            Constructor for StartupService
+            </summary>
+            <param name="logger">logger</param>
+            <param name="serviceScope">Scope of services</param>
+            <param name="displayService">display service</param>
+            <param name="simulationService">Simulation start service</param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.StartupService.StartAsync(System.Threading.CancellationToken)">
             <summary>
