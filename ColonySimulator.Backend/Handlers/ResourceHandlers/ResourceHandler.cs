@@ -6,14 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ColonySimulator.Backend.Handlers.ResourceHandlers;
 
+/// <summary>
+/// Handler for resources
+/// </summary>
 public class ResourceHandler : IResourceHandler
 {
     private ColonySimulatorContext _dbContext;
+    
+    /// <summary>
+    /// Constructor for this handler
+    /// </summary>
+    /// <param name="dbContext">Database context</param>
     public ResourceHandler(ColonySimulatorContext dbContext)
     {
         _dbContext = dbContext;
     }
     
+    /// <summary>
+    /// Handles resource consumption
+    /// </summary>
+    /// <param name="popCount">Population counter</param>
     public async Task ConsumeResources(int popCount)
     {
         var peopleList = new List<Person>();

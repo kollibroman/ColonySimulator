@@ -9,10 +9,34 @@ namespace ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 /// </summary>
 public interface IProfessionHandler
 {
+    /// <summary>
+    /// Handles farmers
+    /// </summary>
     Task HandleFarm();
+    
+    /// <summary>
+    /// Handles apothecaries
+    /// </summary>
     Task HandleApothecary();
+    
+    /// <summary>
+    /// Handles timbers
+    /// </summary>
     Task HandleTimber();
+    
+    /// <summary>
+    /// Handles blacksmiths
+    /// </summary>
     Task HandleBlackSmith();
+    
+    /// <summary>
+    /// Handles trader
+    /// </summary>
     Task HandleTrader();
+    
+    /// <summary>
+    /// Handles medics
+    /// </summary>
+    /// <returns></returns>
     Task HandleMedic();
 }
