@@ -4,17 +4,29 @@ using ColonySimulator.Backend.Persistence.Models.Threats;
 
 namespace ColonySimulator.Backend.Seeders;
 
+/// <summary>
+/// Seeder for threats
+/// </summary>
 public class ThreatSeeder
 {
     private readonly ColonySimulatorContext _dbContext;
     private readonly PopCounter _counter;
-
+    
+    /// <summary>
+    /// Constructor for it with DI parameters
+    /// </summary>
+    /// <param name="dbContext">Database context</param>
+    /// <param name="counter">population counter</param>
     public ThreatSeeder(ColonySimulatorContext dbContext, PopCounter counter)
     {
         _dbContext = dbContext;
         _counter = counter;
     }
-
+    
+    /// <summary>
+    /// Seeder for plagues
+    /// </summary>
+    /// <param name="ct">Cancellation token</param>
     public async Task SeedPlagues(CancellationToken ct)
     {
         var rnd = new Random();
@@ -40,7 +52,11 @@ public class ThreatSeeder
         await _dbContext.AddRangeAsync(plagueList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
-
+    
+    /// <summary>
+    /// Seeder for natural threats
+    /// </summary>
+    /// <param name="ct">Cancellation token</param>
     public async Task SeedNatural(CancellationToken ct)
     {
         var rnd = new Random();
@@ -66,7 +82,11 @@ public class ThreatSeeder
         await _dbContext.AddRangeAsync(naturalList, ct);
         await _dbContext.SaveChangesAsync(ct);
     }
-
+    
+    /// <summary>
+    /// Seeder for fighting threats
+    /// </summary>
+    /// <param name="ct">Cancellation token</param>
     public async Task SeedFighting(CancellationToken ct)
     {
         var rnd = new Random();

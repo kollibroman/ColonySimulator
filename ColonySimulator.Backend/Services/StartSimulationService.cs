@@ -3,10 +3,8 @@ using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Helpers.Interfaces;
 using ColonySimulator.Backend.Persistence;
-using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console;
 
@@ -44,6 +42,7 @@ public class StartSimulationService
     /// Start simulation based on specified parameters and don't stop till everyone is dead
     /// </summary>
     /// <param name="ct">Cancellation token</param>
+    /// <param name="isManually">Bool specifying how duration is handled</param>
 
     public async Task RunAsync(bool isManually, CancellationToken ct)
     {
