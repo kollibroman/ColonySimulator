@@ -1582,6 +1582,7 @@
             Start simulation based on specified parameters and don't stop till everyone is dead
             </summary>
             <param name="ct">Cancellation token</param>
+            <param name="isManually">Bool specifying how duration is handled</param>
         </member>
         <member name="T:ColonySimulator.Backend.Services.StartupService">
             <summary>
