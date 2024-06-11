@@ -921,13 +921,15 @@
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.EntityManagementService.CheckThreatStatus(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Threading.CancellationToken)">
+        <member name="M:ColonySimulator.Backend.Services.EntityManagementService.CheckThreatStatus(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Checks actual threat status
             </summary>
             <param name="currentThreat">Current threat in simulation</param>
+            <param name="highestFarmingLevel"></param>
             <param name="medicineCount"></param>
             <param name="weaponryCount"></param>
+            <param name="cropsCount"></param>
             <param name="ct">Cancellation token</param>
             <param name="highestMedicLevel"></param>
             <param name="highestSmithLevel"></param>
@@ -960,12 +962,18 @@
             </summary>
             <param name="ct"></param>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService.CheckThreatStatus(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Threading.CancellationToken)">
+        <member name="M:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService.CheckThreatStatus(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Checks actual threat status
             </summary>
             <param name="currentThreat">Current threat</param>
+            <param name="highestFarmingLevel"></param>
+            <param name="medicineCount"></param>
+            <param name="weaponryCount"></param>
+            <param name="CropsCount"></param>
             <param name="ct">Cancellation token</param>
+            <param name="highestMedicLevel"></param>
+            <param name="highestSmithLevel"></param>
         </member>
         <member name="T:ColonySimulator.Backend.Services.StartSimulationService">
             <summary>

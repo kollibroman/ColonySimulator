@@ -176,13 +176,50 @@ public class EntityManagementService : IEntityManagementService
                 dbContext.Timbers.Count(x => x.Vitality == 0)
             ];
 
-            _counter.ApothecariesCount -= professionCount[0];
-            _counter.BlackSmithCount -= professionCount[2];
-            _counter.FarmerCount -= professionCount[1];
-            _counter.MedicCount -= professionCount[3];
-            _counter.TimberCount -= professionCount[4];
+            if (_counter.ApothecariesCount - professionCount[0] >= 0)
+            {
+                _counter.ApothecariesCount -= professionCount[0];
+            }
+            else
+            {
+                _counter.ApothecariesCount = 0;
+            }
+
+            if (_counter.BlackSmithCount - professionCount[2] >= 0)
+            {
+                _counter.BlackSmithCount -= professionCount[2];
+            }
+            else
+            {
+                _counter.BlackSmithCount = 0;
+            }
+
+            if (_counter.FarmerCount - professionCount[1] >= 0)
+            {
+                _counter.FarmerCount -= professionCount[1];
+            }
+            else
+            {
+                _counter.FarmerCount = 0;    
+            }
             
-            _counter.PopulationCount -= professionCount.Sum();
+            if(_counter.MedicCount - professionCount[3] >= 0)
+            {
+                _counter.MedicCount -= professionCount[3];
+            }
+            else
+            {
+                _counter.MedicCount = 0;
+            }
+            
+            if (_counter.TimberCount - professionCount[4] >= 0)
+            {
+                _counter.TimberCount -= professionCount[4];
+            }
+            else
+            {
+                _counter.TimberCount = 0;
+            }
             
             dbContext.Apothecaries.RemoveRange(apothecaries);
             dbContext.Farmers.RemoveRange(farmers);
@@ -193,7 +230,6 @@ public class EntityManagementService : IEntityManagementService
             await dbContext.SaveChangesAsync(ct);
         }
     }
-    
     
     /// <summary>
     /// Handle sick status

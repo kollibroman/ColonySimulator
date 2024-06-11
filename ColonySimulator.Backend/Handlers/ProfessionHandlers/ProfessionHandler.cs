@@ -66,22 +66,20 @@ public class ProfessionHandler : IProfessionHandler
         {
             crop!, herbs!
         };
+       
+        var affectedResources = _threatHandler.CalculateUsedResources(resources, _threatProvider.ThreatToExperience);
 
-        if (_threatProvider.ThreatToExperience is not null)
+        for (int i = 0; i < farmers.Count; i++)
         {
-            var affectedResources = _threatHandler.CalculateUsedResources(resources, _threatProvider.ThreatToExperience);
-        
-            for(int i = 0; i < farmers.Count; i++)
-            {
-                await _farmerHandler.Farm(crop!, herbs!, farmers[i].FarmingLevel);
+            await _farmerHandler.Farm(crop!, herbs!, farmers[i].FarmingLevel);
 
-                await _threatHandler.CalculateAffection(farmers[i], _threatProvider.ThreatToExperience);
-                var effect = await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
+            await _threatHandler.CalculateAffection(farmers[i], _threatProvider.ThreatToExperience);
+            var effect =
+                await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
 
-                await _farmerHandler.ExperienceThreat(effect, farmers[i], resources);
-                await _dbContext.SaveChangesAsync();
-            }
-        }
+            await _farmerHandler.ExperienceThreat(effect, farmers[i], resources);
+            await _dbContext.SaveChangesAsync();
+        } 
     }
     
     /// <summary>

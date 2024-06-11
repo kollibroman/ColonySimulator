@@ -83,6 +83,7 @@ public class StartSimulationService
             Console.Clear();
             for (;;)
             {
+                _counter.PopulationCount = _counter.FarmerCount+_counter.ApothecariesCount+_counter.BlackSmithCount+_counter.MedicCount+_counter.TimberCount+1;
                 _year.YearOfSim++;
                 
                 await profHandler.HandleApothecary();
@@ -91,9 +92,6 @@ public class StartSimulationService
                 await profHandler.HandleMedic();
                 await profHandler.HandleBlackSmith();
                 await resHandler.ConsumeResources(_counter.PopulationCount);
-
-                _threatProvider.ThreatToExperience = null;
-                //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
 
                 var profOverview = new ProfessionsOverview
                 {
@@ -161,6 +159,11 @@ public class StartSimulationService
                         await threatHandler.SetActiveThreat(threat, ct);
                         _threatProvider.ThreatToExperience = threat;
                         threatName = _threatProvider.ThreatToExperience.Name;
+                        
+                        await _entityManagementService.CheckThreatStatus(_threatProvider.ThreatToExperience,
+                            profOverview.Medics.Count, profOverview.BlackSmiths.Count, profOverview.Farmers.Count,
+                            resourceOverview.MedicinesCount, resourceOverview.WeaponryCount,
+                            resourceOverview.CropsCount, ct);
                     }
                 }
                 var threatPanel = new Panel(
