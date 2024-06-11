@@ -230,7 +230,6 @@ public class ProfessionHandler : IProfessionHandler
         var affectedResources = _threatHandler.CalculateUsedResources(resources, _threatProvider.ThreatToExperience);
         
         var effect = await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
-
         
         await _traderHandler.Trade(crops!, wood!, medicine!, herbs!, weaponry!);
         await _traderHandler.ExperienceThreat(effect, await _dbContext.Traders.SingleOrDefaultAsync(x => x.Id == 1) ,

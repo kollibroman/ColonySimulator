@@ -34,6 +34,12 @@ public interface IEntityManagementService
     /// Checks actual threat status
     /// </summary>
     /// <param name="currentThreat">Current threat</param>
+    /// <param name="highestFarmingLevel"></param>
+    /// <param name="medicineCount"></param>
+    /// <param name="weaponryCount"></param>
+    /// <param name="CropsCount"></param>
     /// <param name="ct">Cancellation token</param>
-    public Task CheckThreatStatus(Threat currentThreat, CancellationToken ct);
+    /// <param name="highestMedicLevel"></param>
+    /// <param name="highestSmithLevel"></param>
+    public Task CheckThreatStatus(Threat currentThreat, int highestMedicLevel, int highestSmithLevel, int highestFarmingLevel, int medicineCount, int weaponryCount, int CropsCount, CancellationToken ct);
 }

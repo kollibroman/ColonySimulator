@@ -51,6 +51,18 @@ public class ThreatHandler : IThreatHandler
     }
     
     /// <summary>
+    /// Sets activity of threat to true
+    /// </summary>
+    /// <param name="threat">Threat to modify</param>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>Completed task</returns>
+    public Task SetActiveThreat(Threat threat, CancellationToken ct)
+    {
+        threat.IsActive = true;
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
     /// Calculate affected resources
     /// </summary>
     /// <param name="resources">resources to pass</param>

@@ -280,9 +280,55 @@ public class EntityManagementService : IEntityManagementService
     /// Checks actual threat status
     /// </summary>
     /// <param name="currentThreat">Current threat in simulation</param>
+    /// <param name="highestFarmingLevel"></param>
+    /// <param name="medicineCount"></param>
+    /// <param name="weaponryCount"></param>
+    /// <param name="cropsCount"></param>
     /// <param name="ct">Cancellation token</param>
-    public async Task CheckThreatStatus(Threat currentThreat, CancellationToken ct)
+    /// <param name="highestMedicLevel"></param>
+    /// <param name="highestSmithLevel"></param>
+    public Task CheckThreatStatus(Threat currentThreat, int highestMedicLevel, int highestSmithLevel, int highestFarmingLevel, int medicineCount, int weaponryCount, int cropsCount, CancellationToken ct)
     {
+        if (currentThreat.GetType() == typeof(FightingThreat))
+        {
+            var fThreat = (FightingThreat)currentThreat;
+
+            if (fThreat.RequiredSmithingLevel > highestSmithLevel && fThreat.RequiredWeaponryCount > weaponryCount)
+            {
+                currentThreat.IsActive = true;
+            }
+            else
+            {
+                currentThreat.IsActive = false;
+            }
+        }
+        if (currentThreat.GetType() == typeof(PlagueThreat))
+        {
+            var plagueThreat = (PlagueThreat)currentThreat;
+
+            if (plagueThreat.RequiredMedicalLevel > highestMedicLevel && plagueThreat.RequiredMedicineCount > medicineCount)
+            {
+                currentThreat.IsActive = true;
+            }
+            else
+            {
+                currentThreat.IsActive = false;
+            }
+        }
+        if (currentThreat.GetType() == typeof(NaturalThreat))
+        {
+            var nThreat = (NaturalThreat)currentThreat;
+
+            if (nThreat.RequiredFarmingLevel > highestFarmingLevel && nThreat.RequiredCropsCount > cropsCount)
+            {
+                currentThreat.IsActive = true;
+            }
+            else
+            {
+                currentThreat.IsActive = false;
+            }
+        }
         
+        return Task.CompletedTask;
     }
 }

@@ -152,6 +152,14 @@
             </summary>
             <returns>Randomly generated threat</returns>
         </member>
+        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler.SetActiveThreat(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Threading.CancellationToken)">
+            <summary>
+            Sets activity of threat to true
+            </summary>
+            <param name="threat">Threat to modify</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Completed task</returns>
+        </member>
         <member name="M:ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler.CalculateUsedResources(System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource},ColonySimulator.Backend.Persistence.Models.Threats.Threat)">
             <summary>
             Calculates affected resources
@@ -385,6 +393,14 @@
             <param name="profession">Profession of entity</param>
             <param name="threat">threat passed on as parameter</param>
             <returns></returns>
+        </member>
+        <member name="M:ColonySimulator.Backend.Handlers.ThreatHandler.SetActiveThreat(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Threading.CancellationToken)">
+            <summary>
+            Sets activity of threat to true
+            </summary>
+            <param name="threat">Threat to modify</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Completed task</returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ThreatHandler.CalculateUsedResources(System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource},ColonySimulator.Backend.Persistence.Models.Threats.Threat)">
             <summary>
@@ -656,6 +672,18 @@
             Duration of simulation
             </summary>
         </member>
+        <member name="T:ColonySimulator.Backend.Migrations.AddActivityStatusToThreat">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddActivityStatusToThreat.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddActivityStatusToThreat.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ColonySimulator.Backend.Migrations.AddActivityStatusToThreat.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:ColonySimulator.Backend.Migrations.AddIsHungry">
             <inheritdoc />
         </member>
@@ -726,6 +754,11 @@
             Constructor with options
             </summary>
             <param name="options">dbContext options</param>
+        </member>
+        <member name="P:ColonySimulator.Backend.Persistence.Models.Threats.Threat.IsActive">
+            <summary>
+            Activity status check
+            </summary>
         </member>
         <member name="T:ColonySimulator.Backend.Program">
             <summary>
@@ -888,6 +921,17 @@
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
+        <member name="M:ColonySimulator.Backend.Services.EntityManagementService.CheckThreatStatus(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Threading.CancellationToken)">
+            <summary>
+            Checks actual threat status
+            </summary>
+            <param name="currentThreat">Current threat in simulation</param>
+            <param name="medicineCount"></param>
+            <param name="weaponryCount"></param>
+            <param name="ct">Cancellation token</param>
+            <param name="highestMedicLevel"></param>
+            <param name="highestSmithLevel"></param>
+        </member>
         <member name="T:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService">
             <summary>
             Manages entity's quantity
@@ -915,6 +959,13 @@
             Handle Hunger of entities
             </summary>
             <param name="ct"></param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService.CheckThreatStatus(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Threading.CancellationToken)">
+            <summary>
+            Checks actual threat status
+            </summary>
+            <param name="currentThreat">Current threat</param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:ColonySimulator.Backend.Services.StartSimulationService">
             <summary>

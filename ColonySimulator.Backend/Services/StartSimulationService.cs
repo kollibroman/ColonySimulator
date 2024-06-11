@@ -152,12 +152,13 @@ public class StartSimulationService
                 //Threat Panel
                 //Generate random threat and then handle it
                 var threatName = "No threats this year";
-                if (rnd.NextDouble() <= 0.1)
+                if (rnd.NextDouble() <= 0.2)
                 {
                     var threat = await threatHandler.GenerateRandomThreat(ct);
-
+                    
                     if (threat is not null)
                     {
+                        await threatHandler.SetActiveThreat(threat, ct);
                         _threatProvider.ThreatToExperience = threat;
                         threatName = _threatProvider.ThreatToExperience.Name;
                     }
