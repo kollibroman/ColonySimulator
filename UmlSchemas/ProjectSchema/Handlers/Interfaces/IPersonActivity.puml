@@ -1,7 +1,8 @@
 @startuml
 interface IPersonActivity {
-    + ExperienceThreat(threat:Threat) : Task
+    + ExperienceThreat(effect:Effect, profession:Proffesion, resources:List<Resource>) : Task
 }
-
-Threat <.. IPersonActivity
+Effect ..> IPersonActivity
+Proffesion ..> IPersonActivity
+Resource ..> IPersonActivity
 @enduml

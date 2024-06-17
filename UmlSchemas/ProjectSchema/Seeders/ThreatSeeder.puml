@@ -5,7 +5,6 @@ class ThreatSeeder {
     + <<async>> SeedNatural(ct:CancellationToken) : Task
     + <<async>> SeedFighting(ct:CancellationToken) : Task
 }
-
-PopCounter *-- ThreatSeeder
-ColonySimulatorContext *-- ThreatSeeder
+ColonySimulatorContext --* ThreatSeeder
+PopCounter --o ThreatSeeder
 @enduml

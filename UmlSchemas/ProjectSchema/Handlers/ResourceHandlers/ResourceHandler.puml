@@ -1,6 +1,8 @@
 @startuml
 class ResourceHandler {
-    + ConsumeResources(person:Person) : Task
+    + ResourceHandler(dbContext:ColonySimulatorContext)
+    + <<async>> ConsumeResources(popCount:int) : Task
 }
 IResourceHandler <|-- ResourceHandler
+ColonySimulatorContext --* ResourceHandler
 @enduml

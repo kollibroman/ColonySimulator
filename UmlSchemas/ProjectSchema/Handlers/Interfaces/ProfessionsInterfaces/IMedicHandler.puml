@@ -1,7 +1,9 @@
 @startuml
 interface IMedicHandler {
-    + Heal(medicine:Medicine) : Task
+    + Heal(medicine:Medicine, person:Person, medLevel:int) : Task
 }
 IPersonActivity <|-- IMedicHandler
-Medicine <.. IMedicHandler
+Medicine ..> IMedicHandler
+Person ..> IMedicHandler
+
 @enduml

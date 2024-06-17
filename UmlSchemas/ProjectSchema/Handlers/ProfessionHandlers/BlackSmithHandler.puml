@@ -1,7 +1,8 @@
 @startuml
 class BlackSmithHandler {
-    + CreateWeapon(weapon:Weaponry, wood:Wood) : Task
-    + ExperienceThreat(threat:Threat) : Task
+    + CreateWeapon(weapon:Weaponry, wood:Wood, blackLevel:int) : Task
+    + ExperienceThreat(effect:Effect, proffesion:Proffesion, resources:List<Resource>) : Task
 }
 IBlackSmithHandler <|-- BlackSmithHandler
+
 @enduml

@@ -1,7 +1,7 @@
 @startuml
 class FarmerHandler {
-    + Farm(crops:Crops) : Task
-    + ExperienceThreat(threat:Threat) : Task
+    + Farm(crops:Crops, herbs:Herbs, farmLevel:int) : Task
+    + ExperienceThreat(effect:Effect, proffesion:Proffesion, resources:List<Resource>) : Task
 }
 IFarmerHandler <|-- FarmerHandler
 @enduml
