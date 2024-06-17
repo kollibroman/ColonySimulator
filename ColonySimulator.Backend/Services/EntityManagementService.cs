@@ -161,11 +161,15 @@ public class EntityManagementService : IEntityManagementService
 
         if (dbContext is not null)
         {
-            var apothecaries = await dbContext.Apothecaries.Where(x => x.Vitality <= 0).ToListAsync(ct);
-            var farmers = await dbContext.Farmers.Where(x => x.Vitality <= 0).ToListAsync(ct);
-            var blacksmiths = await dbContext.BlackSmiths.Where(x => x.Vitality <= 0).ToListAsync(ct);
-            var medics = await dbContext.Medics.Where(x => x.Vitality <= 0).ToListAsync(ct);
-            var timbers = await dbContext.Timbers.Where(x => x.Vitality <= 0).ToListAsync(ct);
+            var allProfessions = await dbContext.Proffesions
+                .Where(x => x.Vitality <= 0)
+                .ToListAsync(ct);
+
+            var apothecaries = allProfessions.OfType<Apothecary>().ToList();
+            var farmers = allProfessions.OfType<Farmer>().ToList();
+            var blacksmiths = allProfessions.OfType<BlackSmith>().ToList();
+            var medics = allProfessions.OfType<Medic>().ToList();
+            var timbers = allProfessions.OfType<Timber>().ToList();
 
             List<int> professionCount =
             [
@@ -337,43 +341,37 @@ public class EntityManagementService : IEntityManagementService
     /// <param name="highestSmithLevel"></param>
     public Task CheckThreatStatus(Threat currentThreat, int highestMedicLevel, int highestSmithLevel, int highestFarmingLevel, int medicineCount, int weaponryCount, int cropsCount, CancellationToken ct)
     {
-        if (currentThreat.GetType() == typeof(FightingThreat))
+        if (currentThreat is FightingThreat fThreat)
         {
-            var fThreat = (FightingThreat)currentThreat;
-
             if (fThreat.RequiredSmithingLevel > highestSmithLevel && fThreat.RequiredWeaponryCount > weaponryCount)
             {
-                currentThreat.IsActive = true;
+                fThreat.IsActive = true;
             }
             else
             {
-                currentThreat.IsActive = false;
+                fThreat.IsActive = false;
             }
         }
-        if (currentThreat.GetType() == typeof(PlagueThreat))
+        if (currentThreat is PlagueThreat plagueThreat)
         {
-            var plagueThreat = (PlagueThreat)currentThreat;
-
             if (plagueThreat.RequiredMedicalLevel > highestMedicLevel && plagueThreat.RequiredMedicineCount > medicineCount)
             {
-                currentThreat.IsActive = true;
+                plagueThreat.IsActive = true;
             }
             else
             {
-                currentThreat.IsActive = false;
+                plagueThreat.IsActive = false;
             }
         }
-        if (currentThreat.GetType() == typeof(NaturalThreat))
+        if (currentThreat is NaturalThreat nThreat)
         {
-            var nThreat = (NaturalThreat)currentThreat;
-
             if (nThreat.RequiredFarmingLevel > highestFarmingLevel && nThreat.RequiredCropsCount > cropsCount)
             {
-                currentThreat.IsActive = true;
+                nThreat.IsActive = true;
             }
             else
             {
-                currentThreat.IsActive = false;
+                nThreat.IsActive = false;
             }
         }
         

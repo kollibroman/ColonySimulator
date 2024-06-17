@@ -85,7 +85,6 @@ public class StartSimulationService
             Console.Clear();
             for (;;)
             {
-                _counter.PopulationCount = _counter.FarmerCount+_counter.ApothecariesCount+_counter.BlackSmithCount+_counter.MedicCount+_counter.TimberCount+1;
                 _year.YearOfSim++;
                 
                 await profHandler.HandleApothecary();
@@ -93,7 +92,6 @@ public class StartSimulationService
                 await profHandler.HandleTimber();
                 await profHandler.HandleMedic();
                 await profHandler.HandleBlackSmith();
-                await resHandler.ConsumeResources(_counter.PopulationCount);
 
                 var profOverview = new ProfessionsOverview
                 {
@@ -113,7 +111,13 @@ public class StartSimulationService
                     MedicinesCount = dbContext.Medicines.SingleOrDefault(x => x.Id == 1)!.MedicineCount,
                     WoodCount = dbContext.Wood.SingleOrDefault(x => x.Id == 1)!.WoodCount
                 };
-
+                
+                _counter.PopulationCount = profOverview.Apothecaries.Count + profOverview.BlackSmiths.Count +
+                                           profOverview.Farmers.Count + profOverview.Medics.Count +
+                                           profOverview.Timbers.Count;
+                
+                await resHandler.ConsumeResources(_counter.PopulationCount);
+                
                 //Needs further improvement with new console lib in project
                 //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview))          
                 /*################################## Layout GUI ##################################*/
@@ -122,11 +126,10 @@ public class StartSimulationService
 
                 //Population Counter Panel
                 var popCountPanel = new Panel(
-                    new Markup("Apothecaries: " + _counter.ApothecariesCount
-                                                + "\nBlack smiths: " + _counter.BlackSmithCount + "\nFarmers: " +
-                                                _counter.FarmerCount
-                                                + "\nMedics: " + _counter.MedicCount + "\nTimbers: " +
-                                                _counter.TimberCount + "\nSummary: " + (_counter.PopulationCount - 1))
+                    new Markup(
+                        $"Apothecaries: {profOverview.Apothecaries.Count}\nBlack smiths: {profOverview.BlackSmiths.Count}\nFarmers: {profOverview.Farmers.Count}\nMedics: " +
+                        $"{profOverview.Medics.Count}\nTimbers: " +
+                        $"{profOverview.Timbers.Count}\nSummary: {(_counter.PopulationCount)}")
                 )
                 {
                     Border = BoxBorder.Heavy,
@@ -152,7 +155,7 @@ public class StartSimulationService
                 //Threat Panel
                 //Generate random threat and then handle it
                 var threatName = "No threats this year";
-                if (rnd.NextDouble() <= 0.2)
+                if (rnd.NextDouble() <= 0.1)
                 {
                     var threat = await threatHandler.GenerateRandomThreat(ct);
                     

@@ -42,94 +42,88 @@ public class BlackSmithHandler : IBlackSmithHandler
     /// <returns></returns>
     public Task ExperienceThreat(Effect effect, Proffesion proffesion, List<Resource> resources)
     {
-        if (effect.GetType() == typeof(FightingThreatEffect))
+        switch (effect)
         {
-            var fEffect = (FightingThreatEffect)effect;
+            case FightingThreatEffect fEffect:
+                proffesion.Vitality -= fEffect.Damage;
 
-            proffesion.Vitality -= fEffect.Damage;
-
-            try
-            {
-                var weaponry = (Weaponry)resources.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
-                var weaponryEffect = (Weaponry)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
-                var wood = (Wood)resources.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
-                var woodEffect = (Wood)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
-
-                if (weaponry.WeaponryCount - weaponryEffect.WeaponryCount >= 0)
+                try
                 {
-                    weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
-                }
+                    var weaponry = (Weaponry)resources.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
+                    var weaponryEffect = (Weaponry)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
+                    var wood = (Wood)resources.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
+                    var woodEffect = (Wood)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
+
+                    if (weaponry.WeaponryCount - weaponryEffect.WeaponryCount >= 0)
+                    {
+                        weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
+                    }
                 
-                else
+                    else
+                    {
+                        weaponry.WeaponryCount = 0;
+                    }
+
+                    if (wood.WoodCount - woodEffect.WoodCount >= 0)
+                    {
+                        wood.WoodCount -= woodEffect.WoodCount;
+                    }
+                    else
+                    {
+                        wood.WoodCount = 0;
+                    }
+
+                }
+                catch (ArgumentNullException e)
                 {
-                    weaponry.WeaponryCount = 0;
+                    Console.WriteLine(e);
+                    throw;
                 }
 
-                if (wood.WoodCount - woodEffect.WoodCount >= 0)
-                {
-                    wood.WoodCount -= woodEffect.WoodCount;
-                }
-                else
-                {
-                    wood.WoodCount = 0;
-                }
-
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-        
-        if (effect.GetType() == typeof(PlagueEffect))
-        {
-            var pEffect = (PlagueEffect)effect;
-
-            proffesion.Vitality -= pEffect.Damage;
-            proffesion.IsSick = pEffect.IsSick;
-        }
-
-        if (effect.GetType() == typeof(NaturalEffect))
-        {
-            var nEffect = (NaturalEffect)effect;
-
-            proffesion.Vitality -= nEffect.Damage;
-            proffesion.IsHungry = nEffect.IsHungry;
+                break;
+            case PlagueEffect pEffect:
+                proffesion.Vitality -= pEffect.Damage;
+                proffesion.IsSick = pEffect.IsSick;
+                break;
+            case NaturalEffect nEffect:
+                proffesion.Vitality -= nEffect.Damage;
+                proffesion.IsHungry = nEffect.IsHungry;
             
-            try
-            {
-                var weaponry = (Weaponry)resources.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
-                var weaponryEffect = (Weaponry)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
-                var wood = (Wood)resources.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
-                var woodEffect = (Wood)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
-                
-                if (weaponry.WeaponryCount - weaponryEffect.WeaponryCount >= 0)
+                try
                 {
-                    weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
+                    var weaponry = (Weaponry)resources.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
+                    var weaponryEffect = (Weaponry)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Weaponry))!;
+                    var wood = (Wood)resources.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
+                    var woodEffect = (Wood)nEffect.ResourcesLost.SingleOrDefault(x => x.GetType() == typeof(Wood))!;
+                
+                    if (weaponry.WeaponryCount - weaponryEffect.WeaponryCount >= 0)
+                    {
+                        weaponry.WeaponryCount -= weaponryEffect.WeaponryCount;
+                    }
+                
+                    else
+                    {
+                        weaponry.WeaponryCount = 0;
+                    }
+
+                    if (wood.WoodCount - woodEffect.WoodCount >= 0)
+                    {
+                        wood.WoodCount -= woodEffect.WoodCount;
+                    }
+                    else
+                    {
+                        wood.WoodCount = 0;
+                    }
                 }
-                
-                else
+                catch (ArgumentNullException e)
                 {
-                    weaponry.WeaponryCount = 0;
+                    Console.WriteLine(e);
+                    throw;
                 }
 
-                if (wood.WoodCount - woodEffect.WoodCount >= 0)
-                {
-                    wood.WoodCount -= woodEffect.WoodCount;
-                }
-                else
-                {
-                    wood.WoodCount = 0;
-                }
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+                break;
         }
-        
+
         return Task.CompletedTask;
     }
 }

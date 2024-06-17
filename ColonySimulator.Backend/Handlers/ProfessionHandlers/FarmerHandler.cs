@@ -33,93 +33,87 @@ public class FarmerHandler : IFarmerHandler
     /// <returns></returns>
     public Task ExperienceThreat(Effect effect, Proffesion proffesion, List<Resource> resources)
     {
-        if (effect.GetType() == typeof(FightingThreatEffect))
+        switch (effect)
         {
-            var fEffect = (FightingThreatEffect)effect;
+            case FightingThreatEffect fEffect:
+                proffesion.Vitality -= fEffect.Damage;
 
-            proffesion.Vitality -= fEffect.Damage;
-
-            try
-            {
-                var crops = (Crops)resources.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
-                var cropsEffect = (Crops)fEffect.ResourcesStolen?.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
-                var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
-                var herbsEffect = (Herbs)fEffect.ResourcesStolen?.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
-
-                if (crops.CropsCount - cropsEffect.CropsCount >= 0)
+                try
                 {
-                    crops.CropsCount -= cropsEffect.CropsCount;
+                    var crops = (Crops)resources.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
+                    var cropsEffect = (Crops)fEffect.ResourcesStolen?.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
+                    var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
+                    var herbsEffect = (Herbs)fEffect.ResourcesStolen?.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
+
+                    if (crops.CropsCount - cropsEffect.CropsCount >= 0)
+                    {
+                        crops.CropsCount -= cropsEffect.CropsCount;
+                    }
+                    else
+                    {
+                        crops.CropsCount = 0;
+                    }
+
+                    if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                    {
+                        herbs.HerbsCount -= herbsEffect.HerbsCount;    
+                    }
+                    else
+                    {
+                        herbs.HerbsCount = 0;
+                    }
+
                 }
-                else
+                catch (ArgumentNullException e)
                 {
-                    crops.CropsCount = 0;
+                    Console.WriteLine(e);
+                    throw;
                 }
 
-                if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
-                {
-                    herbs.HerbsCount -= herbsEffect.HerbsCount;    
-                }
-                else
-                {
-                    herbs.HerbsCount = 0;
-                }
-
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-        
-        if (effect.GetType() == typeof(PlagueEffect))
-        {
-            var pEffect = (PlagueEffect)effect;
-
-            proffesion.Vitality -= pEffect.Damage;
-            proffesion.IsSick = pEffect.IsSick;
-        }
-
-        if (effect.GetType() == typeof(NaturalEffect))
-        {
-            var nEffect = (NaturalEffect)effect;
-
-            proffesion.Vitality -= nEffect.Damage;
-            proffesion.IsHungry = nEffect.IsHungry;
+                break;
+            case PlagueEffect pEffect:
+                proffesion.Vitality -= pEffect.Damage;
+                proffesion.IsSick = pEffect.IsSick;
+                break;
+            case NaturalEffect nEffect:
+                proffesion.Vitality -= nEffect.Damage;
+                proffesion.IsHungry = nEffect.IsHungry;
             
-            try
-            {
-                var crops = (Crops)resources.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
-                var cropsEffect = (Crops)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
-                var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
-                var herbsEffect = (Herbs)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
+                try
+                {
+                    var crops = (Crops)resources.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
+                    var cropsEffect = (Crops)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Crops))!;
+                    var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
+                    var herbsEffect = (Herbs)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
 
-                if (crops.CropsCount - cropsEffect.CropsCount >= 0)
-                {
-                    crops.CropsCount -= cropsEffect.CropsCount;
-                }
-                else
-                {
-                    crops.CropsCount = 0;
-                }
+                    if (crops.CropsCount - cropsEffect.CropsCount >= 0)
+                    {
+                        crops.CropsCount -= cropsEffect.CropsCount;
+                    }
+                    else
+                    {
+                        crops.CropsCount = 0;
+                    }
 
-                if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
-                {
-                    herbs.HerbsCount -= herbsEffect.HerbsCount;    
-                }
-                else
-                {
-                    herbs.HerbsCount = 0;
-                }
+                    if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                    {
+                        herbs.HerbsCount -= herbsEffect.HerbsCount;    
+                    }
+                    else
+                    {
+                        herbs.HerbsCount = 0;
+                    }
                 
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+
+                break;
         }
-        
+
         return Task.CompletedTask;
     }
 }

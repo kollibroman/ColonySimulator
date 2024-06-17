@@ -20,20 +20,22 @@ public class ApothecaryHandler : IApothecaryHandler
     /// <returns></returns>
     public Task CreateMedicine(Herbs herbs, Medicine medicine, int apoLevel)
     {
-        if (herbs.HerbsCount != 0)
+        if (herbs.HerbsCount == 0)
         {
-            if (herbs.HerbsCount - 6 <= 0)
-            {
-                medicine.MedicineCount += 0;
-                herbs.HerbsCount -= 0;
-            }
-            else
-            {
-                medicine.MedicineCount += 1 * apoLevel;
-                herbs.HerbsCount -= 6;
-            }
+            return Task.CompletedTask;    
         }
         
+        if (herbs.HerbsCount - 6 <= 0)
+        {
+            medicine.MedicineCount += 0;
+            herbs.HerbsCount -= 0;
+        }
+        else
+        {
+            medicine.MedicineCount += 1 * apoLevel;
+            herbs.HerbsCount -= 6;
+        }
+
         return Task.CompletedTask;
     }
     
@@ -58,96 +60,90 @@ public class ApothecaryHandler : IApothecaryHandler
     /// <returns></returns>
     public Task ExperienceThreat(Effect effect, Proffesion proffesion, List<Resource> resources)
     {
-        if (effect.GetType() == typeof(FightingThreatEffect))
+        switch (effect)
         {
-            var fEffect = (FightingThreatEffect)effect;
+            case FightingThreatEffect fEffect:
+                proffesion.Vitality -= fEffect.Damage;
 
-            proffesion.Vitality -= fEffect.Damage;
-
-            try
-            {
-                var medicine = (Medicine)resources.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
-                var medicineEffect = (Medicine)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
-                var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
-                var herbsEffect = (Herbs)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
-
-                if (medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                try
                 {
-                    medicine.MedicineCount -= medicineEffect.MedicineCount;
-                }
+                    var medicine = (Medicine)resources.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
+                    var medicineEffect = (Medicine)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
+                    var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
+                    var herbsEffect = (Herbs)fEffect.ResourcesStolen.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
 
-                else
-                {
-                    medicine.MedicineCount = 0;
-                }
+                    if (medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                    {
+                        medicine.MedicineCount -= medicineEffect.MedicineCount;
+                    }
+
+                    else
+                    {
+                        medicine.MedicineCount = 0;
+                    }
                 
-                if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                    if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                    {
+                        herbs.HerbsCount -= herbsEffect.HerbsCount;
+                    }
+
+                    else
+                    {
+                        herbs.HerbsCount = 0;
+                    }
+
+                }
+                catch (ArgumentNullException e)
                 {
-                    herbs.HerbsCount -= herbsEffect.HerbsCount;
+                    Console.WriteLine(e);
+                    throw;
                 }
 
-                else
-                {
-                    herbs.HerbsCount = 0;
-                }
-
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-        
-        if (effect.GetType() == typeof(PlagueEffect))
-        {
-            var pEffect = (PlagueEffect)effect;
-
-            proffesion.Vitality -= pEffect.Damage;
-            proffesion.IsSick = pEffect.IsSick;
-        }
-
-        if (effect.GetType() == typeof(NaturalEffect))
-        {
-            var nEffect = (NaturalEffect)effect;
-
-            proffesion.Vitality -= nEffect.Damage;
-            proffesion.IsHungry = nEffect.IsHungry;
+                break;
+            case PlagueEffect pEffect:
+                proffesion.Vitality -= pEffect.Damage;
+                proffesion.IsSick = pEffect.IsSick;
+                break;
+            case NaturalEffect nEffect:
+                proffesion.Vitality -= nEffect.Damage;
+                proffesion.IsHungry = nEffect.IsHungry;
             
-            try
-            {
-                var medicine = (Medicine)resources.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
-                var medicineEffect = (Medicine)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
-                var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
-                var herbsEffect = (Herbs)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
-
-                if (medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                try
                 {
-                    medicine.MedicineCount -= medicineEffect.MedicineCount;
-                }
+                    var medicine = (Medicine)resources.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
+                    var medicineEffect = (Medicine)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Medicine))!;
+                    var herbs = (Herbs)resources.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
+                    var herbsEffect = (Herbs)nEffect.ResourcesLost?.SingleOrDefault(x => x.GetType() == typeof(Herbs))!;
 
-                else
-                {
-                    medicine.MedicineCount = 0;
-                }
+                    if (medicine.MedicineCount - medicineEffect.MedicineCount >= 0)
+                    {
+                        medicine.MedicineCount -= medicineEffect.MedicineCount;
+                    }
+
+                    else
+                    {
+                        medicine.MedicineCount = 0;
+                    }
                 
-                if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                    if (herbs.HerbsCount - herbsEffect.HerbsCount >= 0)
+                    {
+                        herbs.HerbsCount -= herbsEffect.HerbsCount;
+                    }
+
+                    else
+                    {
+                        herbs.HerbsCount = 0;
+                    }
+                }
+                catch (ArgumentNullException e)
                 {
-                    herbs.HerbsCount -= herbsEffect.HerbsCount;
+                    Console.WriteLine(e);
+                    throw;
                 }
 
-                else
-                {
-                    herbs.HerbsCount = 0;
-                }
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+                break;
         }
-        
+
         return Task.CompletedTask;
     }
 }

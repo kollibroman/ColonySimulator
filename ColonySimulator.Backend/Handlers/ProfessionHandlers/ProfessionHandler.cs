@@ -69,15 +69,15 @@ public class ProfessionHandler : IProfessionHandler
        
         var affectedResources = _threatHandler.CalculateUsedResources(resources, _threatProvider.ThreatToExperience);
 
-        for (int i = 0; i < farmers.Count; i++)
+        foreach (var farmer in farmers)
         {
-            await _farmerHandler.Farm(crop!, herbs!, farmers[i].FarmingLevel);
+            await _farmerHandler.Farm(crop!, herbs!, farmer.FarmingLevel);
 
-            await _threatHandler.CalculateAffection(farmers[i], _threatProvider.ThreatToExperience);
+            await _threatHandler.CalculateAffection(farmer, _threatProvider.ThreatToExperience);
             var effect =
                 await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
 
-            await _farmerHandler.ExperienceThreat(effect, farmers[i], resources);
+            await _farmerHandler.ExperienceThreat(effect, farmer, resources);
             await _dbContext.SaveChangesAsync();
         } 
     }
@@ -100,16 +100,17 @@ public class ProfessionHandler : IProfessionHandler
 
         if (apothecaries.Count != 0 && herbs.HerbsCount != 0)
         {
-            for(int i = 0; i < apothecaries.Count; i++)
+            foreach (var apothecary in apothecaries)
             {
-                await _apothecaryHandler.CollectingHerbs(herbs!, apothecaries[i].ApothecaryLevel);
-                await _apothecaryHandler.CreateMedicine(herbs!, medicine!, apothecaries[i].ApothecaryLevel);
+                await _apothecaryHandler.CollectingHerbs(herbs!, apothecary.ApothecaryLevel);
+                await _apothecaryHandler.CreateMedicine(herbs!, medicine!, apothecary.ApothecaryLevel);
             
-                await _threatHandler.CalculateAffection(apothecaries[i], _threatProvider.ThreatToExperience);
+                await _threatHandler.CalculateAffection(apothecary, _threatProvider.ThreatToExperience);
                 var effect = await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
 
-                await _apothecaryHandler.ExperienceThreat(effect, apothecaries[i], resources);
+                await _apothecaryHandler.ExperienceThreat(effect, apothecary, resources);
             }
+
             await _dbContext.SaveChangesAsync();
         }
     }
@@ -131,16 +132,16 @@ public class ProfessionHandler : IProfessionHandler
 
         if (timbers.Count != 0)
         {
-            for(int i = 0; i < timbers.Count; i++)
+            foreach (var timber in timbers)
             {
-                await _timberHandler.CreateWood(wood!, timbers[i].TimberLevel);
+                await _timberHandler.CreateWood(wood!, timber.TimberLevel);
             
-                await _threatHandler.CalculateAffection(timbers[i], _threatProvider.ThreatToExperience);
+                await _threatHandler.CalculateAffection(timber, _threatProvider.ThreatToExperience);
                 var effect = await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
 
-                await _timberHandler.ExperienceThreat(effect, timbers[i], resources);
+                await _timberHandler.ExperienceThreat(effect, timber, resources);
             }
-        
+
             await _dbContext.SaveChangesAsync();
         }
     }
@@ -163,16 +164,16 @@ public class ProfessionHandler : IProfessionHandler
 
         if (blackSmiths.Count != 0 && wood.WoodCount != 0)
         {
-            for (int i = 0; i < blackSmiths.Count; i++)
+            foreach (var blacksmith in blackSmiths)
             {
-                await _blackSmithHandler.CreateWeapon(weapon!, wood!, blackSmiths[i].BlackSmithLevel);
+                await _blackSmithHandler.CreateWeapon(weapon!, wood!, blacksmith.BlackSmithLevel);
             
-                await _threatHandler.CalculateAffection(blackSmiths[i], _threatProvider.ThreatToExperience);
+                await _threatHandler.CalculateAffection(blacksmith, _threatProvider.ThreatToExperience);
                 var effect = await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
 
-                await _blackSmithHandler.ExperienceThreat(effect, blackSmiths[i], resources);
+                await _blackSmithHandler.ExperienceThreat(effect, blacksmith, resources);
             }
-        
+
             await _dbContext.SaveChangesAsync();
         }
     }
@@ -202,19 +203,19 @@ public class ProfessionHandler : IProfessionHandler
 
         if (medics.Count != 0 && medicine.MedicineCount != 0)
         {
-            for (int i = 0; i < medics.Count; i++)
+            foreach (var medic in medics)
             {
                 foreach (var sickPerson in sickPeople)
                 {
-                    await _medicHandler.Heal(medicine!, sickPerson, medics[i].MedicLevel);
+                    await _medicHandler.Heal(medicine!, sickPerson, medic.MedicLevel);
                 }
             
-                await _threatHandler.CalculateAffection(medics[i], _threatProvider.ThreatToExperience);
+                await _threatHandler.CalculateAffection(medic, _threatProvider.ThreatToExperience);
                 var effect = await _threatHandler.GenerateEffects(_threatProvider.ThreatToExperience, affectedResources);
 
-                await _medicHandler.ExperienceThreat(effect, medics[i], resources);
+                await _medicHandler.ExperienceThreat(effect, medic, resources);
             }
-        
+
             await _dbContext.SaveChangesAsync();
         }
     }
