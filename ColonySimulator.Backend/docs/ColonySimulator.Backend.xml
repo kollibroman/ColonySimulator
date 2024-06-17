@@ -477,7 +477,6 @@
             <param name="proffesion">Profession of entity</param>
             <param name="resources">List of affected resources</param>
             <returns>Completed task</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.TraderHandler">
             <summary>
@@ -1547,6 +1546,24 @@
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
+        <member name="T:ColonySimulator.Backend.Services.EndDataWriter">
+            <summary>
+            Writes ending data to json file
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.EndDataWriter.#ctor(ColonySimulator.Backend.Helpers.EndDataStorer,ColonySimulator.Backend.Helpers.RandomSeedingData)">
+            <summary>
+            Constructor for it with DI parameters
+            </summary>
+            <param name="dataStorer">Data storer class</param>
+            <param name="randomSeedingData">Seeding data storer class</param>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.EndDataWriter.WriteEndDataAsync(System.Threading.CancellationToken)">
+            <summary>
+            Writes End data to json file
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="T:ColonySimulator.Backend.Services.EntityManagementService">
             <summary>
             Manages entities in simulation
@@ -1596,6 +1613,17 @@
             <param name="ct">Cancellation token</param>
             <param name="highestMedicLevel"></param>
             <param name="highestSmithLevel"></param>
+        </member>
+        <member name="T:ColonySimulator.Backend.Services.Interfaces.IEndDataWriter">
+            <summary>
+            Writes end data to json file
+            </summary>
+        </member>
+        <member name="M:ColonySimulator.Backend.Services.Interfaces.IEndDataWriter.WriteEndDataAsync(System.Threading.CancellationToken)">
+            <summary>
+            Writes end data to json file
+            </summary>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService">
             <summary>

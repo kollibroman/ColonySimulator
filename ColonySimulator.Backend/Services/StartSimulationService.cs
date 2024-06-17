@@ -260,6 +260,10 @@ public class StartSimulationService
                 if (_counter.PopulationCount - 1 <= 0)
                 {
                     Console.WriteLine("Everyone's dead, stopping Simulation: ");
+
+                    _dataStorer.PopulationCount = _counter.PopulationCount;
+                    _dataStorer.ResourceOverview = resourceOverview;
+                    _dataStorer.ProfessionsOverview = profOverview;
                     
                     break;
                 }
@@ -268,12 +272,20 @@ public class StartSimulationService
                 {
                     AnsiConsole.Markup("[red]Too much resources has run out![/]");
                     
+                    _dataStorer.PopulationCount = _counter.PopulationCount;
+                    _dataStorer.ResourceOverview = resourceOverview;
+                    _dataStorer.ProfessionsOverview = profOverview;
+                    
                     break;
                 }
 
                 if (_year.YearOfSim == yearsToFinish)
                 {
                     AnsiConsole.Markup("[red]Simulation has ended[/]");
+                    
+                    _dataStorer.PopulationCount = _counter.PopulationCount;
+                    _dataStorer.ResourceOverview = resourceOverview;
+                    _dataStorer.ProfessionsOverview = profOverview;
                     
                     break;
                 }
