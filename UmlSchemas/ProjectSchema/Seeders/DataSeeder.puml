@@ -1,0 +1,16 @@
+@startuml
+class DataSeeder {
+    + DataSeeder(professionSeeder:ProfessionSeeder, resourceSeeder:ResourceSeeder, threatSeeder:ThreatSeeder, logger:ILogger, counter:PopCounter, year:Year, randomSeedingData:RandomSeedingData)
+    + <<async>> GetSeedingDataAsync(ct:CancellationToken) : Task
+    + <<async>> LoadDataFromFileAsync(ct:CancellationToken) : Task
+    + SeedRandomData(ct:CancellationToken) : Task
+    + <<async>> SeedData(ct:CancellationToken) : Task
+}
+
+ProfessionSeeder --* DataSeeder
+ResourceSeeder --* DataSeeder
+ThreatSeeder --* DataSeeder
+Year --o DataSeeder
+RandomSeedingData --o DataSeeder
+PopCounter --o DataSeeder
+@enduml

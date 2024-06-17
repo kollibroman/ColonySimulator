@@ -1,0 +1,15 @@
+@startuml
+class SimulationData {
+    + ApothecaryCount : int <<get>> <<set>>
+    + BlackSmithCount : int <<get>> <<set>>
+    + FarmerCount : int <<get>> <<set>>
+    + TimberCount : int <<get>> <<set>>
+    + MedicCount : int <<get>> <<set>>
+    + TraderCount : int <<get>> <<set>>
+    + CropsCount : int <<get>> <<set>>
+    + HerbsCount : int <<get>> <<set>>
+    + MedicineCount : int <<get>> <<set>>
+    + WeaponryCount : int <<get>> <<set>>
+    + WoodCount : int <<get>> <<set>>
+}
+@enduml

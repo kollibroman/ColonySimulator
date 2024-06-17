@@ -5,7 +5,7 @@ class ColonySimulatorContext {
 
 DbContext <|-- ColonySimulatorContext
 Apothecary -- ColonySimulatorContext
-Blacksmith -- ColonySimulatorContext
+BlackSmith -- ColonySimulatorContext
 Farmer -- ColonySimulatorContext
 Medic -- ColonySimulatorContext
 Timber -- ColonySimulatorContext

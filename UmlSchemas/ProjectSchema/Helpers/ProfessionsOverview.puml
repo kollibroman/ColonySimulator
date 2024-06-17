@@ -1,9 +1,15 @@
 @startuml
 class ProfessionsOverview {
+    Apothecaries: List<Apothecary>
+    BlackSmiths: List<BlackSmith>
+    Farmers: List<Farmer>
+    Traders: List<Trader>
+    Medics: List<Medic>
+    Timbers: List<Timber>
 }
 
 Apothecary --> ProfessionsOverview
-Blacksmith --> ProfessionsOverview
+BlackSmith --> ProfessionsOverview
 Farmer --> ProfessionsOverview
 Trader --> ProfessionsOverview
 Medic --> ProfessionsOverview

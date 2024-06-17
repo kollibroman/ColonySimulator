@@ -1,0 +1,5 @@
+@startuml
+interface IEndDataWriter {
+    +WriteEndData(Cancellation token): Task
+}
+@enduml

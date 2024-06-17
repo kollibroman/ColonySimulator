@@ -1,0 +1,9 @@
+@startuml
+class ResourceOverview {
+    + CropsCount : int <<get>> <<set>>
+    + MedicinesCount : int <<get>> <<set>>
+    + WeaponryCount : int <<get>> <<set>>
+    + WoodCount : int <<get>> <<set>>
+    + HerbsCount : int <<get>> <<set>>
+}
+@enduml
