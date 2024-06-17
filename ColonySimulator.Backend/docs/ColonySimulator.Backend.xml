@@ -31,7 +31,7 @@
         </member>
         <member name="M:ColonySimulator.Backend.Effects.FightingThreatEffect.#ctor">
             <summary>
-            Empty constructor
+            Empty contstructor
             </summary>
         </member>
         <member name="M:ColonySimulator.Backend.Effects.FightingThreatEffect.#ctor(System.String,System.Int32,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
@@ -123,18 +123,7 @@
             <param name="effect">Experienced threat effect</param>
             <param name="profession">Profession of entity</param>
             <param name="resources">resources to modify</param>
-        </member>
-        <member name="T:ColonySimulator.Backend.Handlers.Interfaces.IResourceHandler">
-            <summary>
-            Handler for resources
-            </summary>
-        </member>
-        <member name="M:ColonySimulator.Backend.Handlers.Interfaces.IResourceHandler.ConsumeResources(System.Int32)">
-            <summary>
-            Handles resource consumption
-            </summary>
-            <param name="popCount">Population counter</param>
-            <returns>Completed task</returns>
+            <returns></returns>
         </member>
         <member name="T:ColonySimulator.Backend.Handlers.Interfaces.IResourceHandler">
             <summary>
@@ -159,13 +148,14 @@
             </summary>
             <param name="profession">entities profession</param>
             <param name="threat">Threat on which calculation is made</param>
+            <returns></returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler.GenerateEffects(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
             <summary>
             Generates effect of threat based on calculated affection
             </summary>
             <param name="threat">Passed threat</param>
-            <param name="resources">Resources affected</param>
+            <param name="resources"></param>
             <returns>Generated effect</returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.Interfaces.IThreatHandler.GenerateRandomThreat(System.Threading.CancellationToken)">
@@ -329,7 +319,7 @@
             <param name="herbs">Modifies herbs entity</param>
             <param name="medicine">Modifies medicine entity</param>
             <param name="apoLevel">level of apothecary</param>
-            <returns>Completed task</returns>
+            <returns></returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.ApothecaryHandler.CollectingHerbs(ColonySimulator.Backend.Persistence.Models.Resources.Herbs,System.Int32)">
             <summary>
@@ -337,7 +327,7 @@
             </summary>
             <param name="herbs">herbs to modify</param>
             <param name="apoLevel">level of apothecary</param>
-            <returns>Completed task</returns>
+            <returns></returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.ApothecaryHandler.ExperienceThreat(ColonySimulator.Backend.Effects.Effect,ColonySimulator.Backend.Persistence.Models.Professions.Proffesion,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
             <summary>
@@ -346,6 +336,7 @@
             <param name="effect">effect of threat</param>
             <param name="proffesion">profession of entity</param>
             <param name="resources">resources to modify</param>
+            <returns></returns>
         </member>
         <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.BlackSmithHandler">
             <summary>
@@ -359,7 +350,7 @@
             <param name="weapon">Weapon</param>
             <param name="wood">Wood</param>
             <param name="blackLevel">blacksmith level</param>
-            <returns>Completed task</returns>
+            <returns></returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.BlackSmithHandler.ExperienceThreat(ColonySimulator.Backend.Effects.Effect,ColonySimulator.Backend.Persistence.Models.Professions.Proffesion,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
             <summary>
@@ -368,6 +359,7 @@
             <param name="effect">effect of threat</param>
             <param name="proffesion">profession of entity</param>
             <param name="resources">resources lost</param>
+            <returns></returns>
         </member>
         <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.FarmerHandler">
             <summary>
@@ -381,7 +373,7 @@
             <param name="crops">crops</param>
             <param name="herbs">herbs</param>
             <param name="farmLevel">level of entity</param>
-            <returns>Completed task</returns>
+            <returns></returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.FarmerHandler.ExperienceThreat(ColonySimulator.Backend.Effects.Effect,ColonySimulator.Backend.Persistence.Models.Professions.Proffesion,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
             <summary>
@@ -390,6 +382,7 @@
             <param name="effect">effect of threat</param>
             <param name="proffesion">profession</param>
             <param name="resources">resources affected</param>
+            <returns></returns>
         </member>
         <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.MedicHandler">
             <summary>
@@ -403,6 +396,7 @@
             <param name="medicine">medicine entity used</param>
             <param name="person">person affected</param>
             <param name="medLevel">level of entity</param>
+            <returns></returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.MedicHandler.ExperienceThreat(ColonySimulator.Backend.Effects.Effect,ColonySimulator.Backend.Persistence.Models.Professions.Proffesion,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
             <summary>
@@ -473,7 +467,7 @@
             </summary>
             <param name="wood">entity to modify</param>
             <param name="timLevel">level of timber</param>
-            <returns>Completed task</returns>
+            <returns></returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ProfessionHandlers.TimberHandler.ExperienceThreat(ColonySimulator.Backend.Effects.Effect,ColonySimulator.Backend.Persistence.Models.Professions.Proffesion,System.Collections.Generic.List{ColonySimulator.Backend.Persistence.Models.Resources.Resource})">
             <summary>
@@ -483,6 +477,7 @@
             <param name="proffesion">Profession of entity</param>
             <param name="resources">List of affected resources</param>
             <returns>Completed task</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="T:ColonySimulator.Backend.Handlers.ProfessionHandlers.TraderHandler">
             <summary>
@@ -548,7 +543,7 @@
             </summary>
             <param name="profession">Profession of entity</param>
             <param name="threat">threat passed on as parameter</param>
-            <returns>Completed task</returns>
+            <returns></returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ThreatHandler.SetActiveThreat(ColonySimulator.Backend.Persistence.Models.Threats.Threat,System.Threading.CancellationToken)">
             <summary>
@@ -572,21 +567,23 @@
             </summary>
             <param name="threat">Current threat</param>
             <param name="resources">List of resources to pass</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
             <returns>Generated effect</returns>
         </member>
         <member name="M:ColonySimulator.Backend.Handlers.ThreatHandler.GenerateRandomThreat(System.Threading.CancellationToken)">
             <summary>
             Generates random threat
             </summary>
-            <param name="ct">Cancellation token</param>
+            <param name="ct"></param>
             <returns>generated threat</returns>
         </member>
         <member name="T:ColonySimulator.Backend.Helpers.ConsequenceOverview`2">
             <summary>
             generic class to map data overview 
             </summary>
-            <typeparam name="T">Passed parameter</typeparam>
-            <typeparam name="TR">Passed second parameter</typeparam>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TR"></typeparam>
         </member>
         <member name="M:ColonySimulator.Backend.Helpers.ConsequenceOverview`2.#ctor">
             <summary>
@@ -885,7 +882,7 @@
             <summary>
             Constructor in it
             </summary>
-            <param name="context">Database context</param>
+            <param name="context"></param>
         </member>
         <member name="M:ColonySimulator.Backend.Helpers.Tests.TestDataSeeder.SeedTestData">
             <summary>
@@ -925,11 +922,6 @@
         <member name="P:ColonySimulator.Backend.Helpers.Year.YearOfSim">
             <summary>
             Current year of simulation
-            </summary>
-        </member>
-        <member name="P:ColonySimulator.Backend.Helpers.Year.SimDuration">
-            <summary>
-            Duration of simulation
             </summary>
         </member>
         <member name="P:ColonySimulator.Backend.Helpers.Year.SimDuration">
@@ -1397,7 +1389,7 @@
             <param name="logger">logger class to log data</param>
             <param name="counter">Population counter</param>
             <param name="year">Year counter class</param>
-            <param name="randomSeedingData">Model for randomly seeded data</param>
+            <param name="randomSeedingData"></param>
         </member>
         <member name="M:ColonySimulator.Backend.Seeders.DataSeeder.GetSeedingDataAsync(System.Threading.CancellationToken)">
             <summary>
@@ -1555,25 +1547,6 @@
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="T:ColonySimulator.Backend.Services.DataDisplayService">
-            <summary>
-            Class to display data and serialize it
-            </summary>
-        </member>
-        <member name="M:ColonySimulator.Backend.Services.DataDisplayService.#ctor(ColonySimulator.Backend.Helpers.PopCounter)">
-            <summary>
-            constructor for it with DI parameters
-            </summary>
-            <param name="counter">Population counter class</param>
-        </member>
-        <member name="M:ColonySimulator.Backend.Services.DataDisplayService.SerializeAndDisplayData``2(``0,``1,ColonySimulator.Backend.Helpers.ResourceOverview)">
-            <summary>
-            Serialize and display objects in a pleasant way
-            </summary>
-            <typeparam name="T">Parameter passed</typeparam>
-            <typeparam name="TR">Second parameter passed</typeparam>
-            <returns>Serialized string based on passed content</returns>
-        </member>
         <member name="T:ColonySimulator.Backend.Services.EntityManagementService">
             <summary>
             Manages entities in simulation
@@ -1591,13 +1564,13 @@
             
             </summary>
             <param name="cropsCount">Crops count of entities</param>
-            <param name="ct">Cancellation token</param>
+            <param name="ct"></param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.EntityManagementService.CleanupDeadEntities(System.Threading.CancellationToken)">
             <summary>
             
             </summary>
-            <param name="ct">Cancellation token</param>
+            <param name="ct"></param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.EntityManagementService.CheckSickStatus(System.Threading.CancellationToken)">
             <summary>
@@ -1638,12 +1611,13 @@
             <summary>
             Cleans up dead entities
             </summary>
+            <returns></returns>
         </member>
         <member name="M:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService.CheckSickStatus(System.Threading.CancellationToken)">
             <summary>
             Handle health of entities
             </summary>
-            <param name="ct">Cancellation token</param>
+            <param name="ct"></param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.Interfaces.IEntityManagementService.CheckHungerStatus(System.Threading.CancellationToken)">
             <summary>
@@ -1656,13 +1630,13 @@
             Checks actual threat status
             </summary>
             <param name="currentThreat">Current threat</param>
-            <param name="highestFarmingLevel">highest level of farmer</param>
-            <param name="medicineCount">highest level of medic</param>
-            <param name="weaponryCount">Count of weaponry</param>
-            <param name="CropsCount">Crops number</param>
+            <param name="highestFarmingLevel"></param>
+            <param name="medicineCount"></param>
+            <param name="weaponryCount"></param>
+            <param name="CropsCount"></param>
             <param name="ct">Cancellation token</param>
-            <param name="highestMedicLevel">highest level of medic</param>
-            <param name="highestSmithLevel">highest level of blacksmith</param>
+            <param name="highestMedicLevel"></param>
+            <param name="highestSmithLevel"></param>
         </member>
         <member name="T:ColonySimulator.Backend.Services.StartSimulationService">
             <summary>
@@ -1691,37 +1665,26 @@
             Startup class
             </summary>
         </member>
-        <member name="M:ColonySimulator.Backend.Services.StartupService.#ctor(Serilog.ILogger,Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Services.DataDisplayService,ColonySimulator.Backend.Services.StartSimulationService,ColonySimulator.Backend.Helpers.EndDataStorer,ColonySimulator.Backend.Helpers.RandomSeedingData)">
+        <member name="M:ColonySimulator.Backend.Services.StartupService.#ctor(Serilog.ILogger,Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Services.Interfaces.IEndDataWriter,ColonySimulator.Backend.Services.StartSimulationService)">
             <summary>
             Constructor for StartupService
             </summary>
             <param name="logger">logger</param>
             <param name="serviceScope">Scope of services</param>
-            <param name="displayService">display service</param>
-            <param name="simulationService">Simulation start service</param>
-            <param name="dataStorer"></param>
-            <param name="radomSeedingData"></param>
-        </member>
-        <member name="M:ColonySimulator.Backend.Services.StartupService.#ctor(Serilog.ILogger,Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,ColonySimulator.Backend.Services.DataDisplayService,ColonySimulator.Backend.Services.StartSimulationService)">
-            <summary>
-            Constructor for StartupService
-            </summary>
-            <param name="logger">logger</param>
-            <param name="serviceScope">Scope of services</param>
-            <param name="displayService">display service</param>
+            <param name="dataWriter">Writer of end data</param>
             <param name="simulationService">Simulation start service</param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.StartupService.StartAsync(System.Threading.CancellationToken)">
             <summary>
             application startup method
             </summary>
-            <param name="cancellationToken">Cancellation token</param>
+            <param name="cancellationToken"></param>
         </member>
         <member name="M:ColonySimulator.Backend.Services.StartupService.StopAsync(System.Threading.CancellationToken)">
             <summary>
             application shutdown
             </summary>
-            <param name="cancellationToken">Cancellation token</param>
+            <param name="cancellationToken"></param>
         </member>
     </members>
 </doc>

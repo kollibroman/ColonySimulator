@@ -3,6 +3,7 @@ using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Helpers.Interfaces;
 using ColonySimulator.Backend.Persistence;
+using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -240,9 +241,9 @@ public class StartSimulationService
                 AnsiConsole.Write(layout);
                 
                 await _entityManagementService.CleanupDeadEntities(ct);
-                await _entityManagementService.GenerateNewEntity(resourceOverview.CropsCount, ct);
                 await _entityManagementService.CheckHungerStatus(ct);
                 await _entityManagementService.CheckSickStatus(ct);
+                await _entityManagementService.GenerateNewEntity(resourceOverview.CropsCount, ct);
 
                 List<int> resourcesCountList =
                 [
@@ -257,11 +258,6 @@ public class StartSimulationService
                 {
                     Console.WriteLine("Everyone's dead, stopping Simulation: ");
                     
-                    _dataStorer.PopulationCount = _counter.PopulationCount - 1;
-                    _dataStorer.PopulationLost = _counter.PeopleLost;
-                    _dataStorer.ProfessionsOverview = profOverview;
-                    _dataStorer.ResourceOverview = resourceOverview;
-                    
                     break;
                 }
 
@@ -269,22 +265,12 @@ public class StartSimulationService
                 {
                     AnsiConsole.Markup("[red]Too much resources has run out![/]");
                     
-                    _dataStorer.PopulationCount = _counter.PopulationCount - 1;
-                    _dataStorer.PopulationLost = _counter.PeopleLost;
-                    _dataStorer.ProfessionsOverview = profOverview;
-                    _dataStorer.ResourceOverview = resourceOverview;
-                    
                     break;
                 }
 
                 if (_year.YearOfSim == yearsToFinish)
                 {
                     AnsiConsole.Markup("[red]Simulation has ended[/]");
-                    
-                    _dataStorer.PopulationCount = _counter.PopulationCount - 1;
-                    _dataStorer.PopulationLost = _counter.PeopleLost;
-                    _dataStorer.ProfessionsOverview = profOverview;
-                    _dataStorer.ResourceOverview = resourceOverview;
                     
                     break;
                 }

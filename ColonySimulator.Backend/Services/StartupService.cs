@@ -1,10 +1,8 @@
-using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Seeders;
+using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
-using Serilog;
 using Spectre.Console;
 using ILogger = Serilog.ILogger;
 
@@ -17,30 +15,23 @@ public class StartupService : IHostedService
 {
     private readonly ILogger _logger;
     private readonly IServiceScopeFactory _serviceScope;
-    private readonly DataDisplayService _displayService;
+    private readonly IEndDataWriter _dataWriter;
     private readonly StartSimulationService _simulationService;
-    private readonly EndDataStorer _dataStorer;
-    private readonly RandomSeedingData _randomSeedingData;
 
     /// <summary>
     /// Constructor for StartupService
     /// </summary>
     /// <param name="logger">logger</param>
     /// <param name="serviceScope">Scope of services</param>
-    /// <param name="displayService">display service</param>
+    /// <param name="dataWriter">Writer of end data</param>
     /// <param name="simulationService">Simulation start service</param>
-    /// <param name="dataStorer"></param>
-    /// <param name="radomSeedingData"></param>
     public StartupService(ILogger logger, IServiceScopeFactory serviceScope,
-        DataDisplayService displayService, StartSimulationService simulationService, EndDataStorer dataStorer,
-        RandomSeedingData radomSeedingData)
+        IEndDataWriter dataWriter, StartSimulationService simulationService)
     {
         _logger = logger;
         _serviceScope = serviceScope;
-        _displayService = displayService;
+        _dataWriter = dataWriter;
         _simulationService = simulationService;
-        _dataStorer = dataStorer;
-        _randomSeedingData = radomSeedingData;
     }
     /// <summary>
     /// application startup method
@@ -94,14 +85,7 @@ public class StartupService : IHostedService
         using var scope = _serviceScope.CreateScope();
         var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
 
-        var serializedString = JsonConvert.SerializeObject(_dataStorer, Formatting.Indented);
-        await File.WriteAllTextAsync("EndData.json", serializedString, cancellationToken);
-
-        if (_randomSeedingData.Duration != 0)
-        {
-            var serializedData = JsonConvert.SerializeObject(_randomSeedingData, Formatting.Indented);
-            await File.WriteAllTextAsync("RandomStartData.json", serializedData, cancellationToken);
-        }
+        await _dataWriter.WriteEndDataAsync(cancellationToken);
 
         await dbContext!.Database.EnsureDeletedAsync(cancellationToken);
     }

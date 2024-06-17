@@ -169,55 +169,65 @@ public class EntityManagementService : IEntityManagementService
 
             List<int> professionCount =
             [
-                dbContext.Apothecaries.Count(x => x.Vitality <= 0),
-                dbContext.Farmers.Count(x => x.Vitality <= 0),
-                dbContext.BlackSmiths.Count(x => x.Vitality <= 0),
-                dbContext.Medics.Count(x => x.Vitality <= 0),
-                dbContext.Timbers.Count(x => x.Vitality <= 0)
+                apothecaries.Count,
+                farmers.Count,
+                blacksmiths.Count,
+                medics.Count,
+                timbers.Count
             ];
 
             if (_counter.ApothecariesCount - professionCount[0] >= 0)
             {
+                _counter.PeopleLost++;
                 _counter.ApothecariesCount -= professionCount[0];
             }
             else
             {
+                _counter.PeopleLost++;
                 _counter.ApothecariesCount = 0;
             }
 
             if (_counter.BlackSmithCount - professionCount[2] >= 0)
             {
+                _counter.PeopleLost++;
                 _counter.BlackSmithCount -= professionCount[2];
             }
             else
             {
+                _counter.PeopleLost++;
                 _counter.BlackSmithCount = 0;
             }
 
             if (_counter.FarmerCount - professionCount[1] >= 0)
             {
+                _counter.PeopleLost++;
                 _counter.FarmerCount -= professionCount[1];
             }
             else
             {
+                _counter.PeopleLost++;
                 _counter.FarmerCount = 0;    
             }
             
             if(_counter.MedicCount - professionCount[3] >= 0)
             {
+                _counter.PeopleLost++;
                 _counter.MedicCount -= professionCount[3];
             }
             else
             {
+                _counter.PeopleLost++;
                 _counter.MedicCount = 0;
             }
             
             if (_counter.TimberCount - professionCount[4] >= 0)
             {
+                _counter.PeopleLost++;
                 _counter.TimberCount -= professionCount[4];
             }
             else
             {
+                _counter.PeopleLost++;
                 _counter.TimberCount = 0;
             }
             
