@@ -1,0 +1,15 @@
+@startuml
+class ThreatHandler {
+    + ThreatHandler(dbContext:ColonySimulatorContext)
+    + CalculateAffection(profession:Proffesion, threat:Threat) : Task
+    + SetActiveThreat(threat:Threat, ct:CancellationToken) : Task
+    + CalculateUsedResources(resources:List<Resource>, threat:Threat?) : List<Resource>
+    + GenerateEffects(threat:Threat?, resources:List<Resource>) : Task<Effect>
+    + <<async>> GenerateRandomThreat(ct:CancellationToken) : Task<Threat?>
+}
+IThreatHandler <|-- ThreatHandler
+ColonySimulatorContext --* ThreatHandler
+Proffesion ..> ThreatHandler
+Threat ..> ThreatHandler
+Resource ..> ThreatHandler
+@enduml

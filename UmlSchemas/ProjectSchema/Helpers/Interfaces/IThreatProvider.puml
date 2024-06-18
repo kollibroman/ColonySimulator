@@ -1,0 +1,6 @@
+@startuml
+interface IThreatProvider {
+    Threat ThreatToExperience <<get>> <<set>>
+}
+IThreatProvider --> Threat
+@enduml

@@ -1,8 +1,8 @@
 @startuml
 class ApothecaryHandler {
-    + CreateMedicine(herbs:Herbs) : Task
-    + CollectingHerbs(herbs:Herbs) : Task
-    + ExperienceThreat(threat:Threat) : Task
+    + CreateMedicine(herbs:Herbs, medicine:Medicine, apoLevel:int) : Task
+    + CollectingHerbs(herbs:Herbs, apoLevel:int) : Task
+    + ExperienceThreat(effect:Effect, proffesion:Proffesion, resources:List<Resource>) : Task
 }
 IApothecaryHandler <|-- ApothecaryHandler
 @enduml

@@ -31,7 +31,7 @@ public class FarmerHandlerTest
 
         // Assert
         Assert.Equal(4, crops.CropsCount);
-        Assert.Equal(1, herbs.HerbsCount);
+        Assert.Equal(4, herbs.HerbsCount);
     }
 
     [Fact]

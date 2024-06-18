@@ -1,0 +1,6 @@
+@startuml
+class InputStorer {
+    + <<required>> Duration : int <<get>> <<init>>
+}
+InputStorer --> "Data" SimulationData
+@enduml

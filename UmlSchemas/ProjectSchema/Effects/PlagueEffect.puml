@@ -1,5 +1,10 @@
 @startuml
 class PlagueEffect {
+    + PlagueEffect()
+    + PlagueEffect(name:string, damage:int, medicineCount:int, isSick:bool, requiredMedicLevel:int)
+    + <<required>> IsSick : bool <<get>> <<init>> = true
+    + <<required>> MedicineCount : int <<get>> <<init>>
+    + <<required>> RequiredMedicLevel : int <<get>> <<init>>
 }
 Effect <|-- PlagueEffect
 @enduml

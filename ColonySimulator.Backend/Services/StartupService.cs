@@ -1,13 +1,9 @@
-using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
-using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Seeders;
-using Microsoft.EntityFrameworkCore;
+using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Serilog;
 using Spectre.Console;
-using Spectre.Console.Cli;
 using ILogger = Serilog.ILogger;
 
 namespace ColonySimulator.Backend.Services;
@@ -19,22 +15,22 @@ public class StartupService : IHostedService
 {
     private readonly ILogger _logger;
     private readonly IServiceScopeFactory _serviceScope;
-    private readonly DataDisplayService _displayService;
+    private readonly IEndDataWriter _dataWriter;
     private readonly StartSimulationService _simulationService;
-    
+
     /// <summary>
     /// Constructor for StartupService
     /// </summary>
     /// <param name="logger">logger</param>
     /// <param name="serviceScope">Scope of services</param>
-    /// <param name="displayService">display service</param>
+    /// <param name="dataWriter">Writer of end data</param>
     /// <param name="simulationService">Simulation start service</param>
     public StartupService(ILogger logger, IServiceScopeFactory serviceScope,
-        DataDisplayService displayService, StartSimulationService simulationService)
+        IEndDataWriter dataWriter, StartSimulationService simulationService)
     {
         _logger = logger;
         _serviceScope = serviceScope;
-        _displayService = displayService;
+        _dataWriter = dataWriter;
         _simulationService = simulationService;
     }
     /// <summary>
@@ -62,6 +58,7 @@ public class StartupService : IHostedService
         {
             case "[green]Seed manually[/]":
                 AnsiConsole.Markup("[red]Seeding data manually[/]");
+                isManual = true;
                 await dataSeeder!.GetSeedingDataAsync(cancellationToken);
                 break;
             case "[blue]Seed data from file[/]":
@@ -88,7 +85,8 @@ public class StartupService : IHostedService
         using var scope = _serviceScope.CreateScope();
         var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
 
+        await _dataWriter.WriteEndDataAsync(cancellationToken);
+
         await dbContext!.Database.EnsureDeletedAsync(cancellationToken);
-        Console.WriteLine("Bye world");
     }
 }

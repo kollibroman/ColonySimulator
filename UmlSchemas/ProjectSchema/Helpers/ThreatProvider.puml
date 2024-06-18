@@ -1,0 +1,7 @@
+@startuml
+class ThreatProvider {
+    ThreatToExperience: Threat
+}
+IThreatProvider <|-- ThreatProvider
+ThreatProvider --> "ThreatToExperience" Threat
+@enduml

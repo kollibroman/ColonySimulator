@@ -33,6 +33,14 @@ public interface IThreatHandler
     public Task<Threat?> GenerateRandomThreat(CancellationToken ct);
     
     /// <summary>
+    /// Sets activity of threat to true
+    /// </summary>
+    /// <param name="threat">Threat to modify</param>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>Completed task</returns>
+    public Task SetActiveThreat(Threat threat, CancellationToken ct);
+    
+    /// <summary>
     /// Calculates affected resources
     /// </summary>
     /// <param name="resources">List of resources to pass</param>

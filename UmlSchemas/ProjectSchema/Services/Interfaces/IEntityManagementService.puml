@@ -1,0 +1,11 @@
+@startuml
+interface IEntityManagementService {
+    + GenerateNewEntity(summaricCount:int, ct:CancellationToken) : Task
+    + CleanupDeadEntities(ct:CancellationToken) : Task
+    + CheckSickStatus(ct:CancellationToken) : Task
+    + CheckHungerStatus(ct:CancellationToken) : Task
+    + CheckThreatStatus(currentThreat:Threat, highestMedicLevel:int, highestSmithLevel:int, highestFarmingLevel:int, medicineCount:int, weaponryCount:int, CropsCount:int, ct:CancellationToken) : Task
+}
+
+Threat ..> IEntityManagementService
+@enduml

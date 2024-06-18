@@ -1,5 +1,6 @@
 @startuml
 abstract class Effect {
     + <<required>> Name : string <<get>> <<init>>
+    + <<required>> Damage : int <<get>> <<init>>
 }
 @enduml

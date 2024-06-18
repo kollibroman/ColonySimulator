@@ -1,7 +1,8 @@
 @startuml
 class TimberHandler {
-    + CreateWood(wood:Wood) : Task
-    + ExperienceThreat(threat:Threat) : Task
+    + CreateWood(wood:Wood, timLevel:int) : Task
+    + ExperienceThreat(effect:Effect, proffesion:Proffesion, resources:List<Resource>) : Task
 }
 ITimberHandler <|-- TimberHandler
+
 @enduml

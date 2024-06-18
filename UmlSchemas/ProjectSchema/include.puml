@@ -1,20 +1,37 @@
 @startuml
+
 left to right direction
 
 !include ./Program.puml
 !include ./Helpers/Year.puml
+!include ./Helpers/ThreatsOverview.puml
+!include ./Helpers/InputStorer.puml
+!include ./Helpers/ProfessionsOverview.puml
 !include ./Helpers/PopCounter.puml
+!include ./Helpers/EndDataStorer.puml
+!include ./Helpers/ConsequenceOverview.puml
+!include ./Helpers/SimulationData.puml
+!include ./Helpers/ThreatProvider.puml
+!include ./Helpers/RandomSeedingData.puml
+!include ./Helpers/ResourceOverview.puml
+!include ./Seeders/DataSeeder.puml
 !include ./Seeders/ThreatSeeder.puml
 !include ./Seeders/ResourceSeeder.puml
 !include ./Seeders/ProfessionSeeder.puml
-!include ./Handlers/Threathandler.puml
+!include ./Handlers/ThreatHandler.puml
 !include ./Persistence/ColonySimulatorContext.puml
+!include ./Effects/FightingThreatEffect.puml
+!include ./Effects/PlagueEffect.puml
+!include ./Effects/EmptyEffect.puml
+!include ./Effects/Effect.puml
+!include ./Effects/NaturalEffect.puml
+!include ./Services/EndDataWriter.puml
 !include ./Services/StartupService.puml
 !include ./Services/StartSimulationService.puml
-!include ./Effects/PlagueEffect.puml
-!include ./Effects/FightingThreatEffect.puml
-!include ./Effects/NaturalEffect.puml
-!include ./Effects/Effect.puml
+!include ./Services/EntityManagementService.puml
+!include ./Helpers/Interfaces/IThreatProvider.puml
+!include ./Helpers/Tests/TestDataHelper.puml
+!include ./Helpers/Tests/TestDataSeeder.puml
 !include ./Handlers/ProfessionHandlers/TraderHandler.puml
 !include ./Handlers/ProfessionHandlers/ProfessionHandler.puml
 !include ./Handlers/ProfessionHandlers/FarmerHandler.puml
@@ -27,6 +44,8 @@ left to right direction
 !include ./Handlers/Interfaces/IResourceHandler.puml
 !include ./Handlers/ResourceHandlers/ResourceHandler.puml
 !include ./Persistence/Enums/Gender.puml
+!include ./Services/Interfaces/IEntityManagementService.puml
+!include ./Services/Interfaces/IEndDataWriter.puml
 !include ./Handlers/Interfaces/ProfessionsInterfaces/IBlackSmithHandler.puml
 !include ./Handlers/Interfaces/ProfessionsInterfaces/IProfessionHandler.puml
 !include ./Handlers/Interfaces/ProfessionsInterfaces/IFarmerHandler.puml
@@ -52,6 +71,4 @@ left to right direction
 !include ./Persistence/Models/Threats/Threat.puml
 !include ./Persistence/Models/Threats/NaturalThreat.puml
 !include ./Persistence/Models/Threats/PlagueThreat.puml
-
-Program --> StartupService
 @enduml

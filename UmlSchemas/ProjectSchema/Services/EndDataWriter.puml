@@ -1,0 +1,9 @@
+@startuml
+class EndDataWriter {
+    + EndDataWriter(dataStorer:EndDataStorer, randomSeedingData:RandomSeedingData)
+    + <<async>> WriteEndDataAsync(ct:CancellationToken) : Task
+}
+IEndDataWriter <|-- EndDataWriter
+EndDataStorer --o EndDataWriter
+RandomSeedingData --o EndDataWriter
+@enduml

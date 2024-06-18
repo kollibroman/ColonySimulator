@@ -4,8 +4,9 @@ abstract class Person {
     + Vitality : int <<get>> <<set>>
     + Strength : int <<get>> <<set>>
     + Agility : int <<get>> <<set>>
-    + ResourceConsumption : double <<get>> <<set>>
+    + ResourceConsumption : int <<get>> <<set>>
     + IsSick : bool <<get>> <<set>>
+    + IsHungry : bool <<get>> <<set>>
 }
-Person *-- "Gender" Gender
+Person --> "Gender" Gender
 @enduml

@@ -1,9 +1,13 @@
 @startuml
 interface IThreatHandler {
-    + CalculateAffection(proffesion:Proffesion) : Task
-    + GenerateEffects(threat:Threat) : Task<Effect>
+    + CalculateAffection(profession:Proffesion, threat:Threat) : Task
+    + GenerateEffects(threat:Threat, resources:List<Resource>) : Task<Effect>
+    + GenerateRandomThreat(ct:CancellationToken) : Task<Threat?>
+    + SetActiveThreat(threat:Threat, ct:CancellationToken) : Task
+    + CalculateUsedResources(resources:List<Resource>, threat:Threat) : List<Resource>
 }
 
-Proffesion <.. IThreatHandler
-Threat <.. IThreatHandler
+Proffesion ..> IThreatHandler
+Threat ..> IThreatHandler
+Resource ..> IThreatHandler
 @enduml

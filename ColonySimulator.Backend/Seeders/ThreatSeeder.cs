@@ -42,7 +42,8 @@ public class ThreatSeeder
                 Name = nameArr[rnd.Next(0, 5)],
                 RequiredMedicalLevel = rnd.Next(1, 5),
                 ThreatLevel = threatLevel,
-                RequiredMedicineCount = rnd.Next(1, (_counter.PopulationCount/10)*threatLevel)
+                RequiredMedicineCount = rnd.Next(1, (_counter.PopulationCount/10)*threatLevel),
+                IsActive = false
             };
             
             plagueList.Add(plague);
@@ -71,7 +72,8 @@ public class ThreatSeeder
                 Name = nameArr[rnd.Next(0,6)],
                 RequiredCropsCount = rnd.Next(_counter.PopulationCount/4,(_counter.PopulationCount/4)*threatLevel),
                 ThreatLevel = threatLevel,
-                RequiredFarmingLevel = rnd.Next(1,5)
+                RequiredFarmingLevel = rnd.Next(1,5),
+                IsActive = false
             };
             
             naturalList.Add(naturalThreat);
@@ -101,7 +103,8 @@ public class ThreatSeeder
                 RequiredSmithingLevel = rnd.Next(1, 5),
                 RequiredWeaponryCount =
                     rnd.Next(_counter.PopulationCount / 10, (_counter.PopulationCount / 10) * threatLevel),
-                ThreatLevel = threatLevel
+                ThreatLevel = threatLevel,
+                IsActive = false
             };
             
             fightingList.Add(threat);

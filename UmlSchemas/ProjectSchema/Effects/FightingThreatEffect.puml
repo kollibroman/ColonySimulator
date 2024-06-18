@@ -1,5 +1,9 @@
 @startuml
 class FightingThreatEffect {
+    + FightingThreatEffect()
+    + FightingThreatEffect(name:string, damage:int, resourcesStolen:List<Resource>)
 }
+
 Effect <|-- FightingThreatEffect
+FightingThreatEffect ..> Resource
 @enduml

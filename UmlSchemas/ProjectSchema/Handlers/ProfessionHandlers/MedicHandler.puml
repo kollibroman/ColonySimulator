@@ -1,7 +1,8 @@
 @startuml
 class MedicHandler {
-    + Heal(medicine:Medicine) : Task
-    + ExperienceThreat(threat:Threat) : Task
+    + Heal(medicine:Medicine, person:Person, medLevel:int) : Task
+    + ExperienceThreat(effect:Effect, proffesion:Proffesion, resources:List<Resource>) : Task
 }
 IMedicHandler <|-- MedicHandler
+
 @enduml

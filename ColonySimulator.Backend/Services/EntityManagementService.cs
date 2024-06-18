@@ -2,6 +2,7 @@ using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Persistence;
 using ColonySimulator.Backend.Persistence.Enums;
 using ColonySimulator.Backend.Persistence.Models.Professions;
+using ColonySimulator.Backend.Persistence.Models.Threats;
 using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,11 +31,11 @@ public class EntityManagementService : IEntityManagementService
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="summaricCount">Summaric count of entities</param>
+    /// <param name="cropsCount">Crops count of entities</param>
     /// <param name="ct"></param>
-    public async Task GenerateNewEntity(int summaricCount, CancellationToken ct)
+    public async Task GenerateNewEntity(int cropsCount, CancellationToken ct)
     {
-        if (summaricCount >= 50)
+        if (cropsCount >= 10)
         {
             using var scope = _serviceScope.CreateScope();
             var dbContext = scope.ServiceProvider.GetService<ColonySimulatorContext>();
@@ -160,34 +161,89 @@ public class EntityManagementService : IEntityManagementService
 
         if (dbContext is not null)
         {
-            List<Proffesion> professions = new();
-            professions.AddRange(await dbContext.Apothecaries.Where(x => x.Vitality == 0).ToListAsync(ct));
-            professions.AddRange(await dbContext.Farmers.Where(x => x.Vitality == 0).ToListAsync(ct));
-            professions.AddRange(await dbContext.BlackSmiths.Where(x => x.Vitality == 0).ToListAsync(ct));
-            professions.AddRange(await dbContext.Medics.Where(x => x.Vitality == 0).ToListAsync(ct));
-            professions.AddRange(await dbContext.Timbers.Where(x => x.Vitality == 0).ToListAsync(ct));
+            var allProfessions = await dbContext.Proffesions
+                .Where(x => x.Vitality <= 0)
+                .ToListAsync(ct);
 
-            _counter.PopulationCount -= professions.Count;
+            var apothecaries = allProfessions.OfType<Apothecary>().ToList();
+            var farmers = allProfessions.OfType<Farmer>().ToList();
+            var blacksmiths = allProfessions.OfType<BlackSmith>().ToList();
+            var medics = allProfessions.OfType<Medic>().ToList();
+            var timbers = allProfessions.OfType<Timber>().ToList();
 
-            List<int> professionCount = new();
-            professionCount.Add(dbContext.Apothecaries.Where(x => x.Vitality == 0).Count());
-            professionCount.Add(dbContext.Farmers.Where(x => x.Vitality == 0).Count());
-            professionCount.Add(dbContext.BlackSmiths.Where(x => x.Vitality == 0).Count());
-            professionCount.Add(dbContext.Medics.Where(x => x.Vitality == 0).Count());
-            professionCount.Add(dbContext.Timbers.Where(x => x.Vitality == 0).Count());
+            List<int> professionCount =
+            [
+                apothecaries.Count,
+                farmers.Count,
+                blacksmiths.Count,
+                medics.Count,
+                timbers.Count
+            ];
 
-            _counter.ApothecariesCount -= professionCount[0];
-            _counter.BlackSmithCount -= professionCount[2];
-            _counter.FarmerCount -= professionCount[1];
-            _counter.MedicCount -= professionCount[3];
-            _counter.TimberCount -= professionCount[4];
+            if (_counter.ApothecariesCount - professionCount[0] >= 0)
+            {
+                _counter.PeopleLost++;
+                _counter.ApothecariesCount -= professionCount[0];
+            }
+            else
+            {
+                _counter.PeopleLost++;
+                _counter.ApothecariesCount = 0;
+            }
+
+            if (_counter.BlackSmithCount - professionCount[2] >= 0)
+            {
+                _counter.PeopleLost++;
+                _counter.BlackSmithCount -= professionCount[2];
+            }
+            else
+            {
+                _counter.PeopleLost++;
+                _counter.BlackSmithCount = 0;
+            }
+
+            if (_counter.FarmerCount - professionCount[1] >= 0)
+            {
+                _counter.PeopleLost++;
+                _counter.FarmerCount -= professionCount[1];
+            }
+            else
+            {
+                _counter.PeopleLost++;
+                _counter.FarmerCount = 0;    
+            }
             
+            if(_counter.MedicCount - professionCount[3] >= 0)
+            {
+                _counter.PeopleLost++;
+                _counter.MedicCount -= professionCount[3];
+            }
+            else
+            {
+                _counter.PeopleLost++;
+                _counter.MedicCount = 0;
+            }
             
-            dbContext.RemoveRange(professions);
+            if (_counter.TimberCount - professionCount[4] >= 0)
+            {
+                _counter.PeopleLost++;
+                _counter.TimberCount -= professionCount[4];
+            }
+            else
+            {
+                _counter.PeopleLost++;
+                _counter.TimberCount = 0;
+            }
+            
+            dbContext.Apothecaries.RemoveRange(apothecaries);
+            dbContext.Farmers.RemoveRange(farmers);
+            dbContext.BlackSmiths.RemoveRange(blacksmiths);
+            dbContext.Medics.RemoveRange(medics);
+            dbContext.Timbers.RemoveRange(timbers);
+            
             await dbContext.SaveChangesAsync(ct);
         }
     }
-    
     
     /// <summary>
     /// Handle sick status
@@ -211,7 +267,7 @@ public class EntityManagementService : IEntityManagementService
 
             foreach (var item in sickPeople)
             {
-                item.Vitality -= 1;
+                item.Vitality -= 2;
             }
 
             await dbContext.SaveChangesAsync(ct);
@@ -258,7 +314,9 @@ public class EntityManagementService : IEntityManagementService
                 item.Vitality -= 1;
             }
 
-            if (dbContext.Crops.SingleOrDefault(x => x.Id == 1)!.CropsCount >= _counter.PopulationCount)
+            if (dbContext.Crops.SingleOrDefault(x => x.Id == 1)!.CropsCount >= _counter.PopulationCount
+                && dbContext.Herbs.SingleOrDefault(x => x.Id == 1)!.HerbsCount >= 1 && dbContext.Wood.SingleOrDefault(x => x.Id == 1)!.WoodCount >= 1
+                && dbContext.Medicines.SingleOrDefault(x => x.Id == 1)!.MedicineCount >= 1)
             {
                 foreach (var item in hungryPeople)
                 {
@@ -268,5 +326,55 @@ public class EntityManagementService : IEntityManagementService
 
             await dbContext.SaveChangesAsync(ct);
         }
+    }
+
+    /// <summary>
+    /// Checks actual threat status
+    /// </summary>
+    /// <param name="currentThreat">Current threat in simulation</param>
+    /// <param name="highestFarmingLevel"></param>
+    /// <param name="medicineCount"></param>
+    /// <param name="weaponryCount"></param>
+    /// <param name="cropsCount"></param>
+    /// <param name="ct">Cancellation token</param>
+    /// <param name="highestMedicLevel"></param>
+    /// <param name="highestSmithLevel"></param>
+    public Task CheckThreatStatus(Threat currentThreat, int highestMedicLevel, int highestSmithLevel, int highestFarmingLevel, int medicineCount, int weaponryCount, int cropsCount, CancellationToken ct)
+    {
+        if (currentThreat is FightingThreat fThreat)
+        {
+            if (fThreat.RequiredSmithingLevel > highestSmithLevel && fThreat.RequiredWeaponryCount > weaponryCount)
+            {
+                fThreat.IsActive = true;
+            }
+            else
+            {
+                fThreat.IsActive = false;
+            }
+        }
+        if (currentThreat is PlagueThreat plagueThreat)
+        {
+            if (plagueThreat.RequiredMedicalLevel > highestMedicLevel && plagueThreat.RequiredMedicineCount > medicineCount)
+            {
+                plagueThreat.IsActive = true;
+            }
+            else
+            {
+                plagueThreat.IsActive = false;
+            }
+        }
+        if (currentThreat is NaturalThreat nThreat)
+        {
+            if (nThreat.RequiredFarmingLevel > highestFarmingLevel && nThreat.RequiredCropsCount > cropsCount)
+            {
+                nThreat.IsActive = true;
+            }
+            else
+            {
+                nThreat.IsActive = false;
+            }
+        }
+        
+        return Task.CompletedTask;
     }
 }
