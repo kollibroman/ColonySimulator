@@ -9,6 +9,6 @@ class ProfessionSeeder {
     + <<async>> SeedTraders(traderCount:int, ct:CancellationToken) : Task
 }
 
-ColonySimulatorContext *-- ProfessionSeeder
-PopCounter *-- ProfessionSeeder
+ColonySimulatorContext --* ProfessionSeeder
+PopCounter --o ProfessionSeeder
 @enduml

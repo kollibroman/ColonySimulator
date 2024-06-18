@@ -2,4 +2,5 @@
 class Program {
     + {static} <<async>> Main(args:string[]) : Task
 }
+Program -- StartupService
 @enduml

@@ -1,6 +1,11 @@
 @startuml
 class PopCounter {
     + PopulationCount : int <<get>> <<set>> = 0
+    + ApothecariesCount : int <<get>> <<set>> = 0
+    + BlackSmithCount : int <<get>> <<set>> = 0
+    + FarmerCount : int <<get>> <<set>> = 0
+    + MedicCount : int <<get>> <<set>> = 0
+    + TimberCount : int <<get>> <<set>> = 0
     + PeopleLost : int <<get>> <<set>> = 0
 }
 @enduml

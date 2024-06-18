@@ -1,0 +1,8 @@
+@startuml
+class EndDataStorer {
+    + PopulationCount : int <<get>> <<set>>
+    + PopulationLost : int <<get>> <<set>>
+}
+EndDataStorer o-> "ProfessionsOverview" ProfessionsOverview
+EndDataStorer o-> "ResourceOverview" ResourceOverview
+@enduml

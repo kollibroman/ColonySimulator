@@ -7,6 +7,5 @@ class ResourceSeeder {
     + <<async>> SeedWeaponry(weaponryCount:int, ct:CancellationToken) : Task
     + <<async>> SeedWood(woodCount:int, ct:CancellationToken) : Task
 }
-
-ColonySimulatorContext *-- ResourceSeeder
+ColonySimulatorContext --* ResourceSeeder
 @enduml

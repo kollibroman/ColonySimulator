@@ -1,8 +1,6 @@
 @startuml
 class ThreatsOverview {
 }
-class "ICollection`1"<T> {
-}
-ThreatsOverview o-> "ThreatsDefeated<Threat>" "ICollection`1"
-ThreatsOverview o-> "ThreatsYieldedTo<Threat>" "ICollection`1"
+
+Threat --> ThreatsOverview
 @enduml

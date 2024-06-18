@@ -43,10 +43,31 @@ public class ResourceHandler : IResourceHandler
         foreach (var person in peopleList)
         {
             //Need to add dying people from starvation later
-            if(crop.CropsCount - person.ResourceConsumption < 0){}
+            if (crop.CropsCount - person.ResourceConsumption < 0)
+            {
+                crop.CropsCount = 0;    
+            }
             else
             {
                 crop.CropsCount -= person.ResourceConsumption/4;
+            }
+            
+            if(herbs.HerbsCount - person.ResourceConsumption < 0)
+            {
+                herbs.HerbsCount = 0;
+            }
+            else
+            {
+                herbs.HerbsCount -= person.ResourceConsumption/4;
+            }
+
+            if (wood.WoodCount - person.ResourceConsumption < 0)
+            {
+                wood.WoodCount = 0;
+            }
+            else
+            {
+                wood.WoodCount -= person.ResourceConsumption/4;
             }
         }
     }

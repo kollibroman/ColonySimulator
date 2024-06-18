@@ -1,0 +1,6 @@
+@startuml
+class RandomSeedingData {
+    + <<required>> Duration : int <<get>> <<set>> = 0
+}
+RandomSeedingData o-> "Data" SimulationData
+@enduml

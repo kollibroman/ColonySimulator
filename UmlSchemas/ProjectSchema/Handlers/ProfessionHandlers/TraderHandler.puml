@@ -1,7 +1,7 @@
 @startuml
 class TraderHandler {
-    + Trade(wood:Wood, medicine:Medicine, herbs:Herbs, weaponry:Weaponry) : Task
-    + ExperienceThreat(threat:Threat) : Task
+    + Trade(crops:Crops, wood:Wood, medicine:Medicine, herbs:Herbs, weaponry:Weaponry) : Task
+    + ExperienceThreat(effect:Effect, proffesion:Proffesion, resources:List<Resource>) : Task
 }
 ITraderHandler <|-- TraderHandler
 @enduml

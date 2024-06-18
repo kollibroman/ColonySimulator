@@ -1,10 +1,10 @@
 @startuml
 class StartupService {
-    + StartupService(year:Year, logger:ILogger, startSimulation:StartSimulationService)
+    + StartupService(logger:ILogger, serviceScope:IServiceScopeFactory, dataWriter:IEndDataWriter, simulationService:StartSimulationService)
     + <<async>> StartAsync(cancellationToken:CancellationToken) : Task
     + <<async>> StopAsync(cancellationToken:CancellationToken) : Task
 }
 
-StartupService --* Year
-StartupService --* StartSimulationService
+StartSimulationService --o StartupService
+IEndDataWriter --o StartupService
 @enduml

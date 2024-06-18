@@ -1,5 +1,10 @@
 @startuml
 class NaturalEffect {
+    + NaturalEffect()
+    + NaturalEffect(name:string, damage:int, isHungry:bool, resourcesLost:List<Resource>)
+    + <<required>> IsHungry : bool <<get>> <<init>> = true
 }
+
 Effect <|-- NaturalEffect
+NaturalEffect ..> Resource
 @enduml

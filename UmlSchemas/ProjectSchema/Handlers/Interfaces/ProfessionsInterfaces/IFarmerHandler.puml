@@ -1,7 +1,8 @@
 @startuml
 interface IFarmerHandler {
-    + Farm(crops:Crops) : Task
+    + Farm(crops:Crops, herbs:Herbs, farmLevel:int) : Task
 }
 IPersonActivity <|-- IFarmerHandler
-Crops <.. IFarmerHandler
+Crops ..> IFarmerHandler
+Herbs ..> IFarmerHandler
 @enduml

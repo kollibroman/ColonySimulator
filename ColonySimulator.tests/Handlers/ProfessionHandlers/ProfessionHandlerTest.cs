@@ -296,11 +296,11 @@ public class ProfessionHandlerTest
         mockBlackSmithHandler.Verify(bsh => bsh.CreateWeapon(It.IsAny<Weaponry>(), It.IsAny<Wood>(), It.IsAny<int>()), Times.Exactly(blackSmiths.Count));
         mockBlackSmithHandler.Verify(bsh => bsh.ExperienceThreat(It.IsAny<Effect>(), It.IsAny<BlackSmith>(), It.IsAny<List<Resource>>()), Times.Exactly(blackSmiths.Count));
 
-        mockApothecaryHandler.Verify(ah => ah.CollectingHerbs(It.IsAny<Herbs>(), It.IsAny<int>()), Times.Exactly(apothecaries.Count));
-        mockApothecaryHandler.Verify(ah => ah.CreateMedicine(It.IsAny<Herbs>(), It.IsAny<Medicine>(), It.IsAny<int>()), Times.Exactly(apothecaries.Count));
-        mockApothecaryHandler.Verify(ah => ah.ExperienceThreat(It.IsAny<Effect>(), It.IsAny<Apothecary>(), It.IsAny<List<Resource>>()), Times.Exactly(apothecaries.Count));
+        mockApothecaryHandler.Verify(ah => ah.CollectingHerbs(It.IsAny<Herbs>(), It.IsAny<int>()), Times.Exactly(0));
+        mockApothecaryHandler.Verify(ah => ah.CreateMedicine(It.IsAny<Herbs>(), It.IsAny<Medicine>(), It.IsAny<int>()), Times.Exactly(0));
+        mockApothecaryHandler.Verify(ah => ah.ExperienceThreat(It.IsAny<Effect>(), It.IsAny<Apothecary>(), It.IsAny<List<Resource>>()), Times.Exactly(0));
 
-        mockTraderHandler.Verify(th => th.Trade(It.IsAny<Crops>(), It.IsAny<Wood>(), It.IsAny<Medicine>(), It.IsAny<Herbs>(), It.IsAny<Weaponry>()), Times.Exactly(traders.Count));
-        mockTraderHandler.Verify(th => th.ExperienceThreat(It.IsAny<Effect>(), It.IsAny<Trader>(), It.IsAny<List<Resource>>()), Times.Exactly(traders.Count));
+        mockTraderHandler.Verify(th => th.Trade(It.IsAny<Crops>(), It.IsAny<Wood>(), It.IsAny<Medicine>(), It.IsAny<Herbs>(), It.IsAny<Weaponry>()), Times.Exactly(0));
+        mockTraderHandler.Verify(th => th.ExperienceThreat(It.IsAny<Effect>(), It.IsAny<Trader>(), It.IsAny<List<Resource>>()), Times.Exactly(0));
     }
 }

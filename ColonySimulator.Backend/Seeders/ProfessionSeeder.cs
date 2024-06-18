@@ -51,7 +51,7 @@ public class ProfessionSeeder
                 RequiredStrength = 1,
                 Strength = 1,
                 Vitality = rand.Next(1, 10),
-                ResourceConsumption = rand.Next(1, 10),
+                ResourceConsumption = rand.Next(1, 5),
                 IsSick = false,
                 IsHungry = false
             };
@@ -87,7 +87,7 @@ public class ProfessionSeeder
                 RequiredStrength = 4,
                 Strength = 4,
                 Vitality = rand.Next(1, 10),
-                ResourceConsumption = rand.Next(1, 10),
+                ResourceConsumption = rand.Next(1, 5),
                 IsSick = false,
                 IsHungry = false
             };
@@ -123,7 +123,7 @@ public class ProfessionSeeder
                 RequiredStrength = 5,
                 Strength = 5,
                 Vitality = rand.Next(1, 10),
-                ResourceConsumption = rand.Next(1, 10),
+                ResourceConsumption = rand.Next(1, 5),
                 IsSick = false,
                 IsHungry = false
             };
@@ -159,7 +159,7 @@ public class ProfessionSeeder
                 RequiredStrength = 1,
                 Strength = 1,
                 Vitality = rand.Next(1, 10),
-                ResourceConsumption = rand.Next(1, 10),
+                ResourceConsumption = rand.Next(1, 5),
                 IsSick = false,
                 IsHungry = false
             };
@@ -195,7 +195,7 @@ public class ProfessionSeeder
                 RequiredStrength = 5,
                 Strength = 5,
                 Vitality = rand.Next(1, 10),
-                ResourceConsumption = rand.Next(1, 10),
+                ResourceConsumption = rand.Next(1, 5),
                 IsSick = false,
                 IsHungry = false
             };
@@ -229,7 +229,7 @@ public class ProfessionSeeder
             RequiredStrength = 1,
             Strength = 1,
             Vitality = rand.Next(1, 10),
-            ResourceConsumption = rand.Next(1, 10),
+            ResourceConsumption = rand.Next(1, 5),
             IsSick = false,
             IsHungry = false
         };

@@ -55,11 +55,13 @@ public class Program
             
             services.AddSingleton<Year>();
             services.AddSingleton<PopCounter>();
-            services.AddSingleton<DataDisplayService>();
             services.AddSingleton<StartupService>();
             services.AddSingleton<StartSimulationService>();
             services.AddSingleton<IThreatProvider, ThreatProvider>();
             services.AddSingleton<IEntityManagementService, EntityManagementService>();
+            services.AddSingleton<EndDataStorer>();
+            services.AddSingleton<RandomSeedingData>();
+            services.AddSingleton<IEndDataWriter, EndDataWriter>();
             
             services.AddSqlite<ColonySimulatorContext>(connectionString);
         })

@@ -1,0 +1,7 @@
+@startuml
+class TestDataSeeder {
+    + TestDataSeeder(context:ColonySimulatorContext)
+    + <<async>> SeedTestData() : Task
+}
+TestDataSeeder --* ColonySimulatorContext
+@enduml

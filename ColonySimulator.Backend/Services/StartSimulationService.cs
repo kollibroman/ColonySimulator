@@ -3,6 +3,7 @@ using ColonySimulator.Backend.Handlers.Interfaces.ProfessionsInterfaces;
 using ColonySimulator.Backend.Helpers;
 using ColonySimulator.Backend.Helpers.Interfaces;
 using ColonySimulator.Backend.Persistence;
+using ColonySimulator.Backend.Persistence.Models.Professions;
 using ColonySimulator.Backend.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,7 @@ public class StartSimulationService
     private readonly Year _year;
     private readonly IEntityManagementService _entityManagementService;
     private readonly IThreatProvider _threatProvider;
+    private readonly EndDataStorer _dataStorer;
     
     /// <summary>
     /// Constructor for this service
@@ -29,13 +31,14 @@ public class StartSimulationService
     /// <param name="year">current year in simulation</param>
     /// <param name="entityManagementService">Entity lifecycle service</param>
     /// <param name="threatProvider">threat to provide</param>
-    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, IEntityManagementService entityManagementService, IThreatProvider threatProvider)
+    public StartSimulationService(IServiceScopeFactory serviceScopeFactory, PopCounter counter, Year year, IEntityManagementService entityManagementService, IThreatProvider threatProvider, EndDataStorer dataStorer)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _counter = counter;
         _year = year;
         _entityManagementService = entityManagementService;
         _threatProvider = threatProvider;
+        _dataStorer = dataStorer;
     }
 
     /// <summary>
@@ -89,10 +92,6 @@ public class StartSimulationService
                 await profHandler.HandleTimber();
                 await profHandler.HandleMedic();
                 await profHandler.HandleBlackSmith();
-                await resHandler.ConsumeResources(_counter.PopulationCount);
-
-                _threatProvider.ThreatToExperience = null;
-                //Console.WriteLine("Simulation end, specified period timed out! Showing data: ");
 
                 var profOverview = new ProfessionsOverview
                 {
@@ -112,7 +111,13 @@ public class StartSimulationService
                     MedicinesCount = dbContext.Medicines.SingleOrDefault(x => x.Id == 1)!.MedicineCount,
                     WoodCount = dbContext.Wood.SingleOrDefault(x => x.Id == 1)!.WoodCount
                 };
-
+                
+                _counter.PopulationCount = profOverview.Apothecaries.Count + profOverview.BlackSmiths.Count +
+                                           profOverview.Farmers.Count + profOverview.Medics.Count +
+                                           profOverview.Timbers.Count;
+                
+                await resHandler.ConsumeResources(_counter.PopulationCount);
+                
                 //Needs further improvement with new console lib in project
                 //Console.WriteLine(_displayService.SerializeAndDisplayData<ProfessionsOverview, ThreatsOverview>(profOverview, threatOverview, resourceOverview))          
                 /*################################## Layout GUI ##################################*/
@@ -121,11 +126,10 @@ public class StartSimulationService
 
                 //Population Counter Panel
                 var popCountPanel = new Panel(
-                    new Markup("Apothecaries: " + _counter.ApothecariesCount
-                                                + "\nBlack smiths: " + _counter.BlackSmithCount + "\nFarmers: " +
-                                                _counter.FarmerCount
-                                                + "\nMedics: " + _counter.MedicCount + "\nTimbers: " +
-                                                _counter.TimberCount + "\nSummary: " + (_counter.PopulationCount - 1))
+                    new Markup(
+                        $"Apothecaries: {profOverview.Apothecaries.Count}\nBlack smiths: {profOverview.BlackSmiths.Count}\nFarmers: {profOverview.Farmers.Count}\nMedics: " +
+                        $"{profOverview.Medics.Count}\nTimbers: " +
+                        $"{profOverview.Timbers.Count}\nSummary: {(_counter.PopulationCount)}")
                 )
                 {
                     Border = BoxBorder.Heavy,
@@ -154,11 +158,17 @@ public class StartSimulationService
                 if (rnd.NextDouble() <= 0.1)
                 {
                     var threat = await threatHandler.GenerateRandomThreat(ct);
-
+                    
                     if (threat is not null)
                     {
+                        await threatHandler.SetActiveThreat(threat, ct);
                         _threatProvider.ThreatToExperience = threat;
                         threatName = _threatProvider.ThreatToExperience.Name;
+                        
+                        await _entityManagementService.CheckThreatStatus(_threatProvider.ThreatToExperience,
+                            profOverview.Medics.Count, profOverview.BlackSmiths.Count, profOverview.Farmers.Count,
+                            resourceOverview.MedicinesCount, resourceOverview.WeaponryCount,
+                            resourceOverview.CropsCount, ct);
                     }
                 }
                 var threatPanel = new Panel(
@@ -232,35 +242,55 @@ public class StartSimulationService
 
                 Console.Clear();
                 AnsiConsole.Write(layout);
-
-                int summaricCount = resourceOverview.MedicinesCount + resourceOverview.HerbsCount +
-                                    resourceOverview.CropsCount + resourceOverview.WeaponryCount +
-                                    resourceOverview.WoodCount;
-
+                
                 await _entityManagementService.CleanupDeadEntities(ct);
-                await _entityManagementService.GenerateNewEntity(summaricCount, ct);
                 await _entityManagementService.CheckHungerStatus(ct);
                 await _entityManagementService.CheckSickStatus(ct);
+                await _entityManagementService.GenerateNewEntity(resourceOverview.CropsCount, ct);
 
-                if (_counter.PopulationCount == 0)
+                List<int> resourcesCountList =
+                [
+                    resourceOverview.CropsCount,
+                    resourceOverview.HerbsCount,
+                    resourceOverview.MedicinesCount,
+                    resourceOverview.WoodCount,
+                    resourceOverview.WeaponryCount
+                ];
+                
+                if (_counter.PopulationCount - 1 <= 0)
                 {
-                    Console.WriteLine("Everyone's dead, showing end data: ");
+                    Console.WriteLine("Everyone's dead, stopping Simulation: ");
+
+                    _dataStorer.PopulationCount = _counter.PopulationCount;
+                    _dataStorer.ResourceOverview = resourceOverview;
+                    _dataStorer.ProfessionsOverview = profOverview;
+                    
+                    break;
+                }
+
+                if (resourcesCountList.Count(x => x == 0) >= 4)
+                {
+                    AnsiConsole.Markup("[red]Too much resources has run out![/]");
+                    
+                    _dataStorer.PopulationCount = _counter.PopulationCount;
+                    _dataStorer.ResourceOverview = resourceOverview;
+                    _dataStorer.ProfessionsOverview = profOverview;
+                    
                     break;
                 }
 
                 if (_year.YearOfSim == yearsToFinish)
                 {
+                    AnsiConsole.Markup("[red]Simulation has ended[/]");
+                    
+                    _dataStorer.PopulationCount = _counter.PopulationCount;
+                    _dataStorer.ResourceOverview = resourceOverview;
+                    _dataStorer.ProfessionsOverview = profOverview;
+                    
                     break;
                 }
 
-                if (traderString != "No trader this year")
-                {
-                    Thread.Sleep(500);
-                }
-                else
-                {
-                    Thread.Sleep(200);
-                }
+                Thread.Sleep(500);
             }
         }
     }

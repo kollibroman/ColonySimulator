@@ -1,0 +1,11 @@
+@startuml
+class EntityManagementService {
+    + EntityManagementService(serviceScope:IServiceScopeFactory, counter:PopCounter)
+    + <<async>> GenerateNewEntity(cropsCount:int, ct:CancellationToken) : Task
+    + <<async>> CleanupDeadEntities(ct:CancellationToken) : Task
+    + <<async>> CheckSickStatus(ct:CancellationToken) : Task
+    + <<async>> CheckHungerStatus(ct:CancellationToken) : Task
+    + CheckThreatStatus(currentThreat:Threat, highestMedicLevel:int, highestSmithLevel:int, highestFarmingLevel:int, medicineCount:int, weaponryCount:int, cropsCount:int, ct:CancellationToken) : Task
+}
+IEntityManagementService <|-- EntityManagementService
+@enduml
